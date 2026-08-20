@@ -1,0 +1,36 @@
+/* YKS2027 Arena v0.9 — LGS2027 Arena doğrulanmış Zeus yaklaşımı */
+:root{--yks-gold:#f0b62d;--yks-deep:#020914}
+.app{position:relative;isolation:isolate}
+.app::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 0%,rgba(240,182,45,.10),transparent 34%),radial-gradient(circle at 88% 22%,rgba(45,127,255,.08),transparent 30%);z-index:0}
+.global-zeus-watermark{position:fixed!important;left:50%!important;top:51%!important;width:min(78vw,420px)!important;height:auto!important;transform:translate(-50%,-50%)!important;object-fit:contain!important;object-position:center!important;opacity:.12!important;filter:saturate(1.06) contrast(1.08) drop-shadow(0 0 28px rgba(240,182,45,.10))!important;z-index:1!important;pointer-events:none!important;mix-blend-mode:screen}
+.app>header,.main,.nav{position:relative;z-index:3}
+.screen{position:relative;z-index:3}
+.card,.note,.qcard{position:relative;z-index:2}
+.card{background:linear-gradient(180deg,rgba(17,29,39,.94),rgba(11,20,29,.93))!important;backdrop-filter:blur(5px)}
+.entry-gate{background:#02070b!important}
+.entry-cover{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 24%!important;filter:saturate(1.12) contrast(1.08) brightness(.93) drop-shadow(0 20px 46px rgba(0,0,0,.72))!important}
+.entry-shade{background:linear-gradient(180deg,rgba(2,7,11,.04) 0%,rgba(2,7,11,.08) 58%,rgba(2,7,11,.72) 83%,rgba(2,7,11,.94) 100%)!important}
+.arena-enter{box-shadow:0 0 30px rgba(240,182,45,.27),0 16px 34px rgba(0,0,0,.46)!important}
+/* Ana sayfada filigran kartların arkasından görünür, okunabilirlik korunur. */
+#home .hero{background:linear-gradient(135deg,rgba(4,13,22,.91),rgba(8,20,31,.86))!important}
+/* Akıllı Notlar mobil okunabilirlik */
+#notes .notes-grid{position:relative;z-index:3}
+#notes .note{background:rgba(7,18,27,.92)!important;padding:14px!important;border-color:rgba(240,182,45,.28)!important}
+#notes .note h3{font-size:20px!important;line-height:1.22!important;margin:0 0 9px!important;color:#fff!important}
+#notes .note p{font-size:16px!important;line-height:1.52!important;margin:8px 0!important;color:#eef3f6!important}
+#notes .note strong{font-size:16px!important;color:var(--yks-gold)!important}
+#notes .notes-tools .chip,#notes .notes-tools select{font-size:13px!important}
+@media(max-width:430px){
+  .global-zeus-watermark{width:min(88vw,390px)!important;top:50%!important;opacity:.135!important}
+  .entry-cover{object-position:center 20%!important}
+  #notes .note{padding:15px!important}
+  #notes .note h3{font-size:21px!important;line-height:1.24!important}
+  #notes .note p,#notes .note strong{font-size:17px!important;line-height:1.56!important}
+  #notes .notes-grid{gap:10px!important;overflow:auto!important;padding-bottom:6px!important}
+  #notes .notes-tools .chip,#notes .notes-tools select{font-size:13px!important;padding:7px 9px!important}
+}
+@media(max-height:700px){
+  .global-zeus-watermark{width:min(68vw,330px)!important;opacity:.10!important}
+  #notes .note p,#notes .note strong{font-size:15px!important}
+  #notes .note h3{font-size:19px!important}
+}
