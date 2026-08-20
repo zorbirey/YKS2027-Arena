@@ -1,5 +1,4 @@
 // Her yeni turda önceki turun sonuç kilidini yeniden kapatır.
-// Böylece soru çözümü sırasında Raporlar sekmesine geçilse bile doğru cevaplar görünmez.
 (function(){
   if(typeof startSession==='function'){
     const originalStartSession=startSession;
@@ -14,41 +13,48 @@
   }
 })();
 
-// v7: GitHub Pages asset yolunu tamamen devre dışı bırak.
-// Görseller, oluşturuldukları sabit commit üzerinden raw.githubusercontent.com'dan gelir.
-(function loadZeusFromImmutableRaw(){
+// v7: Zeus görselleri için üç bağımsız kaynak.
+(function loadZeusWithFallbacks(){
   const commit='0a8ac41f0dd52dddbfebeac81619d89a85dcf6be';
-  const base='https://raw.githubusercontent.com/zorbirey/YKS2027-Arena/'+commit+'/assets/';
-  const coverUrl=base+'arena-cover.webp';
-  const watermarkUrl=base+'zeus-watermark.webp';
+  const coverSources=[
+    'https://raw.githubusercontent.com/zorbirey/YKS2027-Arena/'+commit+'/assets/arena-cover.webp',
+    'https://cdn.jsdelivr.net/gh/zorbirey/YKS2027-Arena@'+commit+'/assets/arena-cover.webp',
+    './assets/arena-cover.webp?v=7'
+  ];
+  const watermarkSources=[
+    'https://raw.githubusercontent.com/zorbirey/YKS2027-Arena/'+commit+'/assets/zeus-watermark.webp',
+    'https://cdn.jsdelivr.net/gh/zorbirey/YKS2027-Arena@'+commit+'/assets/zeus-watermark.webp',
+    './assets/zeus-watermark.webp?v=7'
+  ];
 
   const cover=document.querySelector('.entry-cover');
   if(cover){
-    cover.src=coverUrl;
-    cover.removeAttribute('srcset');
-    cover.style.opacity='1';
-    cover.onerror=function(){
-      // İkinci yol: doğrudan main branch raw dosyası.
-      if(!this.dataset.fallback){
-        this.dataset.fallback='1';
-        this.src='https://raw.githubusercontent.com/zorbirey/YKS2027-Arena/main/assets/arena-cover.webp?v=7';
+    let i=0;
+    cover.style.opacity='0';
+    const next=()=>{
+      if(i>=coverSources.length){
+        cover.style.display='none';
+        return;
       }
+      cover.src=coverSources[i++];
     };
+    cover.onload=()=>{cover.style.display='block';cover.style.opacity='1'};
+    cover.onerror=next;
+    next();
   }
 
   document.documentElement.style.setProperty(
     '--zeus-watermark-image',
-    'url("'+watermarkUrl+'")'
+    watermarkSources.map(u=>'url("'+u+'")').join(',')
   );
   document.documentElement.classList.add('zeus-assets-ready');
 })();
 
-// v7 mobil görünürlük ve Akıllı Notlar okunabilirlik katmanı.
 (function applyV7VisualFix(){
   const style=document.createElement('style');
   style.id='yks-v7-visual-fix';
   style.textContent=`
-    .entry-cover{opacity:1!important;object-fit:cover!important;object-position:center top!important}
+    .entry-cover{object-fit:cover!important;object-position:center top!important;transition:opacity .18s ease!important}
     .screen{position:relative!important;isolation:isolate!important}
     .screen::before{
       content:""!important;
@@ -57,8 +63,8 @@
       pointer-events:none!important;
       z-index:-1!important;
       background-image:var(--zeus-watermark-image,none)!important;
-      background-position:center 42%!important;
-      background-size:min(82vw,520px) auto!important;
+      background-position:center 42%,center 42%,center 42%!important;
+      background-size:min(82vw,520px) auto,min(82vw,520px) auto,min(82vw,520px) auto!important;
       background-repeat:no-repeat!important;
       opacity:.16!important;
       filter:saturate(.9) contrast(1.08)!important;
@@ -71,7 +77,7 @@
     #notes .notes-tools .chip,#notes .notes-tools select{font-size:13px!important}
     #notes .notes-grid{gap:10px!important;overflow:auto!important}
     @media(max-width:430px){
-      .screen::before{background-size:94vw auto!important;background-position:center 46%!important;opacity:.18!important}
+      .screen::before{background-size:94vw auto,94vw auto,94vw auto!important;background-position:center 46%,center 46%,center 46%!important;opacity:.18!important}
       #notes .note{padding:16px!important}
       #notes .note h3{font-size:21px!important}
       #notes .note p,#notes .note strong{font-size:17px!important;line-height:1.62!important}
