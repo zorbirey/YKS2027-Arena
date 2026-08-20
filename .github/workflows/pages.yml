@@ -1,7 +1,7 @@
 name: Deploy YKS2027 Arena PWA
 on:
   push:
-    branches: [demo-pwa]
+    branches: [main, demo-pwa]
   workflow_dispatch:
 permissions:
   contents: read
