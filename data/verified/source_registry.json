@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-08-21",
+  "sources": [
+    {
+      "id": "MEB-TTKB-2026-YKS",
+      "type": "scope",
+      "authority": "MEB Talim ve Terbiye Kurulu Başkanlığı",
+      "title": "2026 YKS'ye Esas Derslere Ait Konu ve Kazanımlar",
+      "url": "https://ttkb.meb.gov.tr/www/osym-tarafindan-2026-yilinda-gerceklestirilecek-quotyuksekogretim-kurumlari-sinavi-yksquotna-esas-derslere-ait-konu-ve-kazanimlar/icerik/831/tr",
+      "note": "2027 resmî konu-kazanım listesi yayımlanana kadar kapsam tabanı."
+    },
+    {
+      "id": "OSYM-2026-YKS",
+      "type": "style",
+      "authority": "ÖSYM",
+      "title": "2026-YKS TYT, AYT ve YDT Temel Soru Kitapçıkları ve Cevap Anahtarları",
+      "url": "https://www.osym.gov.tr/2026yks-tyt-ayt-ve-ydt-temel-soru-kitapciklari-ve-cevap-anahtarlari",
+      "note": "Yalnız test yapısı, beceri seviyesi ve soru tarzı referansı; soru metinleri kopyalanmaz."
+    },
+    {
+      "id": "OSYM-2026-GUIDE",
+      "type": "structure",
+      "authority": "ÖSYM",
+      "title": "2026 YKS Kılavuzu - TYT/AYT test kapsamları ve soru sayıları",
+      "note": "TYT: Türkçe 40, Sosyal 20, Temel Matematik 40, Fen 20; AYT test dağılımları için sınav yapısı referansı."
+    }
+  ]
+}
