@@ -1,9 +1,9 @@
 {
   "project": "YKS2027 Arena",
-  "verifiedQuestionTotal": 200,
+  "verifiedQuestionTotal": 250,
   "verifiedByExam": {
-    "TYT": 120,
-    "AYT": 80
+    "TYT": 150,
+    "AYT": 100
   },
   "updatedAt": "2026-08-22",
   "status": "verified-baseline",
@@ -35,11 +35,17 @@
       "count": 50,
       "exam": "TYT+AYT",
       "distribution": {"TYT": 20, "AYT": 30}
+    },
+    {
+      "file": "mixed_core_v6_50.json",
+      "count": 50,
+      "exam": "TYT+AYT",
+      "distribution": {"TYT": 30, "AYT": 20}
     }
   ],
-  "nextMilestone": 250,
-  "todayTarget": 200,
-  "todayTargetReached": true,
+  "nextMilestone": 300,
+  "nextTarget": 700,
+  "remainingToTarget": 450,
   "productionTarget": 15000,
   "needs2027Recheck": true
 }
