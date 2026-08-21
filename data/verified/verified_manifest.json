@@ -1,75 +1,32 @@
 {
   "project": "YKS2027 Arena",
-  "verifiedQuestionTotal": 450,
+  "verifiedQuestionTotal": 700,
   "verifiedByExam": {
-    "TYT": 250,
-    "AYT": 200
+    "TYT": 375,
+    "AYT": 325
   },
   "updatedAt": "2026-08-22",
   "status": "verified-baseline",
   "batches": [
-    {
-      "file": "tyt_core_v1.json",
-      "count": 20,
-      "exam": "TYT"
-    },
-    {
-      "file": "tyt_core_v2_30.json",
-      "count": 30,
-      "exam": "TYT"
-    },
-    {
-      "file": "mixed_core_v3_50.json",
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 30, "AYT": 20}
-    },
-    {
-      "file": "mixed_core_v4_50.json",
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 20, "AYT": 30}
-    },
-    {
-      "file": "mixed_core_v5_50.json",
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 20, "AYT": 30}
-    },
-    {
-      "file": "mixed_core_v6_50.json",
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 30, "AYT": 20}
-    },
-    {
-      "file": "mixed_core_v7_50.json",
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 25, "AYT": 25}
-    },
-    {
-      "files": ["mixed_core_v8_tyt25.json", "mixed_core_v8_ayt25.json"],
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 25, "AYT": 25}
-    },
-    {
-      "files": ["mixed_core_v9_tyt25.json", "mixed_core_v9_ayt25.json"],
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 25, "AYT": 25}
-    },
-    {
-      "files": ["mixed_core_v10_tyt25.json", "mixed_core_v10_ayt25.json"],
-      "count": 50,
-      "exam": "TYT+AYT",
-      "distribution": {"TYT": 25, "AYT": 25}
-    }
+    {"file":"tyt_core_v1.json","count":20,"exam":"TYT"},
+    {"file":"tyt_core_v2_30.json","count":30,"exam":"TYT"},
+    {"file":"mixed_core_v3_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":30,"AYT":20}},
+    {"file":"mixed_core_v4_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":20,"AYT":30}},
+    {"file":"mixed_core_v5_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":20,"AYT":30}},
+    {"file":"mixed_core_v6_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":30,"AYT":20}},
+    {"file":"mixed_core_v7_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"files":["mixed_core_v8_tyt25.json","mixed_core_v8_ayt25.json"],"count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"files":["mixed_core_v9_tyt25.json","mixed_core_v9_ayt25.json"],"count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"files":["mixed_core_v10_tyt25.json","mixed_core_v10_ayt25.json"],"count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v11_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v12_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v13_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v14_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v15_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}}
   ],
-  "nextMilestone": 500,
-  "nextTarget": 700,
-  "remainingToTarget": 250,
+  "milestone700Reached": true,
+  "nextMilestone": 1000,
   "productionTarget": 15000,
+  "remainingToProductionTarget": 14300,
   "needs2027Recheck": true
 }
