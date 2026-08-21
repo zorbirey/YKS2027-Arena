@@ -1,9 +1,9 @@
 {
   "project": "YKS2027 Arena",
-  "verifiedQuestionTotal": 1500,
+  "verifiedQuestionTotal": 2000,
   "verifiedByExam": {
-    "TYT": 775,
-    "AYT": 725
+    "TYT": 1025,
+    "AYT": 975
   },
   "updatedAt": "2026-08-22",
   "status": "verified-baseline",
@@ -24,13 +24,15 @@
     {"file":"mixed_core_v14_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
     {"file":"mixed_core_v15_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
     {"file":"mixed_core_v16_v21_factory.js","count":300,"exam":"TYT+AYT","distribution":{"TYT":150,"AYT":150},"batches":["V16","V17","V18","V19","V20","V21"],"format":"deterministic-factory-v2"},
-    {"file":"mixed_core_v22_v31_factory.js","count":500,"exam":"TYT+AYT","distribution":{"TYT":250,"AYT":250},"batches":["V22","V23","V24","V25","V26","V27","V28","V29","V30","V31"],"format":"deterministic-factory-v3"}
+    {"file":"mixed_core_v22_v31_factory.js","count":500,"exam":"TYT+AYT","distribution":{"TYT":250,"AYT":250},"batches":["V22","V23","V24","V25","V26","V27","V28","V29","V30","V31"],"format":"deterministic-factory-v3"},
+    {"file":"mixed_core_v32_v41_factory.js","count":500,"exam":"TYT+AYT","distribution":{"TYT":250,"AYT":250},"batches":["V32","V33","V34","V35","V36","V37","V38","V39","V40","V41"],"format":"deterministic-factory-v4"}
   ],
   "milestone700Reached": true,
   "milestone1000Reached": true,
   "milestone1500Reached": true,
-  "nextMilestone": 2000,
+  "milestone2000Reached": true,
+  "nextMilestone": 2500,
   "productionTarget": 15000,
-  "remainingToProductionTarget": 13500,
+  "remainingToProductionTarget": 13000,
   "needs2027Recheck": true
 }
