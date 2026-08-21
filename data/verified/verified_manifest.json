@@ -1,0 +1,21 @@
+{
+  "project": "YKS2027 Arena",
+  "verifiedQuestionTotal": 50,
+  "updatedAt": "2026-08-21",
+  "status": "verified-baseline",
+  "batches": [
+    {
+      "file": "tyt_core_v1.json",
+      "count": 20,
+      "exam": "TYT"
+    },
+    {
+      "file": "tyt_core_v2_30.json",
+      "count": 30,
+      "exam": "TYT"
+    }
+  ],
+  "nextMilestone": 100,
+  "productionTarget": 15000,
+  "needs2027Recheck": true
+}
