@@ -1,9 +1,9 @@
 {
   "project": "YKS2027 Arena",
-  "verifiedQuestionTotal": 700,
+  "verifiedQuestionTotal": 1000,
   "verifiedByExam": {
-    "TYT": 375,
-    "AYT": 325
+    "TYT": 525,
+    "AYT": 475
   },
   "updatedAt": "2026-08-22",
   "status": "verified-baseline",
@@ -22,11 +22,13 @@
     {"file":"mixed_core_v12_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
     {"file":"mixed_core_v13_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
     {"file":"mixed_core_v14_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
-    {"file":"mixed_core_v15_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}}
+    {"file":"mixed_core_v15_50.json","count":50,"exam":"TYT+AYT","distribution":{"TYT":25,"AYT":25}},
+    {"file":"mixed_core_v16_v21_factory.js","count":300,"exam":"TYT+AYT","distribution":{"TYT":150,"AYT":150},"batches":["V16","V17","V18","V19","V20","V21"],"format":"deterministic-factory-v2"}
   ],
   "milestone700Reached": true,
-  "nextMilestone": 1000,
+  "milestone1000Reached": true,
+  "nextMilestone": 1500,
   "productionTarget": 15000,
-  "remainingToProductionTarget": 14300,
+  "remainingToProductionTarget": 14000,
   "needs2027Recheck": true
 }
