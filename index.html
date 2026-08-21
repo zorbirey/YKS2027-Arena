@@ -11,9 +11,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="yks-v09-zeus.css?v=10">
 </head>
 <body><div id="entryGate" class="entry-gate" role="dialog" aria-modal="true" aria-label="YKS2027 Arena giriş ekranı">
-  <img src="assets/arena-cover.webp" class="entry-cover" alt="YKS2027 Arena Zeus kapak görseli">
+  <img src="https://zorbirey.github.io/LGS2027-Arena/assets/zeus-real-v09.webp?v=10" class="entry-cover" alt="YKS2027 Arena Zeus kapak görseli">
   <div class="entry-shade"></div>
   <div class="entry-content">
     <button id="enterArena" class="arena-enter">ARENA’YA GİR</button>
@@ -35,5 +36,5 @@
 <nav class="nav"><button class="active" data-go="home" onclick="go('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg><span>Ana Sayfa</span></button><button data-go="subjects" onclick="go('subjects')"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dersler</span></button><button data-go="notes" onclick="go('notes')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Notlar</span></button><button data-go="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15z"/><path d="m13.5 6.5 4 4M4 21h16"/></svg><span>Soru Çöz</span></button><button data-go="reports" onclick="go('reports')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Raporlar</span></button><button data-go="zeus" onclick="go('zeus')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h6l-1 8 9-13h-6z"/></svg><span>Zeus</span></button></nav>
 </div>
 <div class="ad" id="ad"><div class="adbox"><div class="gold ad-label">REKLAM</div><h2>Sonuçların hazırlanıyor</h2><p class="small">Ücretsiz sürümde sonuçlardan önce reklam gösterilir. Premium kullanıcı doğrudan sonuçlara geçer.</p><div class="adslot">Reklam alanı<br>Gerçek sürümde reklam ağı burada çalışacak.</div><div class="gold" id="adCount">3 saniye</div><button class="btn primary" id="adBtn" onclick="revealResults()" disabled>SONUÇLARI GÖR</button></div></div>
-<script src="data.js"></script><script src="app.js"></script><script src="privacy-fix.js"></script><script>(()=>{const gate=document.getElementById('entryGate');const enter=document.getElementById('enterArena');document.documentElement.classList.add('arena-locked');enter.addEventListener('click',()=>{gate.classList.add('leaving');document.documentElement.classList.remove('arena-locked');setTimeout(()=>gate.remove(),380);});})();</script><script>if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.error));</script>
+<script src="data.js"></script><script src="app.js"></script><script src="privacy-fix.js"></script><script src="pwa.js?v=10"></script><script>(()=>{const gate=document.getElementById('entryGate');const enter=document.getElementById('enterArena');document.documentElement.classList.add('arena-locked');enter.addEventListener('click',()=>{gate.classList.add('leaving');document.documentElement.classList.remove('arena-locked');setTimeout(()=>gate.remove(),380);});})();</script>
 </body></html>

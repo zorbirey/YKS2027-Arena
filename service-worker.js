@@ -1,7 +1,6 @@
-const CACHE_NAME='yks-2027-arena-pwa-v0.9-verified-zeus';
+const CACHE_NAME='yks-2027-arena-pwa-v1.0-zeus-lgs-verified';
 const APP_SHELL=[
-  './','./index.html','./styles.css','./yks-v09-zeus.css','./data.js','./app.js','./privacy-fix.js','./manifest.webmanifest','./assets/icon.svg',
-  './assets/arena-cover.webp','./assets/zeus-watermark.webp','./assets/zeus-real-v09.webp','./assets/zeus-watermark-v09.webp'
+  './','./index.html','./styles.css','./yks-v09-zeus.css?v=10','./data.js','./app.js','./privacy-fix.js','./pwa.js?v=10','./manifest.webmanifest','./assets/icon.svg'
 ];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
@@ -21,9 +20,12 @@ self.addEventListener('fetch',event=>{
     return;
   }
   event.respondWith(caches.match(request).then(cached=>cached||fetch(request).then(response=>{
-    if(!response||response.status!==200||response.type==='opaque') return response;
-    const copy=response.clone();
-    caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));
+    if(!response) return response;
+    // Aynı origin dosyalarını cache'le; harici doğrulanmış Zeus görseli ağdan güncel gelsin.
+    if(response.status===200 && response.type!=='opaque'){
+      const copy=response.clone();
+      caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));
+    }
     return response;
   })));
 });
