@@ -1,29 +1,30 @@
 (() => {
   'use strict';
 
-  // LGS2027 Arena'da Android 16 üzerinde doğrulanan gerçek Zeus görseli.
-  // YKS deposundaki eski/yanlış WebP dosyasını kullanmak yerine çalışan kaynağa yönlendiriyoruz.
-  const VERIFIED_ZEUS = 'https://zorbirey.github.io/LGS2027-Arena/assets/zeus-real-v09.webp?v=10';
-  const LOCAL_FALLBACK = './assets/zeus-real-v09.webp?v=10';
+  // Giriş kapağı ilk HTML çiziminde yüklenen yerel görsel olarak kalır.
+  // Android/PWA yeniden yazımı artık entry-cover kaynağını değiştirmez.
+  const VERIFIED_ZEUS = 'https://zorbirey.github.io/LGS2027-Arena/assets/zeus-real-v09.webp?v=11';
+  const LOCAL_ZEUS = './assets/zeus-real-v09.webp?v=11';
 
   function setVerifiedSource(img) {
     if (!img) return;
     if (img.dataset.verifiedZeus === '1') return;
     img.dataset.verifiedZeus = '1';
     img.addEventListener('error', () => {
-      if (!img.src.includes('assets/zeus-real-v09.webp')) img.src = LOCAL_FALLBACK;
+      if (img.dataset.localFallback !== '1') {
+        img.dataset.localFallback = '1';
+        img.src = LOCAL_ZEUS;
+      }
     }, { once: true });
     img.src = VERIFIED_ZEUS;
   }
 
   function installVerifiedZeus() {
-    const cover = document.querySelector('.entry-cover');
-    setVerifiedSource(cover);
-
-    // Eski Zeus görselleri varsa çalışma anında tek doğrulanmış kaynağa çevir.
-    document.querySelectorAll('img').forEach(img => {
+    // entry-cover özellikle hariç tutulur. Giriş ekranındaki resim butona basılana
+    // kadar aynı DOM elemanı ve aynı kaynak olarak görünmeye devam eder.
+    document.querySelectorAll('img:not(.entry-cover)').forEach(img => {
       const src = img.getAttribute('src') || '';
-      if (/zeus|arena-cover/i.test(src)) setVerifiedSource(img);
+      if (/zeus/i.test(src)) setVerifiedSource(img);
     });
 
     const app = document.querySelector('.app');
@@ -39,14 +40,13 @@
     setVerifiedSource(watermark);
   }
 
-  // DOM hazır olduğu anda çalıştır; eski görselin ekranda parlamasını bekleme.
   installVerifiedZeus();
   window.addEventListener('DOMContentLoaded', installVerifiedZeus, { once: true });
   window.addEventListener('load', installVerifiedZeus, { once: true });
 
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js?v=10')
+      navigator.serviceWorker.register('./service-worker.js?v=11')
         .then(reg => {
           reg.update().catch(() => {});
           if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
