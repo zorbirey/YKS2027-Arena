@@ -1,1 +1,19 @@
-{"name":"YKS2027 Arena","short_name":"YKS Arena","description":"TYT ve AYT hazırlığı için Zeus Koçluğu, Akıllı Notlar ve Arena soru çözme uygulaması.","start_url":"./","scope":"./","display":"standalone","background_color":"#050a0f","theme_color":"#071018","lang":"tr","orientation":"portrait-primary","icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "id":"./",
+  "name":"YKS2027 Arena",
+  "short_name":"YKS Arena",
+  "description":"TYT ve AYT hazırlığı için Zeus Koçluğu, Akıllı Notlar ve Arena soru çözme PWA uygulaması.",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "display_override":["standalone","minimal-ui"],
+  "background_color":"#050a0f",
+  "theme_color":"#071018",
+  "lang":"tr",
+  "dir":"ltr",
+  "orientation":"portrait-primary",
+  "categories":["education"],
+  "icons":[
+    {"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
