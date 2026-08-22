@@ -1,0 +1,40 @@
+{
+  "project": "YKS2027 Arena",
+  "stage": "early-bank-quality-screen",
+  "date": "2026-08-22",
+  "scope": {
+    "from": "V3",
+    "to": "V15",
+    "questionCount": 650
+  },
+  "decisions": [
+    {
+      "range": "V3-V8",
+      "count": 300,
+      "status": "second-review-candidate",
+      "reason": "Existing batch QA includes five-option structure, answer/explanation checks and numerical second-check coverage. These batches show broader question construction than later factory-style production, but still require question-by-question rubric scoring and independent semantic review before live promotion.",
+      "liveEligible": false
+    },
+    {
+      "range": "V9-V10",
+      "count": 100,
+      "status": "revision-candidate",
+      "reason": "Technical and answer QA passed, but the batches are too direct/basic in several subjects and difficulty calibration is weak. V10 also has known metadata/biology wording cleanup handled by quality_gate_v2. Questions must be rescored and weaker items rewritten before second review.",
+      "liveEligible": false
+    },
+    {
+      "range": "V11-V15",
+      "count": 250,
+      "status": "rewrite-quarantine",
+      "reason": "Technical QA passed but content is heavily repetitive and template-driven, difficulty distribution is 55 Kolay / 195 Orta / 0 Zor, and many questions are direct recall or one-step calculations. Full replacement/rewrite is required rather than relabeling.",
+      "liveEligible": false
+    }
+  ],
+  "counts": {
+    "secondReviewCandidates": 300,
+    "revisionCandidates": 100,
+    "rewriteQuarantine": 250,
+    "unclassified": 0
+  },
+  "rule": "Batch screening is not an independent question-by-question semantic review. No item becomes liveEligible from this file alone."
+}
