@@ -1,4 +1,4 @@
-const CACHE_NAME='yks-2027-arena-final-v14';
+const CACHE_NAME='yks-2027-arena-final-v15';
 const APP_SHELL=[
   './',
   './index.html',
