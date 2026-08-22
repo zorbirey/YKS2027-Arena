@@ -8,8 +8,16 @@
   "factoryGeneratedDisposition": "quarantine-until-rewrite-and-independent-review",
   "earlyReviewQueue": {
     "range": "V1-V15",
-    "count": 700,
-    "status": "manual-semantic-review-required"
+    "originalCount": 700,
+    "reviewedRound1Count": 50,
+    "remainingRound1Count": 650,
+    "status": "manual-semantic-review-in-progress"
+  },
+  "reviewedCandidates": {
+    "count": 50,
+    "source": "CLEAN_REVIEWED_CANDIDATES_STAGE1_V1_V2.json",
+    "liveEligible": false,
+    "independentSemanticReview": false
   },
   "knownDirectRemediations": {
     "V10_Turkish_skill_metadata": 1,
