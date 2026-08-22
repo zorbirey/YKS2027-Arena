@@ -1,0 +1,58 @@
+/* YKS2027 Arena FINAL PWA v13 — local Zeus cover + permanent watermark */
+:root{--final-gold:#f0b62d;--final-bg:#020609}
+html,body{overscroll-behavior:none}
+html.arena-locked,html.arena-locked body{overflow:hidden!important}
+
+/* Opening gate: no <img>, so a broken-image icon can never appear. Three local layers act as fallbacks. */
+.entry-gate{
+  position:fixed!important;inset:0!important;z-index:99999!important;
+  display:flex!important;align-items:flex-end!important;justify-content:center!important;
+  padding:0 22px calc(28px + env(safe-area-inset-bottom))!important;
+  overflow:hidden!important;isolation:isolate!important;background-color:#020609!important;
+  background-image:
+    linear-gradient(180deg,rgba(2,6,9,.02) 0%,rgba(2,6,9,.03) 54%,rgba(2,6,9,.58) 78%,rgba(2,6,9,.94) 100%),
+    url('./assets/zeus-cover-inline.webp'),
+    url('./assets/arena-cover.webp'),
+    url('./assets/zeus-real-v09.webp')!important;
+  background-size:cover,cover,cover,cover!important;
+  background-position:center,center 18%,center 18%,center 18%!important;
+  background-repeat:no-repeat!important;
+}
+.entry-gate::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 55%,transparent 0 42%,rgba(0,0,0,.16) 73%,rgba(0,0,0,.35) 100%)}
+.entry-shade{display:none!important}
+.entry-content{position:relative!important;z-index:3!important;width:min(100%,560px)!important;padding-bottom:2px!important}
+.arena-enter{width:100%!important;min-height:68px!important;border:1px solid rgba(255,225,145,.9)!important;border-radius:28px!important;background:linear-gradient(180deg,#ffd45d,#efad14)!important;color:#17120a!important;font-size:clamp(20px,5.4vw,31px)!important;font-weight:950!important;letter-spacing:.3px!important;box-shadow:0 0 34px rgba(240,182,45,.35),0 18px 44px rgba(0,0,0,.55)!important}
+.entry-gate.leaving{opacity:0!important;transform:scale(1.015)!important;transition:opacity .3s ease,transform .3s ease!important;pointer-events:none!important}
+
+/* Permanent watermark above cards, below header/nav. It is CSS-based, not JS-injected. */
+.app{position:relative!important;isolation:isolate!important}
+.app::after{
+  content:""!important;position:fixed!important;left:50%!important;top:50%!important;
+  width:min(88vw,430px)!important;height:min(74vh,760px)!important;
+  transform:translate(-50%,-48%)!important;pointer-events:none!important;z-index:70!important;
+  background-image:url('./assets/zeus-watermark-inline.webp'),url('./assets/zeus-watermark-v09.webp')!important;
+  background-repeat:no-repeat,no-repeat!important;background-position:center,center!important;
+  background-size:contain,contain!important;opacity:.105!important;mix-blend-mode:screen!important;
+  filter:saturate(1.08) contrast(1.08) drop-shadow(0 0 24px rgba(240,182,45,.10))!important;
+}
+.global-zeus-watermark{display:none!important}
+.app>header,.nav{position:relative!important;z-index:90!important}
+.main,.screen{position:relative!important;z-index:3!important}
+.card,.note,.qcard{position:relative!important;z-index:2!important}
+
+/* Keep text readable while watermark remains visible in screenshots. */
+.card{background:linear-gradient(180deg,rgba(17,29,39,.91),rgba(11,20,29,.90))!important;backdrop-filter:blur(3px)}
+.qcard{background:rgba(246,245,241,.96)!important}
+#home .hero{min-height:190px!important;background:linear-gradient(135deg,rgba(4,13,22,.90),rgba(8,20,31,.82))!important}
+
+/* Mobile-first usability */
+.header-actions{display:flex;align-items:center;gap:6px;min-width:0}.pwa-status{font-size:10px;color:#9eb0bd;white-space:nowrap}.install-btn{border:1px solid rgba(240,182,45,.55);background:rgba(240,182,45,.10);color:#ffd86b;border-radius:9px;padding:6px 8px;font-size:10px;font-weight:900;white-space:nowrap}.install-btn[hidden]{display:none!important}
+@media(max-width:430px){
+  .entry-gate{padding:0 32px calc(42px + env(safe-area-inset-bottom))!important;background-position:center,center 16%,center 16%,center 16%!important}
+  .arena-enter{min-height:66px!important;font-size:22px!important;border-radius:26px!important}
+  .app::after{width:min(93vw,410px)!important;height:min(70vh,690px)!important;top:50%!important;opacity:.115!important}
+  header{padding-left:9px!important;padding-right:9px!important}.header-actions{gap:4px!important}.pwa-status{display:none!important}.install-btn{font-size:8px!important;padding:5px 6px!important}header select{max-width:78px!important}
+  .nav{grid-template-columns:repeat(6,1fr)!important}.nav button{font-size:8px!important}.nav button svg{width:20px!important;height:20px!important}
+}
+@media(max-height:690px){.entry-gate{padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}.arena-enter{min-height:58px!important}.app::after{height:min(68vh,610px)!important;opacity:.095!important}}
+@media(min-width:760px){.app::after{width:min(58vw,520px)!important;height:min(78vh,820px)!important}}
