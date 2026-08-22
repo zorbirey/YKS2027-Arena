@@ -1,22 +1,22 @@
-const CACHE_NAME='yks-2027-arena-final-v13';
+const CACHE_NAME='yks-2027-arena-final-v14';
 const APP_SHELL=[
   './',
   './index.html',
-  './styles.css?v=13',
-  './yks-v09-zeus.css?v=13',
-  './pwa-shell-v12.css?v=13',
-  './final-pwa-v13.css?v=13',
-  './data.js?v=13',
-  './app.js?v=13',
-  './privacy-fix.js?v=13',
-  './pwa.js?v=13',
-  './manifest.webmanifest?v=13',
+  './styles.css?v=14',
+  './yks-v09-zeus.css?v=14',
+  './pwa-shell-v12.css?v=14',
+  './final-pwa-v14.css?v=14',
+  './zeus-assets-v14.js?v=14',
+  './data.js?v=14',
+  './app.js?v=14',
+  './privacy-fix.js?v=14',
+  './pwa.js?v=14',
+  './manifest.webmanifest?v=14',
   './assets/icon.svg',
-  './assets/zeus-cover-inline.webp',
-  './assets/arena-cover.webp',
-  './assets/zeus-real-v09.webp',
-  './assets/zeus-watermark-inline.webp',
-  './assets/zeus-watermark-v09.webp'
+  './assets/zeus-cover-inline.webp?v=14',
+  './assets/zeus-watermark-inline.webp?v=14',
+  './assets/zeus-real-v09.webp?v=14',
+  './assets/zeus-watermark-v09.webp?v=14'
 ];
 
 self.addEventListener('install',event=>{
@@ -24,7 +24,11 @@ self.addEventListener('install',event=>{
 });
 
 self.addEventListener('activate',event=>{
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+  event.waitUntil(
+    caches.keys()
+      .then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k))))
+      .then(()=>self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch',event=>{
@@ -44,7 +48,8 @@ self.addEventListener('fetch',event=>{
 
   const url=new URL(req.url);
   const isCore=/\.(?:js|css|webmanifest)$/i.test(url.pathname);
-  if(isCore){
+  const isZeusPayload=/zeus-(?:cover|watermark)-inline\.webp$/i.test(url.pathname);
+  if(isCore||isZeusPayload){
     event.respondWith(
       fetch(req,{cache:'no-store'}).then(res=>{
         if(res&&res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));}
