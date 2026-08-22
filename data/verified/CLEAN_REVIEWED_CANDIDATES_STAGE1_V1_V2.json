@@ -1,0 +1,32 @@
+{
+  "project": "YKS2027 Arena",
+  "reviewedAt": "2026-08-22",
+  "reviewType": "manual-semantic-content-review-round-1",
+  "questionCount": 50,
+  "sourceBatches": ["V1", "V2"],
+  "status": "clean-reviewed-candidate",
+  "liveEligible": false,
+  "independentSemanticReview": false,
+  "nextReviewRequired": true,
+  "checks": {
+    "singleCorrectAnswer": "pass",
+    "distractorPlausibility": "pass",
+    "topicConsistency": "pass",
+    "answerExplanationAlignment": "pass",
+    "languageClarity": "pass",
+    "numericRecalculation": "pass-for-numeric-items",
+    "semanticDuplicateWithinReviewedSet": "no-critical-duplicate-found"
+  },
+  "metadataRemediation": {
+    "rule": "Direct factual recall questions are recalibrated toward Kolay unless contextual reasoning is required.",
+    "appliedAtQualityGate": true
+  },
+  "ids": [
+    "V-TYT-TR-001","V-TYT-TR-002","V-TYT-TR-003","V-TYT-TR-004","V-TYT-TR-005",
+    "V-TYT-MAT-001","V-TYT-MAT-002","V-TYT-MAT-003","V-TYT-MAT-004","V-TYT-MAT-005",
+    "V-TYT-TAR-001","V-TYT-TAR-002","V-TYT-COG-001","V-TYT-FEL-001","V-TYT-DIN-001","V-TYT-FIZ-001","V-TYT-FIZ-002","V-TYT-KIM-001","V-TYT-BIO-001","V-TYT-BIO-002",
+    "V-TYT-TR-006","V-TYT-TR-007","V-TYT-TR-008","V-TYT-TR-009","V-TYT-TR-010","V-TYT-TR-011","V-TYT-TR-012","V-TYT-TR-013",
+    "V-TYT-MAT-006","V-TYT-MAT-007","V-TYT-MAT-008","V-TYT-MAT-009","V-TYT-MAT-010","V-TYT-MAT-011","V-TYT-MAT-012","V-TYT-MAT-013",
+    "V-TYT-TAR-003","V-TYT-TAR-004","V-TYT-COG-002","V-TYT-FEL-002","V-TYT-FIZ-003","V-TYT-FIZ-004","V-TYT-FIZ-005","V-TYT-KIM-002","V-TYT-KIM-003","V-TYT-KIM-004","V-TYT-BIO-003","V-TYT-BIO-004","V-TYT-BIO-005","V-TYT-BIO-006"
+  ]
+}
