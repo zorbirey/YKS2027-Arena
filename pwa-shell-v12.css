@@ -1,0 +1,35 @@
+/* YKS2027 Arena — mobile/PWA shell v12 */
+:root{--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+html,body{width:100%;height:100%;overscroll-behavior:none}
+body{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;touch-action:manipulation}
+.app{height:100dvh;min-height:100dvh;padding-top:var(--safe-top)}
+header{height:60px;flex-basis:60px;gap:8px;padding:7px 10px;background:rgba(4,10,16,.97);backdrop-filter:blur(12px)}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;min-width:0}
+.pwa-status{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-size:10px;font-weight:800;color:#9eabb6}
+.pwa-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#35d07f;box-shadow:0 0 10px rgba(53,208,127,.5)}
+.pwa-status.offline::before{background:#ffb84d;box-shadow:none}.pwa-status.offline{color:#ffcf84}
+.install-btn{border:1px solid rgba(240,182,45,.55);background:rgba(240,182,45,.1);color:#ffd86b;border-radius:9px;padding:6px 8px;font-size:10px;font-weight:900;white-space:nowrap}
+.install-btn[hidden]{display:none!important}
+.hero{min-height:150px}.hero-zeus{display:block!important;opacity:.95;object-position:72% 20%!important}.hero:after{background:linear-gradient(90deg,rgba(5,10,15,.99) 0%,rgba(5,10,15,.9) 45%,rgba(5,10,15,.22) 80%,rgba(5,10,15,.08) 100%)}
+.hero-copy{width:65%;z-index:3}.hero-copy .row{flex-wrap:wrap}
+.entry-cover{background:#020609}
+.feedback{color:#d9e5ec;background:#0d1c27;border-color:#2b4659}
+.nav{height:64px;flex-basis:64px;padding-bottom:var(--safe-bottom);box-sizing:content-box;z-index:100!important}
+.nav button{min-height:58px;cursor:pointer}.nav button:focus-visible,.btn:focus-visible,.option:focus-visible,.subject:focus-visible,.chip:focus-visible,.install-btn:focus-visible{outline:2px solid #ffd86b;outline-offset:-2px}
+.option{min-height:44px}.btn,.subject,.chip,select{min-height:38px}
+.offline-note{display:none;position:fixed;left:10px;right:10px;bottom:calc(70px + var(--safe-bottom));z-index:180;background:#2d2110;border:1px solid #a96d19;color:#ffe0aa;border-radius:12px;padding:9px 12px;text-align:center;font-size:11px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.offline-note.show{display:block}
+@media(max-width:560px){
+  .pwa-status{font-size:0}.pwa-status::before{width:8px;height:8px}
+  header select{max-width:86px}.install-btn{font-size:9px;padding:6px}
+}
+@media(max-width:430px){
+  header{height:56px;flex-basis:56px;padding:5px 8px}.brand{font-size:14px}.brand small{font-size:7px}
+  .hero-copy{width:70%}.hero-copy h1{font-size:28px}.hero-copy p{font-size:10.5px}
+  .nav{height:60px;flex-basis:60px}.nav button{min-height:54px;font-size:7.5px}.nav button svg{width:19px;height:19px}
+  .main{padding:5px}.screen.active{gap:5px}
+}
+@media(max-width:360px){
+  .install-btn{max-width:70px;overflow:hidden;text-overflow:ellipsis}.brand{font-size:13px}.nav button span{font-size:7px}
+}
+@media(display-mode:standalone){.install-btn{display:none!important}}
