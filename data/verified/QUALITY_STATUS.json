@@ -1,45 +1,66 @@
 {
   "project": "YKS2027 Arena",
   "auditedAt": "2026-08-22",
+  "remediationStartedAt": "2026-08-22",
   "manifestQuestionCount": 15000,
   "technicalCountStatus": "pass",
   "structuralQAStatus": "pass-with-scope-limits",
-  "semanticUniquenessStatus": "fail",
-  "difficultyCalibrationStatus": "fail",
-  "contentAndDistractorAuditStatus": "needs-remediation",
+  "semanticUniquenessStatus": "remediation-in-progress",
+  "difficultyCalibrationStatus": "remediation-in-progress",
+  "contentAndDistractorAuditStatus": "remediation-in-progress",
   "livePoolReady": false,
-  "knownSystematicIssues": [
+  "qualityGate": {
+    "file": "quality_gate_v1.js",
+    "version": "1.0.0",
+    "semanticFamilyDefaultLimit": 4,
+    "factoryRangeDemotedToGeneratedBaseline": "V16-V301",
+    "factoryRecordCountProtectedFromLive": 14300,
+    "requiresIndependentSemanticReview": true
+  },
+  "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
+  "systematicRemediationRules": [
     {
       "range": "V42-V61",
       "type": "ambiguous-second-correct-risk",
-      "affectedAtLeast": 20,
-      "summary": "AYT Kimya denge şablonunda denge derişimleri ve denge sabiti K birlikte sabit yorumuna açık."
+      "affected": 20,
+      "action": "rewrite",
+      "status": "rule-added",
+      "summary": "AYT Kimya denge sorusu, sıcaklık sabitken K değerinin tek değişmez seçenek olacağı biçimde yeniden yazılıyor."
     },
     {
       "range": "V62-V101",
       "type": "physics-content-topic-mismatch",
-      "affectedAtLeast": 160,
-      "summary": "AYT Fizik şablonu fiziksel nicelikleri tanımlamadan iki değerin çarpımını soruyor; 80 kayıt İş-Enerji etiketi taşıyor."
+      "affected": 160,
+      "action": "rewrite",
+      "status": "rule-added",
+      "summary": "Dört zayıf AYT Fizik şablonu Dinamik, İş-Enerji, Kinetik Enerji ve Momentum sorularıyla açık fiziksel nicelikler kullanılarak yeniden yazılıyor."
     },
     {
       "range": "V102-V141",
       "type": "invalid-difficulty-calibration",
-      "affectedAtLeast": 2000,
-      "summary": "Zorluk seviyesi içerikten değil ID uzunluğundan atanıyor."
+      "affected": 2000,
+      "action": "recalibrate",
+      "status": "rule-added",
+      "summary": "ID uzunluğuna dayalı zorluk etiketi kaldırılıyor; konu ve bilişsel işlem türüne göre yeniden atanıyor."
     },
     {
       "range": "V142-V301",
       "type": "topic-label-mismatch",
-      "affectedAtLeast": 160,
-      "summary": "Analitik Geometri etiketli şablon dikdörtgen alanı soruyor."
+      "affected": 160,
+      "action": "retag",
+      "status": "rule-added",
+      "summary": "Dikdörtgen alanı soran AYT-MAT-006 kayıtları Analitik Geometri yerine Dörtgenler ve Alan olarak etiketleniyor."
     },
     {
       "range": "V142-V301",
       "type": "template-overrepetition",
-      "affectedAtLeast": 8000,
-      "summary": "8.000 tam metin 50 tekrar eden soru pozisyonu/şablon ailesinden bağlam ve parametre değiştirerek üretiliyor."
+      "affected": 8000,
+      "action": "semantic-quarantine",
+      "status": "gate-enabled",
+      "summary": "Tam metin farklılığı artık yeterli sayılmıyor; sayı ve bağlam değişikliklerini normalize eden semantik aile parmak izi uygulanıyor."
     }
   ],
+  "systematicIssueRecordsAddressedByRules": 2340,
   "auditReport": "FULL_AUDIT_15000_2026-08-22.md",
-  "recommendedAction": "Do not connect generated verified bank to live app until semantic deduplication and independent content review are completed."
+  "recommendedAction": "Run all generated records through quality_gate_v1.js, rewrite overused semantic families, then promote only rubric score >=10 questions with independentSemanticReview=true."
 }
