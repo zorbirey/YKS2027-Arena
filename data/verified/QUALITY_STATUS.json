@@ -1,0 +1,45 @@
+{
+  "project": "YKS2027 Arena",
+  "auditedAt": "2026-08-22",
+  "manifestQuestionCount": 15000,
+  "technicalCountStatus": "pass",
+  "structuralQAStatus": "pass-with-scope-limits",
+  "semanticUniquenessStatus": "fail",
+  "difficultyCalibrationStatus": "fail",
+  "contentAndDistractorAuditStatus": "needs-remediation",
+  "livePoolReady": false,
+  "knownSystematicIssues": [
+    {
+      "range": "V42-V61",
+      "type": "ambiguous-second-correct-risk",
+      "affectedAtLeast": 20,
+      "summary": "AYT Kimya denge şablonunda denge derişimleri ve denge sabiti K birlikte sabit yorumuna açık."
+    },
+    {
+      "range": "V62-V101",
+      "type": "physics-content-topic-mismatch",
+      "affectedAtLeast": 160,
+      "summary": "AYT Fizik şablonu fiziksel nicelikleri tanımlamadan iki değerin çarpımını soruyor; 80 kayıt İş-Enerji etiketi taşıyor."
+    },
+    {
+      "range": "V102-V141",
+      "type": "invalid-difficulty-calibration",
+      "affectedAtLeast": 2000,
+      "summary": "Zorluk seviyesi içerikten değil ID uzunluğundan atanıyor."
+    },
+    {
+      "range": "V142-V301",
+      "type": "topic-label-mismatch",
+      "affectedAtLeast": 160,
+      "summary": "Analitik Geometri etiketli şablon dikdörtgen alanı soruyor."
+    },
+    {
+      "range": "V142-V301",
+      "type": "template-overrepetition",
+      "affectedAtLeast": 8000,
+      "summary": "8.000 tam metin 50 tekrar eden soru pozisyonu/şablon ailesinden bağlam ve parametre değiştirerek üretiliyor."
+    }
+  ],
+  "auditReport": "FULL_AUDIT_15000_2026-08-22.md",
+  "recommendedAction": "Do not connect generated verified bank to live app until semantic deduplication and independent content review are completed."
+}
