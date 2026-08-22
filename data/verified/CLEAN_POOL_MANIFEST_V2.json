@@ -1,6 +1,6 @@
 {
   "project": "YKS2027 Arena",
-  "cleaningVersion": "2.0.0",
+  "cleaningVersion": "2.1.0",
   "updatedAt": "2026-08-22",
   "generatedRecordTotal": 15000,
   "factoryGeneratedRange": "V16-V301",
@@ -9,15 +9,34 @@
   "earlyReviewQueue": {
     "range": "V1-V15",
     "originalCount": 700,
-    "reviewedRound1Count": 50,
-    "remainingRound1Count": 650,
-    "status": "manual-semantic-review-in-progress"
+    "questionByQuestionRound1Reviewed": 50,
+    "batchScreenedAdditional": 650,
+    "status": "manual-semantic-review-and-rewrite-in-progress"
   },
-  "reviewedCandidates": {
-    "count": 50,
-    "source": "CLEAN_REVIEWED_CANDIDATES_STAGE1_V1_V2.json",
-    "liveEligible": false,
-    "independentSemanticReview": false
+  "earlyBankScreening": {
+    "V1-V2": {"count":50,"status":"round1-reviewed-candidate","liveEligible":false},
+    "V3-V8": {"count":300,"status":"second-review-candidate","liveEligible":false},
+    "V9-V10": {"count":100,"status":"revision-candidate","liveEligible":false},
+    "V11-V15": {"count":250,"status":"rewrite-quarantine","liveEligible":false}
+  },
+  "rewriteCandidates": {
+    "V11-R1": {
+      "count": 50,
+      "distribution": {"TYT":25,"AYT":25},
+      "files": [
+        "rewrite_v11_r1_part1_10.json",
+        "rewrite_v11_r1_part2_10.json",
+        "rewrite_v11_r1_part3_10.json",
+        "rewrite_v11_r1_part4_10.json",
+        "rewrite_v11_r1_part5_10.json"
+      ],
+      "qaReport": "QA_REWRITE_V11_R1_50.md",
+      "factoryGenerated": false,
+      "numericSecondCheckCount": 25,
+      "correctIndexDistribution": {"0":10,"1":10,"2":10,"3":10,"4":10},
+      "independentSemanticReview": false,
+      "liveEligible": false
+    }
   },
   "knownDirectRemediations": {
     "V10_Turkish_skill_metadata": 1,
@@ -44,5 +63,5 @@
   "livePoolReady": false,
   "qualityGate": "quality_gate_v2.js",
   "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
-  "note": "Cleaning intentionally reduces the usable pool. The 15000 technical records are not treated as 15000 production-ready questions."
+  "note": "The 15000 technical records remain separate from production-ready count. V11-R1 is a newly rewritten static candidate set and is not live until independent review passes."
 }
