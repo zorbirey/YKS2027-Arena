@@ -2,65 +2,78 @@
   "project": "YKS2027 Arena",
   "auditedAt": "2026-08-22",
   "remediationStartedAt": "2026-08-22",
+  "cleaningStage": "strict-quarantine-and-rewrite",
   "manifestQuestionCount": 15000,
   "technicalCountStatus": "pass",
   "structuralQAStatus": "pass-with-scope-limits",
-  "semanticUniquenessStatus": "remediation-in-progress",
-  "difficultyCalibrationStatus": "remediation-in-progress",
-  "contentAndDistractorAuditStatus": "remediation-in-progress",
+  "semanticUniquenessStatus": "strict-cleaning-active",
+  "difficultyCalibrationStatus": "strict-cleaning-active",
+  "contentAndDistractorAuditStatus": "strict-cleaning-active",
   "livePoolReady": false,
+  "liveEligibleCount": 0,
   "qualityGate": {
-    "file": "quality_gate_v1.js",
-    "version": "1.0.0",
-    "semanticFamilyDefaultLimit": 4,
-    "factoryRangeDemotedToGeneratedBaseline": "V16-V301",
-    "factoryRecordCountProtectedFromLive": 14300,
+    "file": "quality_gate_v2.js",
+    "version": "2.0.0",
+    "semanticFamilyDefaultLimit": 2,
+    "factoryRangeQuarantined": "V16-V301",
+    "factoryRecordCountQuarantined": 14300,
+    "earlyReviewRange": "V1-V15",
+    "earlyReviewQueueCount": 700,
+    "minimumAutomatedRubricScore": 10,
     "requiresIndependentSemanticReview": true
   },
   "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
+  "cleanPoolManifest": "CLEAN_POOL_MANIFEST_V2.json",
   "systematicRemediationRules": [
+    {
+      "range": "V10",
+      "type": "metadata-and-wording-cleanup",
+      "affected": 2,
+      "action": "rewrite-or-retag",
+      "status": "implemented-in-quality-gate-v2"
+    },
     {
       "range": "V42-V61",
       "type": "ambiguous-second-correct-risk",
       "affected": 20,
       "action": "rewrite",
-      "status": "rule-added",
-      "summary": "AYT Kimya denge sorusu, sıcaklık sabitken K değerinin tek değişmez seçenek olacağı biçimde yeniden yazılıyor."
+      "status": "implemented-in-quality-gate-v2"
     },
     {
       "range": "V62-V101",
       "type": "physics-content-topic-mismatch",
       "affected": 160,
       "action": "rewrite",
-      "status": "rule-added",
-      "summary": "Dört zayıf AYT Fizik şablonu Dinamik, İş-Enerji, Kinetik Enerji ve Momentum sorularıyla açık fiziksel nicelikler kullanılarak yeniden yazılıyor."
+      "status": "implemented-in-quality-gate-v2"
     },
     {
       "range": "V102-V141",
       "type": "invalid-difficulty-calibration",
       "affected": 2000,
       "action": "recalibrate",
-      "status": "rule-added",
-      "summary": "ID uzunluğuna dayalı zorluk etiketi kaldırılıyor; konu ve bilişsel işlem türüne göre yeniden atanıyor."
+      "status": "implemented-in-quality-gate-v2"
     },
     {
       "range": "V142-V301",
       "type": "topic-label-mismatch",
       "affected": 160,
       "action": "retag",
-      "status": "rule-added",
-      "summary": "Dikdörtgen alanı soran AYT-MAT-006 kayıtları Analitik Geometri yerine Dörtgenler ve Alan olarak etiketleniyor."
+      "status": "implemented-in-quality-gate-v2"
     },
     {
-      "range": "V142-V301",
-      "type": "template-overrepetition",
-      "affected": 8000,
-      "action": "semantic-quarantine",
-      "status": "gate-enabled",
-      "summary": "Tam metin farklılığı artık yeterli sayılmıyor; sayı ve bağlam değişikliklerini normalize eden semantik aile parmak izi uygulanıyor."
+      "range": "V16-V301",
+      "type": "factory-template-overrepetition",
+      "affected": 14300,
+      "action": "hard-quarantine-until-rewrite",
+      "status": "active"
     }
   ],
-  "systematicIssueRecordsAddressedByRules": 2340,
+  "semanticRules": {
+    "contextOrNumberChangeAloneCountsAsUnique": false,
+    "maxPerNormalizedFamily": 2,
+    "directRecallFactoryQuestionRequiresRewrite": true,
+    "mediumOrHardRequiresReasoningEvidence": true
+  },
   "auditReport": "FULL_AUDIT_15000_2026-08-22.md",
-  "recommendedAction": "Run all generated records through quality_gate_v1.js, rewrite overused semantic families, then promote only rubric score >=10 questions with independentSemanticReview=true."
+  "recommendedAction": "Review V1-V15 first. Replace quarantined factory families with genuinely different reasoning questions, then promote only questions scoring at least 10/12 with independentSemanticReview=true."
 }
