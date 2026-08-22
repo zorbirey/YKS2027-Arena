@@ -4,25 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071018">
-<meta name="description" content="YKS 2027 TYT ve AYT hazırlığı için mobil Arena soru çözme, Akıllı Notlar ve Zeus Koçluğu PWA uygulaması.">
+<meta name="description" content="YKS 2027 TYT ve AYT hazırlığı için Arena soru çözme, Akıllı Notlar ve Zeus Koçluğu PWA uygulaması.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
 <title>YKS2027 Arena</title>
-<link rel="manifest" href="manifest.webmanifest?v=12">
+<link rel="manifest" href="manifest.webmanifest?v=13">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css?v=12">
-<link rel="stylesheet" href="yks-v09-zeus.css?v=12">
-<link rel="stylesheet" href="pwa-shell-v12.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="yks-v09-zeus.css?v=13">
+<link rel="stylesheet" href="pwa-shell-v12.css?v=13">
+<link rel="stylesheet" href="final-pwa-v13.css?v=13">
 </head>
 <body>
 <div id="entryGate" class="entry-gate" role="dialog" aria-modal="true" aria-label="YKS2027 Arena giriş ekranı">
-  <img src="assets/zeus-cover-inline.webp?v=12" class="entry-cover" alt="YKS2027 Arena Zeus kapak görseli" fetchpriority="high">
   <div class="entry-shade"></div>
-  <div class="entry-content">
-    <button id="enterArena" class="arena-enter" type="button">ARENA’YA GİR</button>
-  </div>
+  <div class="entry-content"><button id="enterArena" class="arena-enter" type="button">ARENA’YA GİR</button></div>
 </div>
 
 <div class="app">
@@ -37,100 +35,50 @@
 
 <main class="main">
 <section id="home" class="screen active">
-  <div class="hero card">
-    <img class="hero-zeus" src="assets/zeus-cover-inline.webp?v=12" alt="" aria-hidden="true">
-    <div class="hero-copy">
-      <div class="eyebrow">ZİRVEYE GİDEN YOL SORULARLA İNŞA EDİLİR</div>
-      <h1>YKS<span class="gold">2027</span><br>ARENA</h1>
-      <p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Arena soru sistemiyle tek yerde yönet.</p>
-      <div class="row"><button class="btn primary" onclick="startFull()">30 SORULUK DEMO</button><button class="btn" onclick="go('notes')">AKILLI NOTLAR</button></div>
-    </div>
-  </div>
-  <div class="count-grid">
-    <div class="card countdown-card"><div class="row between"><h3>TYT 2027</h3><span class="small gold">19 HAZİRAN</span></div><div class="timer" id="tytTimer"></div></div>
-    <div class="card countdown-card"><div class="row between"><h3>AYT 2027</h3><span class="small gold">20 HAZİRAN</span></div><div class="timer" id="aytTimer"></div></div>
-  </div>
-  <div class="metric-grid">
-    <div class="card metric-card"><span class="small">GÜNLÜK HEDEF</span><div class="metric" id="daily">0 / 30</div></div>
-    <div class="card metric-card"><span class="small">DOĞRULUK</span><div class="metric" id="accuracy">—</div></div>
-    <div class="card metric-card"><span class="small">ARENA PUANI</span><div class="metric" id="points">0</div></div>
-  </div>
-  <div class="rank-grid">
-    <div class="card rank-card"><span class="small">TÜRKİYE SIRALAMASI</span><div class="rank" id="trRank">—</div><div class="small rank-note" id="trSub">Soru çözerek sıralamaya gir.</div></div>
-    <div class="card rank-card"><span class="small">İL SIRALAMASI</span><div class="rank" id="ilRank">—</div><select id="province" onchange="setProvince(this.value)"><option value="">İl seç</option></select></div>
-  </div>
+  <div class="hero card"><div class="hero-copy"><div class="eyebrow">ZİRVEYE GİDEN YOL SORULARLA İNŞA EDİLİR</div><h1>YKS<span class="gold">2027</span><br>ARENA</h1><p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Arena soru sistemiyle tek yerde yönet.</p><div class="row"><button class="btn primary" onclick="startFull()">30 SORULUK DEMO</button><button class="btn" onclick="go('notes')">AKILLI NOTLAR</button></div></div></div>
+  <div class="count-grid"><div class="card countdown-card"><div class="row between"><h3>TYT 2027</h3><span class="small gold">19 HAZİRAN</span></div><div class="timer" id="tytTimer"></div></div><div class="card countdown-card"><div class="row between"><h3>AYT 2027</h3><span class="small gold">20 HAZİRAN</span></div><div class="timer" id="aytTimer"></div></div></div>
+  <div class="metric-grid"><div class="card metric-card"><span class="small">GÜNLÜK HEDEF</span><div class="metric" id="daily">0 / 30</div></div><div class="card metric-card"><span class="small">DOĞRULUK</span><div class="metric" id="accuracy">—</div></div><div class="card metric-card"><span class="small">ARENA PUANI</span><div class="metric" id="points">0</div></div></div>
+  <div class="rank-grid"><div class="card rank-card"><span class="small">TÜRKİYE SIRALAMASI</span><div class="rank" id="trRank">—</div><div class="small rank-note" id="trSub">Soru çözerek sıralamaya gir.</div></div><div class="card rank-card"><span class="small">İL SIRALAMASI</span><div class="rank" id="ilRank">—</div><select id="province" onchange="setProvince(this.value)"><option value="">İl seç</option></select></div></div>
   <div class="card coach"><div class="coach-mark">Z</div><p id="coachHome">İlk sorularını çöz. Zeus performansına göre öncelik vereceğin dersi belirleyecek.</p></div>
 </section>
 
-<section id="subjects" class="screen">
-  <div class="page-head"><div><h2>Dersler</h2><span class="small">TYT + AYT ders arenaları</span></div></div>
-  <div class="subjects" id="subjectGrid"></div>
-  <div class="filters card">
-    <div><label>SINAV</label><select id="examFilter"><option value="ALL">Tümü</option><option>TYT</option><option>AYT</option></select></div>
-    <div><label>DERS</label><select id="subjectFilter"><option value="ALL">Tümü</option></select></div>
-    <div><label>SEVİYE</label><select id="difficultyFilter"><option value="ALL">Tümü</option><option>Kolay</option><option>Orta</option><option>Zor</option></select></div>
-    <button class="btn primary" onclick="startFiltered()">SORULARI GETİR</button>
-  </div>
-</section>
+<section id="subjects" class="screen"><div class="page-head"><div><h2>Dersler</h2><span class="small">TYT + AYT ders arenaları</span></div></div><div class="subjects" id="subjectGrid"></div><div class="filters card"><div><label>SINAV</label><select id="examFilter"><option value="ALL">Tümü</option><option>TYT</option><option>AYT</option></select></div><div><label>DERS</label><select id="subjectFilter"><option value="ALL">Tümü</option></select></div><div><label>SEVİYE</label><select id="difficultyFilter"><option value="ALL">Tümü</option><option>Kolay</option><option>Orta</option><option>Zor</option></select></div><button class="btn primary" onclick="startFiltered()">SORULARI GETİR</button></div></section>
 
-<section id="notes" class="screen">
-  <div class="page-head"><div><h2>Akıllı Notlar</h2><span class="small">Dikkat • Kavram • Örnek</span></div></div>
-  <div class="notes-tools"><button class="chip active" data-noteexam="ALL" onclick="setNoteExam('ALL',this)">Tümü</button><button class="chip" data-noteexam="TYT" onclick="setNoteExam('TYT',this)">TYT</button><button class="chip" data-noteexam="AYT" onclick="setNoteExam('AYT',this)">AYT</button><select id="noteSubject" onchange="renderNotes()"><option value="ALL">Tüm dersler</option></select></div>
-  <div class="notes-grid" id="notesGrid"></div>
-</section>
+<section id="notes" class="screen"><div class="page-head"><div><h2>Akıllı Notlar</h2><span class="small">Dikkat • Kavram • Örnek</span></div></div><div class="notes-tools"><button class="chip active" data-noteexam="ALL" onclick="setNoteExam('ALL',this)">Tümü</button><button class="chip" data-noteexam="TYT" onclick="setNoteExam('TYT',this)">TYT</button><button class="chip" data-noteexam="AYT" onclick="setNoteExam('AYT',this)">AYT</button><select id="noteSubject" onchange="renderNotes()"><option value="ALL">Tüm dersler</option></select></div><div class="notes-grid" id="notesGrid"></div></section>
 
-<section id="quiz" class="screen">
-  <div class="quiz-page-head"><div><h2 id="quizTitle">Arena</h2><span class="small" id="quizCount">0 / 0</span></div></div>
-  <div class="quiz">
-    <div class="progress"><i id="quizProgress" style="width:0%"></i></div>
-    <div class="qcard"><div class="qmeta"><span id="qExam"></span><span id="qTopic"></span></div><div class="qtext" id="qText">Dersler sekmesinden veya ana sayfadan bir tur başlat.</div><div class="options" id="options"></div></div>
-    <div class="feedback" id="feedback">Cevabın kaydedildi. Doğru/yanlış ve çözüm tur sonunda gösterilecek.</div>
-    <div class="quizactions"><button class="btn" onclick="finishQuiz()">BİTİR</button><button class="btn primary" id="nextBtn" onclick="nextQuestion()" disabled>SONRAKİ SORU</button></div>
-  </div>
-</section>
+<section id="quiz" class="screen"><div class="quiz-page-head"><div><h2 id="quizTitle">Arena</h2><span class="small" id="quizCount">0 / 0</span></div></div><div class="quiz"><div class="progress"><i id="quizProgress" style="width:0%"></i></div><div class="qcard"><div class="qmeta"><span id="qExam"></span><span id="qTopic"></span></div><div class="qtext" id="qText">Dersler sekmesinden veya ana sayfadan bir tur başlat.</div><div class="options" id="options"></div></div><div class="feedback" id="feedback">Cevabın kaydedildi. Doğru/yanlış ve çözüm tur sonunda gösterilecek.</div><div class="quizactions"><button class="btn" onclick="finishQuiz()">BİTİR</button><button class="btn primary" id="nextBtn" onclick="nextQuestion()" disabled>SONRAKİ SORU</button></div></div></section>
 
-<section id="reports" class="screen">
-  <div class="page-head"><div><h2>Performans</h2><span class="small" id="reportPlan">ÜCRETSİZ</span></div></div>
-  <div class="report-top">
-    <div class="card"><span class="small">GENEL DOĞRULUK</span><div class="score" id="reportAccuracy">0%</div><div class="small" id="reportLine">Henüz soru çözmedin.</div></div>
-    <div class="card"><span class="small">SIRALAMA</span><div class="rank" id="reportRanks">TR —</div><div class="small" id="reportProvince">İl seçilmedi</div></div>
-  </div>
-  <div class="card review" id="review"><div class="small">Tur tamamlandığında cevapların burada gösterilir.</div></div>
-</section>
+<section id="reports" class="screen"><div class="page-head"><div><h2>Performans</h2><span class="small" id="reportPlan">ÜCRETSİZ</span></div></div><div class="report-top"><div class="card"><span class="small">GENEL DOĞRULUK</span><div class="score" id="reportAccuracy">0%</div><div class="small" id="reportLine">Henüz soru çözmedin.</div></div><div class="card"><span class="small">SIRALAMA</span><div class="rank" id="reportRanks">TR —</div><div class="small" id="reportProvince">İl seçilmedi</div></div></div><div class="card review" id="review"><div class="small">Tur tamamlandığında cevapların burada gösterilir.</div></div></section>
 
-<section id="zeus" class="screen">
-  <div class="page-head zeus-head"><div><h2>Zeus Koçluğu</h2><span class="small gold">AKILLI ÇALIŞMA REHBERİ</span></div></div>
-  <div class="zeus"><div class="card oracle"><div><div class="coach-mark large">Z</div><h2 id="oracleTitle">Arenaya Hoş Geldin</h2><p id="oracleText">Soru çözdükçe performans verin oluşacak ve çalışma önceliklerin burada görünecek.</p><button class="btn primary" onclick="startFull()">KOÇLUK TURUNU BAŞLAT</button></div></div><div class="card tips" id="tips"></div></div>
-</section>
+<section id="zeus" class="screen"><div class="page-head zeus-head"><div><h2>Zeus Koçluğu</h2><span class="small gold">AKILLI ÇALIŞMA REHBERİ</span></div></div><div class="zeus"><div class="card oracle"><div><div class="coach-mark large">Z</div><h2 id="oracleTitle">Arenaya Hoş Geldin</h2><p id="oracleText">Soru çözdükçe performans verin oluşacak ve çalışma önceliklerin burada görünecek.</p><button class="btn primary" onclick="startFull()">KOÇLUK TURUNU BAŞLAT</button></div></div><div class="card tips" id="tips"></div></div></section>
 </main>
 
-<nav class="nav" aria-label="Ana navigasyon">
-  <button class="active" data-go="home" onclick="go('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg><span>Ana Sayfa</span></button>
-  <button data-go="subjects" onclick="go('subjects')"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dersler</span></button>
-  <button data-go="notes" onclick="go('notes')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Notlar</span></button>
-  <button data-go="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15z"/><path d="m13.5 6.5 4 4M4 21h16"/></svg><span>Soru Çöz</span></button>
-  <button data-go="reports" onclick="go('reports')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Raporlar</span></button>
-  <button data-go="zeus" onclick="go('zeus')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h6l-1 8 9-13h-6z"/></svg><span>Zeus</span></button>
+<nav class="nav">
+<button class="active" data-go="home" onclick="go('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg><span>Ana Sayfa</span></button>
+<button data-go="subjects" onclick="go('subjects')"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dersler</span></button>
+<button data-go="notes" onclick="go('notes')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Notlar</span></button>
+<button data-go="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15z"/><path d="m13.5 6.5 4 4M4 21h16"/></svg><span>Soru Çöz</span></button>
+<button data-go="reports" onclick="go('reports')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Raporlar</span></button>
+<button data-go="zeus" onclick="go('zeus')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h6l-1 8 9-13h-6z"/></svg><span>Zeus</span></button>
 </nav>
 </div>
 
-<div id="offlineNote" class="offline-note" role="status">Çevrimdışısın. Daha önce yüklenen Arena içeriği kullanılabilir.</div>
 <div class="ad" id="ad"><div class="adbox"><div class="gold ad-label">REKLAM</div><h2>Sonuçların hazırlanıyor</h2><p class="small">Ücretsiz sürümde sonuçlardan önce reklam gösterilir. Premium kullanıcı doğrudan sonuçlara geçer.</p><div class="adslot">Reklam alanı<br>Gerçek sürümde reklam ağı burada çalışacak.</div><div class="gold" id="adCount">3 saniye</div><button class="btn primary" id="adBtn" onclick="revealResults()" disabled>SONUÇLARI GÖR</button></div></div>
 
-<script src="data.js?v=12"></script>
-<script src="app.js?v=12"></script>
-<script src="privacy-fix.js?v=12"></script>
-<script src="pwa.js?v=12"></script>
+<script src="data.js?v=13"></script>
+<script src="app.js?v=13"></script>
+<script src="privacy-fix.js?v=13"></script>
+<script src="pwa.js?v=13"></script>
 <script>
-(() => {
-  const gate=document.getElementById('entryGate');
-  const enter=document.getElementById('enterArena');
-  if(!gate||!enter) return;
-  enter.addEventListener('click',()=>{
-    gate.classList.add('leaving');
-    document.documentElement.classList.remove('arena-locked');
-    setTimeout(()=>gate.remove(),380);
-  },{once:true});
+(()=>{
+ const gate=document.getElementById('entryGate');
+ const enter=document.getElementById('enterArena');
+ if(!gate||!enter)return;
+ enter.addEventListener('click',()=>{
+   gate.classList.add('leaving');
+   document.documentElement.classList.remove('arena-locked');
+   setTimeout(()=>gate.remove(),340);
+ },{once:true});
 })();
 </script>
 </body>
