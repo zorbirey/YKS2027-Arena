@@ -1,0 +1,44 @@
+(function(g){'use strict';
+const VERSION='2.0.0',FACTORY_MIN=16,FACTORY_MAX=301;
+const FILLER=/\b(analitik|odaklı|stratejik|karma|ileri|seçici|yoğun|süreli|yorumlu|beceri|kapsamlı|bağlantılı|dengeli|hedefli|derin|uygulamalı|tekrar|deneme|tarama|prova|çalışma|oturum|kamp|kontrol|pekiştirme|simülasyon|kapsamında|sırasında|notlarında|için|hazırlanan|çalışmasında|hedef|performans|finale|ikinci aşama|yeni nesil)\b/gi;
+const REASON=/\b(grafik|tablo|deney|veri|çıkarım|yorum|karşılaştır|neden|sonuç|değişim|ilişki|kanıt|öncül|durum|birlikte|hangilerine|ulaşılabilir|ulaşılamaz|en uygun|yorumlanabilir)\b/i;
+const DIRECT_RECALL=/\b(kimdir|nedir|hangisidir|hangi tarihte|hangi yıl|kime aittir|yazarı kim|ne ad verilir)\b/i;
+const ONE_STEP=/\b(kaçtır|kaç tl|kaç km|kaç gram|kaç mol|kaç j|kaç n|kaç v|kaç watt|kaç cm|kaç m\/s|kaç m\/s²)\b/i;
+function cp(x){return JSON.parse(JSON.stringify(x));}
+function vno(id){const m=String(id||'').match(/^V(\d+)-/);return m?+m[1]:null;}
+function ver(q,p){q.verification=Object.assign({},q.verification||{},p);return q;}
+function set(q,text,opts,ci,exp){q.question=text;q.options=opts;q.correctIndex=ci;q.explanation=exp;return q;}
+function fixed(q0){const q=cp(q0),v=vno(q.id);
+ if(q.id==='V10-TYT-TR-007'){q.skill='Gereksiz sözcük kullanımını belirleme';ver(q,{remediation:'QG2-V10-TR-SKILL'});}
+ if(q.id==='V10-TYT-BIO-001'){
+   q.topic='Canlıların Ortak Özellikleri';q.skill='Enerji kullanımının ortaklığını yorumlama';q.difficulty='Orta';
+   set(q,'Aşağıdakilerden hangisi hücresel yapıya sahip tüm canlılarda enerji gerektiren yaşamsal olaylarla doğrudan ilişkilidir?',['ATP’nin enerji aktarımında kullanılması','Kloroplastla fotosentez yapılması','Çekirdek zarının bulunması','Oksijenli solunum yapılması','Çok hücreli yapının bulunması'],0,'Canlı hücrelerde enerji gerektiren süreçlerde ortak enerji aktarım birimi ATP’dir; diğer özellikler tüm canlı hücrelerde bulunmaz.');
+   ver(q,{remediation:'QG2-V10-BIO-WORDING',answerChecked:true,distractorsChecked:true});
+ }
+ if(v>=42&&v<=61&&/-AYT-KIM-002$/.test(q.id)){
+   q.topic='Kimyasal Denge';q.skill='Denge sabitini değişkenlerden ayırt etme';q.difficulty='Orta';
+   set(q,'Dengedeki bir tepkimenin sıcaklığı sabit tutuluyor ve kaba bir miktar tepkimeye giren madde ekleniyor. Sistem yeniden dengeye ulaştığında aşağıdakilerden hangisinin sayısal değeri başlangıçtaki dengeyle aynı kalır?',['Tepkime bölümü Q','Denge sabiti K','İleri tepkime hızı','Geri tepkime hızı','Dengedeki tüm türlerin derişimleri'],1,'Denge sabiti yalnız sıcaklığa bağlıdır. Sıcaklık değişmediği için K değişmez; derişimler ve hızlar yeni denge koşullarına göre değişebilir.');
+   ver(q,{remediation:'QG2-V42-CHEM',answerChecked:true,distractorsChecked:true});
+ }
+ if(v>=62&&v<=101&&/-AYT-FIZ-00[1-4]$/.test(q.id)){
+   const b=v-62,s=+q.id.slice(-1);
+   if(s===1){const m=2+b%5,a=2+(b*2)%6,F=m*a;q.topic='Dinamik';q.skill='Newton ikinci yasa';q.difficulty='Orta';set(q,`Sürtünmesiz yatay düzlemde ${m} kg kütleli bir cisme yatay ${F} N net kuvvet uygulanıyor. Cismin ivmesi kaç m/s² olur?`,[String(Math.max(0,a-2)),String(Math.max(0,a-1)),String(a),String(a+1),String(a+2)],2,`Newton'un ikinci yasası: a=F/m=${F}/${m}=${a} m/s².`);}
+   if(s===2){const F=10+2*(b%7),d=3+b%6,W=F*d;q.topic='İş ve Enerji';q.skill='İş hesabı ve yön ilişkisi';q.difficulty='Orta';set(q,`Yatay düzlemde bir cisme hareket yönünde sabit ${F} N kuvvet uygulanıyor ve cisim ${d} m yer değiştiriyor. Bu kuvvetin yaptığı iş kaç J'dür?`,[String(W-2*F),String(W-F),String(W),String(W+F),String(W+2*F)],2,`Kuvvet ile yer değiştirme aynı yönde olduğundan W=F·d=${F}×${d}=${W} J.`);}
+   if(s===3){const m=2+b%4,u=4+b%5,E=m*u*u/2;q.topic='Enerji';q.skill='Kinetik enerji';q.difficulty='Orta';set(q,`${m} kg kütleli bir cisim ${u} m/s süratle hareket ediyor. Cismin kinetik enerjisi kaç J'dür?`,[String(E-m*u),String(E-m),String(E),String(E+m),String(E+m*u)],2,`Eₖ=½mv²=½×${m}×${u}²=${E} J.`);}
+   if(s===4){const m=2+b%6,u=3+b%7,p=m*u;q.topic='Momentum';q.skill='Momentum';q.difficulty='Orta';set(q,`${m} kg kütleli bir cismin hızı ${u} m/s'dir. Cismin momentum büyüklüğü kaç kg·m/s olur?`,[String(p-2*m),String(p-m),String(p),String(p+m),String(p+2*m)],2,`p=m·v=${m}×${u}=${p} kg·m/s.`);}
+   ver(q,{remediation:'QG2-V62-PHYSICS',numericSecondCheck:true,answerChecked:true,distractorsChecked:true});
+ }
+ if(v>=102&&v<=141){const t=String(q.topic||'').toLocaleLowerCase('tr-TR'),txt=String(q.question||'');let d='Orta';if(/yazım|noktalama|sözcükte anlam|temel kavram/.test(t)||DIRECT_RECALL.test(txt))d='Kolay';else if(REASON.test(txt)||/türev|integral|logaritma|diziler|ikinci derece/.test(t))d='Orta';q.difficulty=d;ver(q,{difficultyCalibration:'QG2-cognitive-rule'});}
+ if(v>=142&&v<=301&&/-AYT-MAT-006$/.test(q.id)&&/dikdörtgenin alanı/i.test(q.question||'')){q.topic='Dörtgenler ve Alan';q.skill='Dikdörtgende alan';ver(q,{remediation:'QG2-V142-TOPIC'});}
+ if(v>=FACTORY_MIN&&v<=FACTORY_MAX)ver(q,{status:'generated-baseline',liveEligible:false,humanReviewRequired:true,qualityGateVersion:VERSION});
+ return q;
+}
+function normalize(s){return String(s||'').toLocaleLowerCase('tr-TR').replace(/[“”"'’]/g,'').replace(/\d+(?:[.,]\d+)?/g,'#').replace(FILLER,' ').replace(/\b(v\d+|tyt|ayt)\b/g,' ').replace(/[^a-zçğıöşü#]+/gi,' ').replace(/\s+/g,' ').trim();}
+function fp(q){let body=normalize(q.question);body=body.replace(/\b(ali|ayşe|ece|öğrenci|araç|cisim|ürün|kutu|çanta)\b/g,'@');return [q.exam||'',q.subject||'',q.topic||'',body].join('|');}
+function structural(q){const r=[];if(!q||!q.id)r.push('missing-id');if(!q||!String(q.question||'').trim())r.push('empty-question');if(!Array.isArray(q&&q.options)||q.options.length!==5)r.push('not-five-options');else if(new Set(q.options).size!==5)r.push('duplicate-options');if(!Number.isInteger(q&&q.correctIndex)||q.correctIndex<0||q.correctIndex>4)r.push('invalid-correctIndex');if(!String(q&&q.explanation||'').trim())r.push('empty-explanation');return r;}
+function knownRisk(q){const r=[],txt=String(q.question||''),opts=(q.options||[]).join('|'),topic=String(q.topic||'');if(/Analitik Geometri/i.test(topic)&&/dikdörtgenin alanı/i.test(txt))r.push('topic-mismatch');if(/denge sisteminde hangisi sabit kalır/i.test(txt)&&/Denge derişimleri/.test(opts)&&/Denge sabiti K/.test(opts))r.push('ambiguous-second-correct');if(/değerlerinin çarpımıyla bulunan fiziksel büyüklük/i.test(txt))r.push('undefined-physics');if(/Tüm canlı hücreler yaşam faaliyetleri için ATP üretir ve kullanır/i.test(txt))r.push('overgeneralized-biology-wording');return r;}
+function cognitive(q){const txt=String(q.question||''),exp=String(q.explanation||'');if(REASON.test(txt))return 2;if(DIRECT_RECALL.test(txt))return 0;if(ONE_STEP.test(txt)&&exp.length<90)return 1;return 1;}
+function score(q,familyCount){let s=0;const risks=knownRisk(q);if(!risks.length)s+=2;const c=cognitive(q);s+=c;const opts=q.options||[];s+=opts.length===5&&new Set(opts).size===5?2:0;s+=String(q.question||'').length>=45&&String(q.question||'').length<=520?2:1;s+=familyCount===1?2:familyCount===2?1:0;let diff=String(q.difficulty||'');s+=((c===0&&diff==='Kolay')||(c===1&&/Kolay|Orta/.test(diff))||(c===2&&/Orta|Zor/.test(diff)))?2:1;return Math.min(12,s);}
+function process(questions,opts){opts=Object.assign({maxPerSemanticFamily:2,minReviewScore:10},opts||{});const a=(questions||[]).map(fixed),counts=new Map();for(const q of a){const f=fp(q);counts.set(f,(counts.get(f)||0)+1);}const quarantine=[],review=[];for(const q of a){const reasons=[...structural(q),...knownRisk(q)],familyCount=counts.get(fp(q))||0,sc=score(q,familyCount),v=vno(q.id);if(familyCount>opts.maxPerSemanticFamily)reasons.push('semantic-family-overuse');if(v>=FACTORY_MIN&&v<=FACTORY_MAX&&cognitive(q)===0)reasons.push('factory-direct-recall');if(q.difficulty==='Zor'&&cognitive(q)<2)reasons.push('difficulty-overstated');if(sc<opts.minReviewScore)reasons.push('rubric-under-10');q.verification=Object.assign({},q.verification||{},{qualityGateVersion:VERSION,semanticFamilyCount:familyCount,automatedRubricScore:sc,independentSemanticReview:false,liveEligible:false});if(reasons.length)quarantine.push({id:q.id,score:sc,reasons:[...new Set(reasons)],fingerprint:fp(q)});else review.push(q);}return{version:VERSION,total:a.length,semanticFamilies:counts.size,reviewCandidateCount:review.length,quarantineCount:quarantine.length,reviewCandidates:review,quarantine,liveEligible:[],policy:'Independent semantic/content review is mandatory before liveEligible=true.'};}
+const api={version:VERSION,fixed,normalize,semanticFingerprint:fp,structuralIssues:structural,knownRisk,cognitiveLevel:cognitive,automatedScore:score,process};g.YKS2027QualityGateV2=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
