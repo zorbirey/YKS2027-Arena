@@ -1,6 +1,6 @@
 {
   "project": "YKS2027 Arena",
-  "cleaningVersion": "2.3.0",
+  "cleaningVersion": "2.4.0",
   "updatedAt": "2026-08-22",
   "generatedRecordTotal": 15000,
   "factoryGeneratedRange": "V16-V301",
@@ -19,18 +19,13 @@
     "V9-V10": {"count":100,"status":"revision-candidate","liveEligible":false},
     "V11-V15": {"count":250,"status":"rewrite-quarantine","liveEligible":false}
   },
-  "rewriteCandidateTotal": 150,
+  "rewriteCandidateTotal": 650,
+  "rewriteCandidateByExam": {"TYT":325,"AYT":325},
   "rewriteCandidates": {
     "V11-R1": {
       "count": 50,
       "distribution": {"TYT":25,"AYT":25},
-      "files": [
-        "rewrite_v11_r1_part1_10.json",
-        "rewrite_v11_r1_part2_10.json",
-        "rewrite_v11_r1_part3_10.json",
-        "rewrite_v11_r1_part4_10.json",
-        "rewrite_v11_r1_part5_10.json"
-      ],
+      "files": ["rewrite_v11_r1_part1_10.json","rewrite_v11_r1_part2_10.json","rewrite_v11_r1_part3_10.json","rewrite_v11_r1_part4_10.json","rewrite_v11_r1_part5_10.json"],
       "qaReport": "QA_REWRITE_V11_R1_50.md",
       "factoryGenerated": false,
       "numericSecondCheckCount": 25,
@@ -41,13 +36,7 @@
     "V12-R1": {
       "count": 50,
       "distribution": {"TYT":25,"AYT":25},
-      "files": [
-        "rewrite_v12_r1_part1_10.json",
-        "rewrite_v12_r1_part2_10.json",
-        "rewrite_v12_r1_part3_10.json",
-        "rewrite_v12_r1_part4_10.json",
-        "rewrite_v12_r1_part5_10.json"
-      ],
+      "files": ["rewrite_v12_r1_part1_10.json","rewrite_v12_r1_part2_10.json","rewrite_v12_r1_part3_10.json","rewrite_v12_r1_part4_10.json","rewrite_v12_r1_part5_10.json"],
       "qaReport": "QA_REWRITE_V12_R1_50.md",
       "factoryGenerated": false,
       "numericSecondCheckCount": 25,
@@ -59,18 +48,29 @@
     "V13-R1": {
       "count": 50,
       "distribution": {"TYT":25,"AYT":25},
-      "files": [
-        "rewrite_v13_r1_part1_10.json",
-        "rewrite_v13_r1_part2_10.json",
-        "rewrite_v13_r1_part3_10.json",
-        "rewrite_v13_r1_part4_10.json",
-        "rewrite_v13_r1_part5_10.json"
-      ],
+      "files": ["rewrite_v13_r1_part1_10.json","rewrite_v13_r1_part2_10.json","rewrite_v13_r1_part3_10.json","rewrite_v13_r1_part4_10.json","rewrite_v13_r1_part5_10.json"],
       "qaReport": "QA_REWRITE_V13_R1_50.md",
       "factoryGenerated": false,
       "numericSecondCheckCount": 28,
       "correctIndexDistribution": {"0":10,"1":10,"2":10,"3":10,"4":10},
       "difficultyDistribution": {"Orta":30,"Zor":20},
+      "independentSemanticReview": false,
+      "liveEligible": false
+    },
+    "V14-V23-R1": {
+      "count": 500,
+      "distribution": {"TYT":250,"AYT":250},
+      "batchRange": {"from":"V14-R1","to":"V23-R1","count":10,"questionsPerBatch":50},
+      "file": "rewrite_v14_v23_r1_500.json.gz.b64",
+      "index": "REWRITE_V14_V23_R1_500_INDEX.json",
+      "materializer": "materialize_rewrite_v14_v23_r1.py",
+      "qaReport": "QA_REWRITE_V14_V23_R1_500.md",
+      "factoryGenerated": false,
+      "semanticFamilies": 250,
+      "maxPerSemanticFamily": 2,
+      "numericSecondCheckCount": 240,
+      "correctIndexDistribution": {"0":100,"1":100,"2":100,"3":100,"4":100},
+      "difficultyDistribution": {"Kolay":36,"Orta":424,"Zor":40},
       "independentSemanticReview": false,
       "liveEligible": false
     }
@@ -100,5 +100,5 @@
   "livePoolReady": false,
   "qualityGate": "quality_gate_v2.js",
   "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
-  "note": "The 15000 technical records remain separate from production-ready count. V11-R1, V12-R1 and V13-R1 are static rewritten candidate sets and are not live until independent review passes."
+  "note": "The 15000 technical records remain separate from production-ready count. Rewrite candidate total is now 650; none are live until independent semantic/content review passes."
 }
