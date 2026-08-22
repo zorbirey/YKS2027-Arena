@@ -1,6 +1,6 @@
 {
   "project": "YKS2027 Arena",
-  "cleaningVersion": "2.1.0",
+  "cleaningVersion": "2.2.0",
   "updatedAt": "2026-08-22",
   "generatedRecordTotal": 15000,
   "factoryGeneratedRange": "V16-V301",
@@ -19,6 +19,7 @@
     "V9-V10": {"count":100,"status":"revision-candidate","liveEligible":false},
     "V11-V15": {"count":250,"status":"rewrite-quarantine","liveEligible":false}
   },
+  "rewriteCandidateTotal": 100,
   "rewriteCandidates": {
     "V11-R1": {
       "count": 50,
@@ -34,6 +35,24 @@
       "factoryGenerated": false,
       "numericSecondCheckCount": 25,
       "correctIndexDistribution": {"0":10,"1":10,"2":10,"3":10,"4":10},
+      "independentSemanticReview": false,
+      "liveEligible": false
+    },
+    "V12-R1": {
+      "count": 50,
+      "distribution": {"TYT":25,"AYT":25},
+      "files": [
+        "rewrite_v12_r1_part1_10.json",
+        "rewrite_v12_r1_part2_10.json",
+        "rewrite_v12_r1_part3_10.json",
+        "rewrite_v12_r1_part4_10.json",
+        "rewrite_v12_r1_part5_10.json"
+      ],
+      "qaReport": "QA_REWRITE_V12_R1_50.md",
+      "factoryGenerated": false,
+      "numericSecondCheckCount": 25,
+      "correctIndexDistribution": {"0":10,"1":10,"2":10,"3":10,"4":10},
+      "difficultyDistribution": {"Orta":43,"Zor":7},
       "independentSemanticReview": false,
       "liveEligible": false
     }
@@ -63,5 +82,5 @@
   "livePoolReady": false,
   "qualityGate": "quality_gate_v2.js",
   "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
-  "note": "The 15000 technical records remain separate from production-ready count. V11-R1 is a newly rewritten static candidate set and is not live until independent review passes."
+  "note": "The 15000 technical records remain separate from production-ready count. V11-R1 and V12-R1 are static rewritten candidate sets and are not live until independent review passes."
 }
