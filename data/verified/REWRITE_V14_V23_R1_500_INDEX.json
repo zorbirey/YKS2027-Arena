@@ -5,7 +5,7 @@
   "questionCount":500,
   "distribution":{"TYT":250,"AYT":250},
   "batchRange":{"from":"V14-R1","to":"V23-R1","count":10,"questionsPerBatch":50},
-  "storage":{"file":"rewrite_v14_v23_r1_500.json.gz","encoding":"gzip","uncompressedFormat":"UTF-8 JSON","uncompressedSha256":"7b274dc10d8753e33cf6fb06138b3da30c808d6b51e76eb2582cd6b3eb77f56e","compressedSha256":"2fe796e6ddf4363c2d8bf4c1949e321137715a7636d047c14f4edd32ba79adf9"},
+  "storage":{"file":"rewrite_v14_v23_r1_500.json.gz.b64","encoding":"base64(gzip(UTF-8 JSON))","materializer":"materialize_rewrite_v14_v23_r1.py","uncompressedSha256":"7b274dc10d8753e33cf6fb06138b3da30c808d6b51e76eb2582cd6b3eb77f56e","compressedSha256":"2fe796e6ddf4363c2d8bf4c1949e321137715a7636d047c14f4edd32ba79adf9"},
   "qa":{"uniqueIds":500,"uniqueQuestionTexts":500,"semanticFamilies":250,"maxPerSemanticFamily":2,"fiveUniqueOptions":500,"validCorrectIndex":500,"correctIndexDistribution":{"0":100,"1":100,"2":100,"3":100,"4":100},"numericSecondCheck":{"checked":240,"passed":240},"difficultyDistribution":{"Kolay":36,"Orta":424,"Zor":40}},
   "factoryGenerated":false,
   "independentSemanticReview":false,
