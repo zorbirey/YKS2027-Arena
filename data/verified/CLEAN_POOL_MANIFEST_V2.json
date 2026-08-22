@@ -1,0 +1,40 @@
+{
+  "project": "YKS2027 Arena",
+  "cleaningVersion": "2.0.0",
+  "updatedAt": "2026-08-22",
+  "generatedRecordTotal": 15000,
+  "factoryGeneratedRange": "V16-V301",
+  "factoryGeneratedRecordCount": 14300,
+  "factoryGeneratedDisposition": "quarantine-until-rewrite-and-independent-review",
+  "earlyReviewQueue": {
+    "range": "V1-V15",
+    "count": 700,
+    "status": "manual-semantic-review-required"
+  },
+  "knownDirectRemediations": {
+    "V10_Turkish_skill_metadata": 1,
+    "V10_biology_wording": 1,
+    "V42_V61_chemistry_equilibrium": 20,
+    "V62_V101_physics_rewrite": 160,
+    "V102_V141_difficulty_recalibration": 2000,
+    "V142_V301_topic_retag": 160
+  },
+  "semanticPolicy": {
+    "maxPerNormalizedFamily": 2,
+    "contextOrNumberChangeAloneCountsAsNewQuestion": false,
+    "directRecallFactoryQuestionsRequireRewrite": true,
+    "mediumOrHardQuestionsRequireReasoningEvidence": true
+  },
+  "promotionPolicy": {
+    "minimumRubricScore": 10,
+    "rubricMax": 12,
+    "independentSemanticReviewRequired": true,
+    "numericSecondCheckRequiredForNumericQuestions": true,
+    "liveEligibleOnlyAfterAllChecks": true
+  },
+  "liveEligibleCount": 0,
+  "livePoolReady": false,
+  "qualityGate": "quality_gate_v2.js",
+  "reviewRubric": "CONTENT_REVIEW_RUBRIC_V1.md",
+  "note": "Cleaning intentionally reduces the usable pool. The 15000 technical records are not treated as 15000 production-ready questions."
+}
