@@ -32,6 +32,6 @@ function renderReview(){const box=document.getElementById('reviewBox');if(!box)r
 function renderReports(){const acc=stats.answered?Math.round(stats.correct/stats.answered*100):0;document.getElementById('statAnswered').textContent=stats.answered;document.getElementById('statAccuracy').textContent=`%${acc}`;document.getElementById('statPoints').textContent=stats.points;}
 document.querySelectorAll('[data-quiz]').forEach(b=>b.addEventListener('click',()=>startQuiz(b.dataset.quiz)));
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;if(installBtn)installBtn.hidden=false;});
-installBtn?.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true;});
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=live3'));
+if(installBtn){installBtn.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true;});}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=android4'));
 renderReports();
