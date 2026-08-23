@@ -1,0 +1,35 @@
+/* YKS2027 Arena Android-first compatibility layer: Android 10–16 */
+html,body{min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.app-shell{height:100vh;height:100dvh;min-height:0}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.main-content{-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+
+.settings-btn{margin-left:8px;width:38px;height:38px;flex:0 0 38px;border-radius:12px;border:1px solid rgba(242,194,70,.2);background:#111a24;color:#f2c246;font-size:20px;display:grid;place-items:center}
+.settings-modal{position:fixed;inset:0;z-index:3000;display:none;align-items:flex-end;justify-content:center;padding:18px;background:rgba(0,0,0,.68);backdrop-filter:blur(4px)}
+.settings-modal.show{display:flex}
+.settings-sheet{width:min(100%,560px);max-height:min(82vh,760px);overflow:auto;background:#09121b;border:1px solid rgba(242,194,70,.3);border-radius:26px 26px 18px 18px;padding:18px;box-shadow:0 -18px 55px rgba(0,0,0,.45)}
+.settings-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}.settings-head h2{margin:3px 0 0;font-size:26px}.settings-kicker{font-size:10px;letter-spacing:.16em;color:#f2c246;font-weight:900}.settings-close{border:0;background:#16212c;color:#fff;width:38px;height:38px;border-radius:12px;font-size:25px}
+.settings-card{background:#0e1822;border:1px solid rgba(242,194,70,.13);border-radius:18px;padding:14px;margin-top:10px}.settings-card>span{display:block;color:#b6c0ca;font-size:12px}.settings-card>strong{display:block;color:#f2c246;font-size:20px;margin:4px 0}.settings-card h3{margin:0 0 9px;font-size:16px}.settings-card p{margin:6px 0;color:#dce3e9;line-height:1.42;font-size:13px}.settings-card small{display:block;line-height:1.4}.support-good{color:#58d892}.support-warn{color:#ffd86b}.support-bad{color:#ff7d84}
+
+/* Tablet layout: Android 10+ tablets can use either portrait or landscape. */
+@media (min-width:600px){
+  .main-content{padding:18px 20px 104px;max-width:1180px;width:100%;margin:0 auto}
+  .dashboard-grid{grid-template-columns:repeat(4,1fr)}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .hero-card{min-height:360px}.page-hero.small{min-height:230px}
+  .hero-content,.page-hero-content{left:26px;right:26px;bottom:24px}.hero-content h2,.page-hero-content h2{font-size:42px}
+  .content-stack.notes-list{display:grid;grid-template-columns:1fr 1fr}
+  .bottom-nav{left:50%;transform:translateX(-50%);max-width:920px;border-left:1px solid rgba(242,194,70,.12);border-right:1px solid rgba(242,194,70,.12);border-radius:20px 20px 0 0}
+}
+@media (min-width:900px) and (orientation:landscape){
+  .screen[data-screen="home"].active{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);align-items:start}
+  .screen[data-screen="home"] .hero-card{grid-row:1 / span 3;min-height:520px}
+  .screen[data-screen="home"] .countdown-strip,.screen[data-screen="home"] .dashboard-grid{grid-column:2}
+  .screen[data-screen="home"] .dashboard-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Low-height phones/tablets: preserve controls without shrinking text too far. */
+@media (max-height:650px){.entry-panel{padding-bottom:18px}.entry-icon{width:64px;height:64px;margin-bottom:10px}.entry-panel h1{font-size:28px}.entry-panel p{margin-bottom:12px}.hero-card{min-height:235px}.page-hero.small{min-height:150px}}
+
+/* Android-first: iOS remains web-compatible but is not the reference rendering target. */
+html[data-platform="android"] .topbar{padding-top:max(10px,env(safe-area-inset-top))}
