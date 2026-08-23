@@ -1,18 +1,43 @@
-const CACHE_NAME='yks2027-arena-core2';
-const ASSETS=[
+const CACHE_NAME = 'yks2027-arena-visual-v1';
+const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=core2',
-  './app.js?v=core2',
-  './manifest.webmanifest?v=core2',
-  './assets/icon.svg',
-  './assets/zeus-hero.svg',
-  './assets/zeus-home.svg',
-  './assets/zeus-coach.svg',
-  './assets/zeus-notes.svg',
-  './assets/zeus-quiz.svg',
-  './assets/zeus-reports.svg'
+  './styles.css?v=visual-v1',
+  './app.js?v=visual-v1',
+  './manifest.webmanifest?v=visual-v1',
+  './assets/visual-v1/icon-192-v1.png',
+  './assets/visual-v1/icon-512-v1.png',
+  './assets/visual-v1/icon-maskable-512-v1.png',
+  './assets/visual-v1/entry-mobile-v1.webp',
+  './assets/visual-v1/home-hero-v1.webp',
+  './assets/visual-v1/section-hero-v1.webp',
+  './assets/visual-v1/zeus-watermark-v1.webp'
 ];
-self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE_NAME).then(function(c){return c.addAll(ASSETS);}).then(function(){return self.skipWaiting();}));});
-self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return k!==CACHE_NAME;}).map(function(k){return caches.delete(k);}));}).then(function(){return self.clients.claim();}));});
-self.addEventListener('fetch',function(e){if(e.request.method!=='GET')return;if(e.request.mode==='navigate'){e.respondWith(fetch(e.request,{cache:'no-store'}).then(function(res){const copy=res.clone();caches.open(CACHE_NAME).then(function(c){c.put('./index.html',copy);});return res;}).catch(function(){return caches.match('./index.html');}));return;}e.respondWith(caches.match(e.request).then(function(cached){return cached||fetch(e.request).then(function(res){if(res&&res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(function(c){c.put(e.request,copy);});}return res;});}));});
+self.addEventListener('install', function (event) {
+  event.waitUntil(caches.open(CACHE_NAME).then(function (cache) { return cache.addAll(APP_SHELL); }).then(function () { return self.skipWaiting(); }));
+});
+self.addEventListener('activate', function (event) {
+  event.waitUntil(caches.keys().then(function (keys) {
+    return Promise.all(keys.filter(function (key) { return key !== CACHE_NAME; }).map(function (key) { return caches.delete(key); }));
+  }).then(function () { return self.clients.claim(); }));
+});
+self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') return;
+  if (event.request.mode === 'navigate') {
+    event.respondWith(fetch(event.request).then(function (response) {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then(function (cache) { cache.put('./index.html', copy); });
+      return response;
+    }).catch(function () { return caches.match('./index.html'); }));
+    return;
+  }
+  event.respondWith(caches.match(event.request).then(function (cached) {
+    return cached || fetch(event.request).then(function (response) {
+      if (response && response.ok && new URL(event.request.url).origin === self.location.origin) {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then(function (cache) { cache.put(event.request, copy); });
+      }
+      return response;
+    });
+  }));
+});
