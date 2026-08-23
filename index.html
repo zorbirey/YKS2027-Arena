@@ -1,71 +1,124 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#07121b" />
-  <meta name="mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07121b">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=visual5" />
-  <link rel="icon" href="./assets/app-icon.webp?v=visual5" type="image/webp" />
-  <link rel="stylesheet" href="./styles.css?v=visual5" />
-  <link rel="stylesheet" href="./android-first.css?v=visual5" />
-  <link rel="stylesheet" href="./visual-design-v5.css?v=visual5" />
+  <link rel="manifest" href="./manifest.webmanifest?v=simple1">
+  <link rel="icon" href="./assets/app-icon.webp" type="image/webp">
+  <link rel="stylesheet" href="./styles.css?v=simple1">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
-    <div class="entry-bg"></div>
+    <img class="entry-art" src="./assets/screen-home.webp" alt="YKS2027 Arena Zeus giriş görseli">
     <div class="entry-overlay"></div>
     <div class="entry-panel">
-      <img class="entry-icon" src="./assets/app-icon.webp?v=visual5" alt="YKS2027 Arena" />
+      <img class="entry-icon" src="./assets/app-icon.webp" alt="YKS2027 Arena ikonu">
       <h1>YKS2027 Arena</h1>
-      <p>Zeus Koçluğu, Akıllı Notlar ve Soru Arenası ile hedefe kontrollü ilerle.</p>
+      <p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Soru Arenası ile yönet.</p>
       <button id="enterBtn" class="primary-btn">ARENA'YA GİR</button>
     </div>
   </div>
 
   <div class="app-shell">
-    <img class="global-watermark" src="./assets/app-icon.webp?v=visual5" alt="" aria-hidden="true" />
+    <img class="global-watermark" src="./assets/screen-coach.webp" alt="" aria-hidden="true">
+
     <header class="topbar">
       <div class="brand-wrap">
-        <img class="brand-icon" src="./assets/app-icon.webp?v=visual5" alt="YKS2027 Arena İkonu" />
-        <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
+        <img class="brand-icon" src="./assets/app-icon.webp" alt="YKS2027 Arena ikonu">
+        <div>
+          <div class="brand-title">YKS2027 ARENA</div>
+          <div class="brand-sub">ZEUS EDITION</div>
+        </div>
       </div>
-      <button id="installBtn" class="ghost-btn" hidden>UYGULAMAYI YÜKLE</button>
+      <div class="top-actions">
+        <button id="installBtn" class="ghost-btn" hidden>YÜKLE</button>
+        <button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button>
+      </div>
     </header>
 
     <main class="main-content">
       <section class="screen active" data-screen="home">
-        <article class="hero-card"><div class="hero-shadow"></div><div class="hero-content">
-          <span class="eyebrow">ZİRVEYE GİDEN YOL PLANLI ÇALIŞMADAN GEÇER</span><h2>YKS 2027 ARENA</h2>
-          <p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Soru Arenası ile tek çatı altında yönet.</p>
-          <div class="hero-actions"><button class="primary-btn action-nav" data-target="arena">Soru Arenası</button><button class="secondary-btn action-nav" data-target="notes">Akıllı Notlar</button></div>
-        </div></article>
-        <div class="countdown-strip"><div><b>TYT 19 Haziran 2027</b><span id="tytCount">Hesaplanıyor</span></div><div><b>AYT 20 Haziran 2027</b><span id="aytCount">Hesaplanıyor</span></div></div>
+        <article class="hero-card">
+          <img class="hero-art" src="./assets/screen-home.webp" alt="Zeus YKS2027 Arena">
+          <div class="hero-shadow"></div>
+          <div class="hero-content">
+            <span class="eyebrow">ZİRVEYE GİDEN YOL PLANLI ÇALIŞMADAN GEÇER</span>
+            <h2>YKS 2027 ARENA</h2>
+            <p>TYT ve AYT hazırlığını tek merkezden yönet.</p>
+            <div class="hero-actions">
+              <button class="primary-btn action-nav" data-target="arena">Soru Arenası</button>
+              <button class="secondary-btn action-nav" data-target="notes">Akıllı Notlar</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="countdown-strip">
+          <div><b>TYT 19 Haziran 2027</b><span id="tytCount">Hesaplanıyor</span></div>
+          <div><b>AYT 20 Haziran 2027</b><span id="aytCount">Hesaplanıyor</span></div>
+        </div>
+
         <div class="dashboard-grid">
-          <button class="feature-card action-nav" data-target="coach"><span class="feature-top">ZEUS KOÇLUĞU</span><strong>Günlük analiz, öneri ve yönlendirme</strong></button>
-          <button class="feature-card action-nav" data-target="notes"><span class="feature-top">AKILLI NOTLAR</span><strong>Kısa kavram özetleri ve örnekler</strong></button>
-          <button class="feature-card action-nav" data-target="arena"><span class="feature-top">SORU ARENASI</span><strong>Ders seç, soru çöz, performansını gör</strong></button>
-          <button class="feature-card action-nav" data-target="program"><span class="feature-top">PROGRAM</span><strong>Haftalık çalışma planını takip et</strong></button>
+          <button class="feature-card action-nav" data-target="coach"><span>ZEUS KOÇLUĞU</span><strong>Günlük analiz ve yönlendirme</strong></button>
+          <button class="feature-card action-nav" data-target="notes"><span>AKILLI NOTLAR</span><strong>Kısa konu ve kavram kartları</strong></button>
+          <button class="feature-card action-nav" data-target="arena"><span>SORU ARENASI</span><strong>TYT ve AYT soru turları</strong></button>
+          <button class="feature-card action-nav" data-target="program"><span>PROGRAM</span><strong>Haftalık çalışma planı</strong></button>
         </div>
       </section>
 
-      <section class="screen" data-screen="coach"><article class="page-hero small"><div class="hero-shadow"></div><div class="page-hero-content"><h2>Zeus Koçluğu</h2><p>Bugünkü hedeflerin, önerilen dersler ve güçlü/zayıf alan analizi.</p></div></article><div class="content-stack"><div class="info-card"><h3>Bugünkü Koçluk Mesajı</h3><p>Türkçe paragraf ve temel matematikte seri tekrar yap. AYT tarafında fonksiyon ve problem çözüm hızına odaklan.</p></div><div class="info-card"><h3>Hızlı Butonlar</h3><div class="btn-row"><button class="secondary-btn action-nav" data-target="program">Programı Aç</button><button class="secondary-btn action-nav" data-target="reports">Raporları Aç</button></div></div></div></section>
+      <section class="screen" data-screen="coach">
+        <article class="page-hero">
+          <img class="page-art" src="./assets/screen-coach.webp" alt="Zeus Koçluğu">
+          <div class="hero-shadow"></div><div class="page-copy"><h2>Zeus Koçluğu</h2><p>Günlük hedeflerin ve çalışma önerilerin.</p></div>
+        </article>
+        <div class="info-card"><h3>Bugünkü Koçluk Mesajı</h3><p>Türkçe paragraf ve temel matematikte seri tekrar yap. AYT tarafında fonksiyon ve problem çözüm hızına odaklan.</p></div>
+      </section>
 
-      <section class="screen" data-screen="notes"><article class="page-hero small"><div class="hero-shadow"></div><div class="page-hero-content"><h2>Akıllı Notlar</h2><p>Ders bazlı dikkat, kavram ve örnek kartları.</p></div></article><div class="content-stack notes-list"><div class="info-card"><h3>TYT Türkçe • Paragrafta Ana Düşünce</h3><p><strong>Dikkat:</strong> Ana düşünce parçanın tamamını kapsar.</p><p><strong>Örnek:</strong> Yazarın temel mesajını destekleyen tüm cümleleri birlikte değerlendir.</p></div><div class="info-card"><h3>TYT Matematik • Yüzde Problemleri</h3><p><strong>Dikkat:</strong> Ardışık yüzde değişimlerde doğrudan toplama yapma.</p><p><strong>Örnek:</strong> %20 indirim sonrası %10 zam, ilk fiyata geri getirmez.</p></div></div></section>
+      <section class="screen" data-screen="notes">
+        <article class="page-hero"><img class="page-art" src="./assets/screen-home.webp" alt="Akıllı Notlar"><div class="hero-shadow"></div><div class="page-copy"><h2>Akıllı Notlar</h2><p>Dikkat, kavram ve örnek kartları.</p></div></article>
+        <div class="info-card"><h3>TYT Türkçe • Paragrafta Ana Düşünce</h3><p><strong>Dikkat:</strong> Ana düşünce parçanın tamamını kapsar.</p><p><strong>Örnek:</strong> Temel mesajı destekleyen cümleleri birlikte değerlendir.</p></div>
+        <div class="info-card"><h3>TYT Matematik • Yüzde Problemleri</h3><p><strong>Dikkat:</strong> Ardışık yüzde değişimlerde oranları doğrudan toplama.</p></div>
+      </section>
 
-      <section class="screen" data-screen="arena"><article class="page-hero small"><div class="hero-shadow"></div><div class="page-hero-content"><h2>Soru Arenası</h2><p>TYT / AYT ve karışık soru modu seçimi.</p></div></article><div class="content-stack"><div class="info-card"><h3>Hızlı Başlat</h3><div class="btn-grid"><button class="secondary-btn" data-quiz="TYT">TYT Mini Tur</button><button class="secondary-btn" data-quiz="AYT">AYT Mini Tur</button><button class="secondary-btn" data-quiz="ALL">Karışık Tur</button></div></div><div id="quizBox"></div></div></section>
+      <section class="screen" data-screen="arena">
+        <article class="page-hero"><img class="page-art" src="./assets/screen-home.webp" alt="Soru Arenası"><div class="hero-shadow"></div><div class="page-copy"><h2>Soru Arenası</h2><p>TYT, AYT ve karışık soru modu.</p></div></article>
+        <div class="info-card"><h3>Hızlı Başlat</h3><div class="btn-grid"><button class="secondary-btn" data-quiz="TYT">TYT Mini Tur</button><button class="secondary-btn" data-quiz="AYT">AYT Mini Tur</button><button class="secondary-btn" data-quiz="ALL">Karışık Tur</button></div></div>
+        <div id="quizBox"></div>
+      </section>
 
-      <section class="screen" data-screen="program"><article class="page-hero small"><div class="hero-shadow"></div><div class="page-hero-content"><h2>Program</h2><p>Günlük ve haftalık çalışma planı.</p></div></article><div class="content-stack"><div class="info-card"><h3>Pazartesi</h3><p>Türkçe 30 soru • Matematik 25 soru • Tarih 10 soru</p></div><div class="info-card"><h3>Salı</h3><p>Matematik problem • Fizik hareket • Akıllı not tekrarı</p></div></div></section>
+      <section class="screen" data-screen="program">
+        <article class="page-hero"><img class="page-art" src="./assets/screen-home.webp" alt="Çalışma Programı"><div class="hero-shadow"></div><div class="page-copy"><h2>Program</h2><p>Günlük ve haftalık çalışma planı.</p></div></article>
+        <div class="info-card"><h3>Pazartesi</h3><p>Türkçe 30 soru • Matematik 25 soru • Tarih 10 soru</p></div>
+        <div class="info-card"><h3>Salı</h3><p>Matematik problem • Fizik hareket • Akıllı not tekrarı</p></div>
+      </section>
 
-      <section class="screen" data-screen="reports"><article class="page-hero small"><div class="hero-shadow"></div><div class="page-hero-content"><h2>Raporlar</h2><p>Doğruluk, soru sayısı ve ilerleme takibi.</p></div></article><div class="stats-grid"><div class="stat-card"><span>Çözülen Soru</span><strong id="statAnswered">0</strong></div><div class="stat-card"><span>Doğruluk</span><strong id="statAccuracy">%0</strong></div><div class="stat-card"><span>Arena Puanı</span><strong id="statPoints">0</strong></div><div class="stat-card"><span>Türkiye</span><strong>—</strong></div></div><div id="reviewBox" class="content-stack"></div></section>
+      <section class="screen" data-screen="reports">
+        <article class="page-hero"><img class="page-art" src="./assets/screen-coach.webp" alt="Raporlar"><div class="hero-shadow"></div><div class="page-copy"><h2>Raporlar</h2><p>Doğruluk, soru sayısı ve ilerleme.</p></div></article>
+        <div class="stats-grid"><div class="stat-card"><span>Çözülen Soru</span><strong id="statAnswered">0</strong></div><div class="stat-card"><span>Doğruluk</span><strong id="statAccuracy">%0</strong></div><div class="stat-card"><span>Arena Puanı</span><strong id="statPoints">0</strong></div><div class="stat-card"><span>Türkiye</span><strong>—</strong></div></div>
+        <div id="reviewBox"></div>
+      </section>
     </main>
 
     <nav class="bottom-nav">
-      <button class="nav-btn active" data-target="home"><span>⌂</span><label>Ana Sayfa</label></button><button class="nav-btn" data-target="program"><span>▤</span><label>Program</label></button><button class="nav-btn" data-target="notes"><span>☰</span><label>Notlar</label></button><button class="nav-btn center" data-target="arena"><span>⚡</span><label>Arena</label></button><button class="nav-btn" data-target="reports"><span>▥</span><label>Raporlar</label></button><button class="nav-btn" data-target="coach"><span>♛</span><label>Zeus</label></button>
+      <button class="nav-btn active" data-target="home"><span>⌂</span><label>Ana Sayfa</label></button>
+      <button class="nav-btn" data-target="program"><span>▤</span><label>Program</label></button>
+      <button class="nav-btn" data-target="notes"><span>☰</span><label>Notlar</label></button>
+      <button class="nav-btn center" data-target="arena"><span>⚡</span><label>Arena</label></button>
+      <button class="nav-btn" data-target="reports"><span>▥</span><label>Raporlar</label></button>
+      <button class="nav-btn" data-target="coach"><span>♛</span><label>Zeus</label></button>
     </nav>
   </div>
-  <script src="./compatibility.js?v=visual5"></script>
-  <script src="./app.js?v=visual5"></script>
+
+  <div id="settingsModal" class="settings-modal">
+    <div class="settings-sheet">
+      <div class="settings-head"><div><span>YKS2027 ARENA</span><h2>Ayarlar</h2></div><button id="settingsClose">×</button></div>
+      <div class="settings-card"><span>Cihaz</span><strong id="deviceInfo">Algılanıyor</strong><small id="supportInfo"></small></div>
+      <div class="settings-card"><h3>Minimum Sistem Gereksinimleri</h3><p>Android 10 veya üzeri</p><p>Güncel Google Chrome önerilir</p><p>En az 2 GB RAM önerilir</p><p>İlk kurulum ve güncellemeler için internet bağlantısı gerekir</p></div>
+    </div>
+  </div>
+
+  <script src="./app.js?v=simple1"></script>
 </body>
 </html>
