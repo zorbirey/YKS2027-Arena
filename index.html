@@ -6,11 +6,12 @@
   <meta name="theme-color" content="#07121b">
   <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=20260823-04">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260824-01">
   <link rel="icon" href="./assets/visual-v1/icon-192-v1.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/visual-v1/icon-192-v1.png">
-  <link rel="stylesheet" href="./styles.css?v=20260823-04">
-  <link rel="stylesheet" href="./reports-v1.css?v=20260823-04">
+  <link rel="stylesheet" href="./styles.css?v=20260824-01">
+  <link rel="stylesheet" href="./reports-v1.css?v=20260824-01">
+  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-01">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
@@ -20,9 +21,12 @@
       <img class="entry-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
       <div class="entry-brand">YKS2027 ARENA</div>
       <div class="entry-sub">ZEUS EDITION</div>
-      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260823-04</div>
-      <p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Sınav Arenası ile yönet.</p>
-      <button id="enterBtn" class="primary-btn entry-button">ARENA'YA GİR</button>
+      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-01</div>
+      <p>TYT ve AYT hazırlığını Zeus Koçluğu, Dersler ve Sınav Arenası ile yönet.</p>
+      <div class="entry-actions">
+        <button id="enterBtn" class="primary-btn entry-button" type="button">ARENA'YA GİR</button>
+        <button id="entryParentBtn" class="secondary-btn entry-parent-button" type="button">VELİ TAKİP PANELİ</button>
+      </div>
     </div>
   </div>
 
@@ -33,7 +37,7 @@
         <img class="brand-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
         <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
       </div>
-      <div class="top-actions"><span class="build-id build-id-top">ID 20260823-04</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
+      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-01</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
     </header>
 
     <main class="main-content">
@@ -41,7 +45,7 @@
         <article class="hero-card">
           <img class="hero-art" src="./assets/visual-v1/home-hero-v1.webp" alt="Zeus YKS2027 Arena" width="1280" height="720">
           <div class="hero-shadow"></div>
-          <div class="hero-content"><span class="eyebrow">ZİRVEYE GİDEN YOL PLANLI ÇALIŞMADAN GEÇER</span><h2>YKS 2027 ARENA</h2><p>TYT ve AYT hazırlığını tek merkezden yönet.</p><div class="hero-actions"><button class="primary-btn action-nav" data-target="arena">Sınav Arenası</button><button class="secondary-btn action-nav" data-target="notes">Akıllı Notlar</button></div></div>
+          <div class="hero-content"><span class="eyebrow">ZİRVEYE GİDEN YOL PLANLI ÇALIŞMADAN GEÇER</span><h2>YKS 2027 ARENA</h2><p>TYT ve AYT hazırlığını tek merkezden yönet.</p><div class="hero-actions"><button class="primary-btn action-nav" data-target="arena">Sınav Arenası</button><button class="secondary-btn action-nav" data-target="notes">Dersler</button></div></div>
         </article>
         <div class="countdown-strip"><div><b>TYT 19 Haziran 2027</b><span id="tytCount">Hesaplanıyor</span></div><div><b>AYT 20 Haziran 2027</b><span id="aytCount">Hesaplanıyor</span></div></div>
         <button class="feature-card program-launch action-nav" data-target="program"><span>HAFTALIK PROGRAM</span><strong>Planını gör, boş gününü seç, temponu koru</strong><em>PROGRAMI AÇ →</em></button>
@@ -56,10 +60,51 @@
 
       <section class="screen" data-screen="coach"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Zeus Koçluğu"><div class="hero-shadow"></div><div class="page-copy"><h2>Zeus Koçluğu</h2><p>Günlük hedeflerin ve çalışma önerilerin.</p></div></article><div class="info-card"><h3>Bugünkü Koçluk Mesajı</h3><p>Türkçe paragraf ve temel matematikte seri tekrar yap. AYT tarafında fonksiyon ve problem çözüm hızına odaklan.</p></div></section>
 
-      <section class="screen" data-screen="notes"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Akıllı Notlar"><div class="hero-shadow"></div><div class="page-copy"><h2>Akıllı Notlar</h2><p>Dikkat, kavram ve örnek kartları.</p></div></article><div class="info-card"><h3>TYT Türkçe • Paragrafta Ana Düşünce</h3><p><strong>Dikkat:</strong> Ana düşünce parçanın tamamını kapsar.</p><p><strong>Örnek:</strong> Temel mesajı destekleyen cümleleri birlikte değerlendir.</p></div><div class="info-card"><h3>TYT Matematik • Yüzde Problemleri</h3><p><strong>Dikkat:</strong> Ardışık yüzde değişimlerde oranları doğrudan toplama.</p></div></section>
-
-      <section class="screen" data-screen="arena"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Sınav Arenası"><div class="hero-shadow"></div><div class="page-copy"><h2>Sınav Arenası</h2><p>TYT, AYT ve karışık sınav modu.</p></div></article><div class="info-card"><h3>Hızlı Başlat</h3><div class="btn-grid"><button class="secondary-btn" data-quiz="TYT">TYT Mini Tur</button><button class="secondary-btn" data-quiz="AYT">AYT Mini Tur</button><button class="secondary-btn" data-quiz="ALL">Karışık Tur</button></div></div><div id="quizBox"></div></section>
-
+      <section class="screen" data-screen="notes">
+        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="YKS Dersleri"><div class="hero-shadow"></div><div class="page-copy"><span class="eyebrow">YKS DERS KÜTÜPHANESİ</span><h2>Dersler</h2><p>YKS ders kapsamı, 12. sınıf ünite özetleri ve akıllı notlar.</p></div></article>
+        <article class="info-card course-scope">
+          <div class="premium-zone-head"><div><span class="eyebrow">YKS KAPSAMI</span><h3>Sorumlu olduğun dersler</h3></div><span id="notesUsage" class="premium-badge">Bugün 0 akıllı not açıldı</span></div>
+          <div class="scope-row"><b>TYT</b><span>Türkçe • Temel Matematik • Geometri • Tarih • Coğrafya • Felsefe • Din Kültürü • Fizik • Kimya • Biyoloji</span></div>
+          <div class="scope-row"><b>AYT</b><span>Matematik • Geometri • Türk Dili ve Edebiyatı • Tarih • Coğrafya • Felsefe Grubu • Din Kültürü • Fizik • Kimya • Biyoloji</span></div>
+          <div class="scope-row"><b>YDT</b><span>İngilizce • Almanca • Fransızca • Arapça • Rusça</span></div>
+        </article>
+        <div id="courseCatalogWrap">
+          <div class="course-toolbar" aria-label="Ders filtreleri"><button class="course-filter active" data-course-filter="ALL" type="button">Tümü</button><button class="course-filter" data-course-filter="TYT" type="button">TYT</button><button class="course-filter" data-course-filter="AYT" type="button">AYT</button></div>
+          <div id="courseCatalog" class="course-grid"></div>
+          <p class="source-note">Ünite özetleri MEB-TTKB ortaöğretim programları esas alınarak hazırlanmıştır; 2027 resmî YKS konu listesi yayımlandığında kapsam yeniden doğrulanacaktır.</p>
+        </div>
+        <section id="courseDetail" class="course-detail" hidden>
+          <button id="courseBack" class="secondary-btn section-back" type="button">← DERSLERE DÖN</button>
+          <article class="info-card"><span class="eyebrow">12. SINIF ÜNİTE ÖZETLERİ</span><h3 id="courseDetailTitle">Ders</h3><p id="courseDetailMeta"></p></article>
+          <div id="unitList" class="unit-list"></div>
+        </section>
+        <section id="lessonReader" class="lesson-reader" hidden>
+          <button id="readerBack" class="secondary-btn section-back" type="button">← ÜNİTELERE DÖN</button>
+          <article class="reader-page"><span id="readerProgress" class="reader-progress">SAYFA 1 / 2</span><h3 id="readerTitle">Ünite</h3><div id="readerBody"></div></article>
+          <div class="reader-actions"><button id="readerNext" class="primary-btn" type="button">SONRAKİ SAYFA</button><button class="secondary-btn open-premium" type="button">PREMIUM'U GÖR</button></div>
+        </section>
+      </section>
+      <section class="screen" data-screen="arena">
+        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Sınav Arenası"><div class="hero-shadow"></div><div class="page-copy"><h2>Sınav Arenası</h2><p>Ücretsiz soru çöz, Premium deneme ve yazılı senaryolarını keşfet.</p></div></article>
+        <div class="quota-strip"><div class="quota-chip"><span>BUGÜNKÜ ÜCRETSİZ SORU</span><strong id="arenaQuestionUsage">0 / 50</strong></div><div class="quota-chip"><span>ÖDÜLLÜ REKLAM</span><strong id="arenaAdUsage">0 / 6</strong></div></div>
+        <article class="info-card">
+          <span class="eyebrow">ÜCRETSİZ • SORU ÇÖZ</span>
+          <h3>Doğrulanmış soru havuzu</h3>
+          <p>Her 10 sorudan sonra tam izlenen ödüllü reklamla devam edilir. Günlük ücretsiz sınır 50 sorudur.</p>
+          <div class="btn-grid"><button class="secondary-btn" data-quiz="TYT" type="button">TYT Soru Çöz</button><button class="secondary-btn" data-quiz="AYT" type="button">AYT Soru Çöz</button><button class="secondary-btn" data-quiz="ALL" type="button">Karışık Soru Çöz</button></div>
+        </article>
+        <article class="premium-zone">
+          <div class="premium-zone-head"><h3>Denemeler</h3><span class="premium-badge">PREMIUM</span></div>
+          <p>Süreli TYT, AYT ve karma deneme oturumları.</p>
+          <div class="btn-grid"><button class="secondary-btn" data-premium-route="tyt-mock" type="button">TYT Denemesi</button><button class="secondary-btn" data-premium-route="ayt-mock" type="button">AYT Denemesi</button><button class="secondary-btn" data-premium-route="mixed-mock" type="button">Karma Deneme</button></div>
+        </article>
+        <article class="premium-zone">
+          <div class="premium-zone-head"><h3>Yazılı Deneme Senaryoları</h3><span class="premium-badge">PREMIUM</span></div>
+          <p>Okul yazılılarına dönem ve sınav sırasına göre hazırlan.</p>
+          <div class="scenario-grid"><button class="secondary-btn" data-premium-route="written-1-1" type="button">1. Dönem<br>1. Yazılı</button><button class="secondary-btn" data-premium-route="written-1-2" type="button">1. Dönem<br>2. Yazılı</button><button class="secondary-btn" data-premium-route="written-2-1" type="button">2. Dönem<br>1. Yazılı</button><button class="secondary-btn" data-premium-route="written-2-2" type="button">2. Dönem<br>2. Yazılı</button></div>
+        </article>
+        <div id="quizBox"></div>
+      </section>
       <section class="screen" data-screen="program"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Çalışma Programı"><div class="hero-shadow"></div><div class="page-copy"><h2>Program</h2><p>Dengeli çalış, dinlenmeyi de planına kat.</p></div></article><div class="info-card target-planner"><span class="eyebrow">GÜNLÜK ÇALIŞMA HEDEFİ</span><h3>Günde kaç soru çözmek istiyorsun?</h3><p>Başlangıç referansımız <strong>100 soru ve en az 3 net saat</strong>. Soru hedefin yalnızca ölçüm içindir; istediğin kadar üzerine çıkabilirsin.</p><div class="target-row"><input id="questionTarget" type="number" min="1" step="5" inputmode="numeric" aria-label="Günlük soru hedefi"><button id="saveQuestionTarget" class="primary-btn" type="button">Hedefi Kaydet</button></div><p id="targetSummary" class="target-summary" aria-live="polite"></p></div><div class="info-card rest-planner"><span class="eyebrow">PROGRAMINI KİŞİSELLEŞTİR</span><h3>Bu hafta bir boş gün ister misin?</h3><p>İstersen seçtiğin günün soru hedefini diğer günlere dengeli biçimde dağıtırız.</p><div class="choice-row"><button id="restYes" class="secondary-btn" type="button">Evet, isterim</button><button id="restNo" class="secondary-btn" type="button">Hayır, devam</button></div><div id="restDayWrap" class="rest-day-wrap" hidden><label for="restDay">Boş gününü seç</label><select id="restDay"><option value="">Gün seç</option><option>Pazartesi</option><option>Salı</option><option>Çarşamba</option><option>Perşembe</option><option>Cuma</option><option>Cumartesi</option><option>Pazar</option></select><button id="applyRestDay" class="primary-btn" type="button">Planı Dengele</button></div><p id="programStatus" class="program-status" aria-live="polite"></p></div><div id="programList" class="program-list"></div></section>
 
       <section class="screen" data-screen="reports">
@@ -122,11 +167,12 @@
         </div>
       </section>
       <section class="screen" data-screen="premium">
-        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="YKS2027 Premium"><div class="hero-shadow"></div><div class="page-copy"><span class="eyebrow">YKS2027 PREMIUM</span><h2>Hedefini daha net gör</h2><p>OBP, bölüm karşılaştırması ve veli takibi tek üyelikte.</p></div></article>
+        <div id="dailyLockBanner" class="daily-lock-banner" hidden></div>
+        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="YKS2027 Premium"><div class="hero-shadow"></div><div class="page-copy"><span class="eyebrow">YKS2027 PREMIUM</span><h2>Hedefini daha net gör</h2><p>Sınırsız kullanım, deneme ve yazılı senaryoları, OBP ve veli takibi tek üyelikte.</p></div></article>
         <article class="info-card premium-offer-card">
           <span class="premium-crown">♛</span>
           <h3>Premium ile açılanlar</h3>
-          <div class="premium-feature-list"><div><b>01</b><span><strong>Tahmini OBP</strong><small>9–12. sınıf notlarından yerleştirme katkısı</small></span></div><div><b>02</b><span><strong>Üniversite ve bölüm karşılaştırması</strong><small>2025 resmî taban puanlarıyla koşullu sonuçlar</small></span></div><div><b>03</b><span><strong>Veli Takip Paneli</strong><small>Haftalık hedef, çözülen soru ve doğruluk özeti</small></span></div></div>
+          <div class="premium-feature-list"><div class="new-feature"><b>01</b><span><strong>Sınırsız soru ve Dersler</strong><small>Reklamsız, günlük kotasız kesintisiz kullanım</small></span></div><div class="new-feature"><b>02</b><span><strong>Deneme ve yazılı senaryoları</strong><small>TYT, AYT ve dört dönem yazılı senaryosu</small></span></div><div><b>03</b><span><strong>Tahmini OBP ve bölüm karşılaştırması</strong><small>Karne notları ve 2025 resmî taban puanları</small></span></div><div><b>04</b><span><strong>Veli Takip Paneli</strong><small>6 haneli kod, haftalık hedef ve ilerleme özeti</small></span></div></div>
           <button id="premiumStart" class="primary-btn wide-btn" type="button">ÜCRETLİ ÜYELİĞE GEÇ</button>
           <p id="premiumCheckoutStatus" class="source-note" aria-live="polite">Üyelik planı ve güvenli ödeme bağlantısı bu ekranda açılacaktır.</p>
         </article>
@@ -134,13 +180,44 @@
       </section>
     </main>
 
-    <nav class="bottom-nav"><button class="nav-btn active" data-target="home"><span>⌂</span><label>Ana Sayfa</label></button><button class="nav-btn" data-target="program"><span>▤</span><label>Program</label></button><button class="nav-btn" data-target="notes"><span>☰</span><label>Notlar</label></button><button class="nav-btn center" data-target="arena"><span>⚡</span><label>Arena</label></button><button class="nav-btn" data-target="reports"><span>▥</span><label>Raporlar</label></button><button class="nav-btn" data-target="coach"><span>♛</span><label>Zeus</label></button></nav>
+    <nav class="bottom-nav"><button class="nav-btn active" data-target="home"><span>⌂</span><label>Ana Sayfa</label></button><button class="nav-btn" data-target="program"><span>▤</span><label>Program</label></button><button class="nav-btn" data-target="notes"><span>☰</span><label>Dersler</label></button><button class="nav-btn center" data-target="arena"><span>⚡</span><label>Arena</label></button><button class="nav-btn" data-target="reports"><span>▥</span><label>Raporlar</label></button><button class="nav-btn" data-target="coach"><span>♛</span><label>Zeus</label></button></nav>
   </div>
 
-  <div id="settingsModal" class="settings-modal"><div class="settings-sheet"><div class="settings-head"><div><span>YKS2027 ARENA</span><h2>Ayarlar</h2></div><button id="settingsClose">×</button></div><div class="settings-card"><span>Cihaz</span><strong id="deviceInfo">Algılanıyor</strong><small id="supportInfo"></small></div><div class="settings-card"><h3>Günlük Çalışma Hedefi</h3><p>Önerilen başlangıç: 100 soru ve en az 3 net saat. Bu hedef üst sınır değildir.</p><div class="target-row"><input id="settingsQuestionTarget" type="number" min="1" step="5" inputmode="numeric" aria-label="Ayarlardaki günlük soru hedefi"><button id="settingsSaveTarget" class="primary-btn" type="button">Güncelle</button></div><small id="settingsTargetStatus" aria-live="polite"></small></div><div class="settings-card"><h3>Minimum Sistem Gereksinimleri</h3><p>Android 10 veya üzeri</p><p>Güncel Google Chrome önerilir</p><p>En az 2 GB RAM önerilir</p><p>İlk kurulum ve güncellemeler için internet bağlantısı gerekir</p></div></div></div>
+  <div id="settingsModal" class="settings-modal">
+    <div class="settings-sheet">
+      <div class="settings-head"><div><span>YKS2027 ARENA</span><h2>Ayarlar</h2></div><button id="settingsClose" type="button">×</button></div>
+      <div class="settings-card"><span>Cihaz</span><strong id="deviceInfo">Algılanıyor</strong><small id="supportInfo"></small></div>
+      <div class="settings-card">
+        <span class="eyebrow">PROFİL</span><h3>Öğrenci Profili</h3>
+        <div class="profile-form"><label for="studentName"><span>Öğrencinin adı</span><input id="studentName" type="text" maxlength="60" autocomplete="name" placeholder="Adını yaz"></label><button id="profileSave" class="primary-btn" type="button">PROFİLİ KAYDET</button><small id="profileStatus" class="profile-inline-status" aria-live="polite"></small></div>
+      </div>
+      <div class="settings-card">
+        <span class="eyebrow">PREMIUM • VELİ GİRİŞİ</span><h3>6 Haneli Veli Takip Kodu</h3>
+        <p>Premium üyelikte veli paneli eşleştirmesi için kısa süreli giriş kodu oluşturulur.</p>
+        <div class="parent-code-row"><div id="parentAccessCode" class="parent-code">PREMIUM</div><button id="parentCodeCopy" class="secondary-btn" type="button">Kopyala</button></div>
+        <button id="parentCodeCreate" class="primary-btn wide-btn" type="button">6 HANELİ KOD OLUŞTUR</button>
+        <small id="parentCodeStatus" class="integration-note" aria-live="polite"></small>
+      </div>
+      <div class="settings-card">
+        <span class="eyebrow">ARKADAŞINA TAVSİYE ET</span><h3>Paylaş, reklamsız gün kazan</h3>
+        <p>Davet kodun: <strong id="referralCode">Hazırlanıyor</strong></p>
+        <div class="referral-steps"><div class="referral-step">1. arkadaş<br><b>+1 gün</b></div><div class="referral-step">2. arkadaş<br><b>+2 gün</b></div><div class="referral-step">3. arkadaş<br><b>+3 gün</b></div></div>
+        <div class="referral-status"><strong id="verifiedReferralCount">0 / 3 doğrulanmış arkadaş</strong><small id="referralPassStatus"></small><button id="referralShare" class="secondary-btn wide-btn" type="button">ARKADAŞINLA PAYLAŞ</button><small id="referralShareStatus" class="profile-inline-status" aria-live="polite"></small></div>
+        <small class="integration-note">Hak yalnızca arkadaşın uygulamayı gerçekten kurup kullandığı üyelik sunucusunda doğrulandıktan sonra tanımlanır.</small>
+      </div>
+      <div class="settings-card"><h3>Günlük Çalışma Hedefi</h3><p>Önerilen başlangıç: 100 soru ve en az 3 net saat. Bu hedef üst sınır değildir.</p><div class="target-row"><input id="settingsQuestionTarget" type="number" min="1" step="5" inputmode="numeric" aria-label="Ayarlardaki günlük soru hedefi"><button id="settingsSaveTarget" class="primary-btn" type="button">Güncelle</button></div><small id="settingsTargetStatus" aria-live="polite"></small></div>
+      <div class="settings-card"><h3>Ücretsiz Kullanım Kuralları</h3><p>50 soru veya 6 tamamlanmış ödüllü reklamdan sonra erişim ertesi gün Türkiye saatiyle 08.00’e kadar kilitlenir.</p><div class="quota-strip"><div class="quota-chip"><span>SORU</span><strong id="freeQuestionCount">0 / 50</strong></div><div class="quota-chip"><span>REKLAM</span><strong id="freeAdCount">0 / 6</strong></div></div></div>
+      <div class="settings-card"><h3>Minimum Sistem Gereksinimleri</h3><p>Android 10 veya üzeri</p><p>Güncel Google Chrome önerilir</p><p>En az 2 GB RAM önerilir</p><p>İlk kurulum ve güncellemeler için internet bağlantısı gerekir</p></div>
+    </div>
+  </div>
   <div id="targetConfirmModal" class="settings-modal"><div class="settings-sheet confirm-sheet"><div class="settings-head"><div><span>HEDEF ONAYI</span><h2>Ortalamanın altında</h2></div></div><p id="targetConfirmText">Çalışma programınız seçtiğiniz şartlara göre oluşturuluyor. Emin misiniz?</p><div class="choice-row"><button id="confirmLowTarget" class="primary-btn" type="button">Bu Hedefle Oluştur</button><button id="editLowTarget" class="secondary-btn" type="button">Hedefi Düzenle</button></div></div></div>
   <div id="resultUpsellModal" class="settings-modal"><div class="settings-sheet premium-question-sheet"><span class="premium-crown">♛</span><div class="settings-head"><div><span>DENEME SONUCUN HAZIR</span><h2>Kazanabileceğin üniversite ve bölümleri de görmek ister misin?</h2></div></div><p>OBP katkını ve 2025 resmî taban puanlarına göre bölüm karşılaştırmanı görmek için Premium üyeliğe geçebilirsin.</p><div class="choice-row"><button id="resultPremiumYes" class="primary-btn" type="button">EVET, PREMIUM'U GÖR</button><button id="resultPremiumNo" class="secondary-btn" type="button">HAYIR, PUANIMI GÖSTER</button></div><small>Karşılaştırma tahminidir; kesin yerleşme garantisi vermez.</small></div></div>
-  <script src="./app.js?v=20260823-04"></script>
+  <div id="rewardModal" class="settings-modal"><div class="settings-sheet reward-sheet"><div class="reward-symbol">▶</div><span class="eyebrow">ÖDÜLLÜ REKLAM KAPISI</span><h2>Devam etmek için reklamı tamamla</h2><p id="rewardText"></p><p id="rewardQuota" class="quota-warning"></p><p id="rewardStatus" class="reward-status" aria-live="polite"></p><div class="reward-actions"><button id="rewardWatch" class="primary-btn" type="button">ÖDÜLLÜ REKLAMI İZLE</button><button id="rewardPremium" class="secondary-btn" type="button">PREMIUM'A GEÇ</button><button id="rewardCancel" class="ghost-btn" type="button">ŞİMDİ DEĞİL</button></div></div></div>
+  <div id="lessonChoiceModal" class="settings-modal"><div class="settings-sheet lesson-choice-sheet"><span class="premium-crown">♛</span><span class="eyebrow">SONRAKİ SAYFA</span><h2>Nasıl devam etmek istersin?</h2><p id="lessonChoiceText">Ödüllü reklamı tamamen izle veya Premium üyeliğe geç.</p><div class="reward-actions"><button id="lessonAdChoice" class="primary-btn" type="button">ÖDÜLLÜ REKLAM</button><button id="lessonPremiumChoice" class="secondary-btn" type="button">PREMIUM ÜYELİK</button><button id="lessonChoiceCancel" class="ghost-btn" type="button">VAZGEÇ</button></div></div></div>
+  <div id="dailyLockModal" class="settings-modal"><div class="settings-sheet lock-sheet"><div class="reward-symbol">🔒</div><span class="eyebrow">GÜNLÜK KOTA</span><h2>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</h2><p id="dailyLockText"></p><p id="dailyLockUntil" class="lock-until"></p><button id="dailyLockPremium" class="primary-btn wide-btn" data-lock-allowed type="button">ÜCRETLİ ÜYELİĞE GEÇ</button></div></div>
+  <script src="./app.js?v=20260824-01"></script>
+  <script src="./courses-v1.js?v=20260824-01"></script>
+  <script src="./engagement-v1.js?v=20260824-01"></script>
 </body>
 </html>
 

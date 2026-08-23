@@ -1,11 +1,15 @@
-const CACHE_NAME = 'yks2027-arena-20260823-04';
+const CACHE_NAME = 'yks2027-arena-20260824-01';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=20260823-04',
-  './reports-v1.css?v=20260823-04',
-  './app.js?v=20260823-04',
-  './manifest.webmanifest?v=20260823-04',
+  './styles.css?v=20260824-01',
+  './reports-v1.css?v=20260824-01',
+  './engagement-v1.css?v=20260824-01',
+  './app.js?v=20260824-01',
+  './courses-v1.js?v=20260824-01',
+  './engagement-v1.js?v=20260824-01',
+  './manifest.webmanifest?v=20260824-01',
+  './data/verified/mixed_core_v15_50.json?v=20260824-01',
   './assets/visual-v1/icon-192-v1.png',
   './assets/visual-v1/icon-512-v1.png',
   './assets/visual-v1/icon-maskable-512-v1.png',
