@@ -6,10 +6,11 @@
   <meta name="theme-color" content="#07121b">
   <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=20260823-03">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260823-04">
   <link rel="icon" href="./assets/visual-v1/icon-192-v1.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/visual-v1/icon-192-v1.png">
-  <link rel="stylesheet" href="./styles.css?v=20260823-03">
+  <link rel="stylesheet" href="./styles.css?v=20260823-04">
+  <link rel="stylesheet" href="./reports-v1.css?v=20260823-04">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
@@ -19,7 +20,7 @@
       <img class="entry-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
       <div class="entry-brand">YKS2027 ARENA</div>
       <div class="entry-sub">ZEUS EDITION</div>
-      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260823-03</div>
+      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260823-04</div>
       <p>TYT ve AYT hazırlığını Zeus Koçluğu, Akıllı Notlar ve Sınav Arenası ile yönet.</p>
       <button id="enterBtn" class="primary-btn entry-button">ARENA'YA GİR</button>
     </div>
@@ -32,7 +33,7 @@
         <img class="brand-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
         <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
       </div>
-      <div class="top-actions"><span class="build-id build-id-top">ID 20260823-03</span><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
+      <div class="top-actions"><span class="build-id build-id-top">ID 20260823-04</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
     </header>
 
     <main class="main-content">
@@ -49,6 +50,7 @@
           <button class="feature-card action-nav" data-target="coach"><span>ZEUS KOÇLUĞU</span><strong>Günlük analiz ve yönlendirme</strong></button>
           <button class="feature-card action-nav" data-target="arena"><span>SINAV ARENASI</span><strong>TYT, AYT ve karışık sınav turları</strong></button>
           <button class="feature-card action-nav" data-target="reports"><span>İLERLEME</span><strong>Puanını ve doğruluk oranını izle</strong></button>
+          <button id="parentPanelEntry" class="feature-card premium-entry" type="button"><span>🔒 VELİ PANELİ</span><strong>Haftalık ilerleme ve çalışma özeti</strong><small>Premium özellik</small></button>
         </div>
       </section>
 
@@ -60,7 +62,76 @@
 
       <section class="screen" data-screen="program"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Çalışma Programı"><div class="hero-shadow"></div><div class="page-copy"><h2>Program</h2><p>Dengeli çalış, dinlenmeyi de planına kat.</p></div></article><div class="info-card target-planner"><span class="eyebrow">GÜNLÜK ÇALIŞMA HEDEFİ</span><h3>Günde kaç soru çözmek istiyorsun?</h3><p>Başlangıç referansımız <strong>100 soru ve en az 3 net saat</strong>. Soru hedefin yalnızca ölçüm içindir; istediğin kadar üzerine çıkabilirsin.</p><div class="target-row"><input id="questionTarget" type="number" min="1" step="5" inputmode="numeric" aria-label="Günlük soru hedefi"><button id="saveQuestionTarget" class="primary-btn" type="button">Hedefi Kaydet</button></div><p id="targetSummary" class="target-summary" aria-live="polite"></p></div><div class="info-card rest-planner"><span class="eyebrow">PROGRAMINI KİŞİSELLEŞTİR</span><h3>Bu hafta bir boş gün ister misin?</h3><p>İstersen seçtiğin günün soru hedefini diğer günlere dengeli biçimde dağıtırız.</p><div class="choice-row"><button id="restYes" class="secondary-btn" type="button">Evet, isterim</button><button id="restNo" class="secondary-btn" type="button">Hayır, devam</button></div><div id="restDayWrap" class="rest-day-wrap" hidden><label for="restDay">Boş gününü seç</label><select id="restDay"><option value="">Gün seç</option><option>Pazartesi</option><option>Salı</option><option>Çarşamba</option><option>Perşembe</option><option>Cuma</option><option>Cumartesi</option><option>Pazar</option></select><button id="applyRestDay" class="primary-btn" type="button">Planı Dengele</button></div><p id="programStatus" class="program-status" aria-live="polite"></p></div><div id="programList" class="program-list"></div></section>
 
-      <section class="screen" data-screen="reports"><article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Raporlar"><div class="hero-shadow"></div><div class="page-copy"><h2>Raporlar</h2><p>Doğruluk, soru sayısı ve ilerleme.</p></div></article><div class="stats-grid"><div class="stat-card"><span>Çözülen Soru</span><strong id="statAnswered">0</strong></div><div class="stat-card"><span>Doğruluk</span><strong id="statAccuracy">%0</strong></div><div class="stat-card"><span>Arena Puanı</span><strong id="statPoints">0</strong></div><div class="stat-card"><span>Türkiye</span><strong>—</strong></div></div><div id="reviewBox"></div></section>
+      <section class="screen" data-screen="reports">
+        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Raporlar"><div class="hero-shadow"></div><div class="page-copy"><h2>Raporlar</h2><p>İlerlemeni ücretsiz izle; OBP ve 2025 bölüm karşılaştırması Premium'da.</p></div></article>
+        <div class="stats-grid"><div class="stat-card"><span>Çözülen Soru</span><strong id="statAnswered">0</strong></div><div class="stat-card"><span>Doğruluk</span><strong id="statAccuracy">%0</strong></div><div class="stat-card"><span>Arena Puanı</span><strong id="statPoints">0</strong></div><div class="stat-card"><span>Türkiye</span><strong>—</strong></div></div>
+        <div id="reviewBox"></div>
+        <article id="premiumReportsLock" class="info-card premium-lock-card">
+          <div class="premium-lock-icon">♛</div>
+          <span class="eyebrow">YKS2027 PREMIUM</span>
+          <h3>OBP, üniversite eşleştirme ve Veli Paneli</h3>
+          <p>Karne notlarından tahmini OBP, 2025 taban puanlarıyla bölüm karşılaştırması ve veliye özel ilerleme özeti Premium üyelikte açılır.</p>
+          <button class="primary-btn wide-btn open-premium" type="button">PREMIUM ÜYELİĞİ GÖR</button>
+        </article>
+        <div id="premiumReportTools" class="premium-report-tools" hidden>
+        <article class="info-card report-tool">
+          <span class="eyebrow">TAHMİNİ OBP PROFİLİ</span>
+          <h3>Karne notların yerleştirmene kaç puan katabilir?</h3>
+          <p>Yıl sonu başarı puanlarını gir. 12. sınıf yıl sonu puanın henüz oluşmadıysa okul sınav notlarından geçici bir tahmin hazırlanır.</p>
+          <div class="form-grid">
+            <label class="field full-field" for="studentStage"><span>Öğrenim durumun</span><select id="studentStage"><option value="9">9. sınıf</option><option value="10">10. sınıf</option><option value="11">11. sınıf</option><option value="12" selected>12. sınıf</option><option value="graduate">Mezun</option></select></label>
+            <label class="field" for="grade9"><span>9. sınıf yıl sonu puanı</span><input id="grade9" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="Örn. 82,50"></label>
+            <label class="field" for="grade10"><span>10. sınıf yıl sonu puanı</span><input id="grade10" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="Örn. 84,25"></label>
+            <label class="field" for="grade11"><span>11. sınıf yıl sonu puanı</span><input id="grade11" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="Örn. 87,10"></label>
+            <label class="field" id="grade12Wrap" for="grade12"><span>12. sınıf yıl sonu puanı (varsa)</span><input id="grade12" type="number" min="0" max="100" step="0.01" inputmode="decimal" placeholder="Henüz yoksa boş bırak"></label>
+          </div>
+          <div id="schoolExamWrap" class="school-exam-wrap">
+            <div><strong>12. sınıf okul sınavların</strong><small>Yıl sonu puanın yoksa, girilen notların basit ortalaması geçici 12. sınıf tahmini olarak kullanılır.</small></div>
+            <div class="exam-grade-grid"><input id="schoolExam1" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="12. sınıf okul sınavı 1" placeholder="Sınav 1"><input id="schoolExam2" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="12. sınıf okul sınavı 2" placeholder="Sınav 2"><input id="schoolExam3" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="12. sınıf okul sınavı 3" placeholder="Sınav 3"><input id="schoolExam4" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="12. sınıf okul sınavı 4" placeholder="Sınav 4"></div>
+          </div>
+          <label class="check-field"><input id="previousPlaced" type="checkbox"><span>Bir önceki yıl ÖSYM ile bir programa yerleştirildim veya özel yetenekle kayıt oldum.</span></label>
+          <button id="calculateObp" class="primary-btn wide-btn" type="button">OBP TAHMİNİNİ HESAPLA</button>
+          <div id="obpResult" class="result-panel" aria-live="polite"><p>Notlarını girerek tahmini diploma puanını, OBP'ni ve yerleştirme katkısını görebilirsin.</p></div>
+          <p class="source-note"><strong>Önemli:</strong> Bu hesap 2026 ÖSYM kuralını referans alan bir tahmindir. Kesin diploma notu ve OBP, e‑Okul/ÖSYM kaydındadır; 2027 kılavuzu yayımlandığında yeniden doğrulanmalıdır.</p>
+        </article>
+        <article class="info-card report-tool placement-tool">
+          <span class="eyebrow">2025 YERLEŞTİRME KARŞILAŞTIRMASI</span>
+          <h3>Deneme puanınla hangi bölümler mümkün görünürdü?</h3>
+          <p>Deneme sağlayıcının verdiği puanı ve türünü seç. Sistem, tamamlanmış son resmî yerleştirme yılı olan 2025'in genel kontenjan taban puanlarıyla karşılaştırır.</p>
+          <div class="form-grid">
+            <label class="field" for="mockScoreType"><span>Puan türü</span><select id="mockScoreType"><option>TYT</option><option>SAY</option><option>EA</option><option>SÖZ</option><option>DİL</option></select></label>
+            <label class="field" for="mockScoreMode"><span>Girdiğin puan</span><select id="mockScoreMode"><option value="exam">Sınav puanı • OBP hariç</option><option value="placement">Yerleştirme puanı • OBP dahil</option></select></label>
+            <label class="field" for="mockScore"><span>Deneme puanın</span><input id="mockScore" type="number" min="100" max="560" step="0.001" inputmode="decimal" placeholder="Örn. 385,250"></label>
+            <label class="field" for="programLevel"><span>Program düzeyi</span><select id="programLevel"><option value="all">Tümü</option><option value="4">Lisans</option><option value="2">Ön lisans</option></select></label>
+            <label class="field full-field" for="universityType"><span>Üniversite türü</span><select id="universityType"><option value="all">Tümü</option><option value="DEVLET">Devlet</option><option value="VAKIF">Vakıf</option><option value="VAKIF MYO">Vakıf MYO</option><option value="KKTC">KKTC</option><option value="YURTDISI KAMU">Yurt dışı kamu</option><option value="YURTDISI VAKIF">Yurt dışı vakıf</option></select></label>
+          </div>
+          <button id="comparePrograms" class="primary-btn wide-btn" type="button">2025 BÖLÜMLERİNİ GÖSTER</button>
+          <div id="placementSummary" class="result-panel" aria-live="polite"><p>Önce puanını gir. OBP hariç puan seçersen yukarıdaki tahmini katkı otomatik eklenir.</p></div>
+          <div id="placementResults" class="placement-results"></div>
+          <p class="source-note">Taban puan karşılaştırması tek başına yerleşme garantisi değildir. Kontenjan, başarı sırası, özel koşullar ve yıllık puan dağılımı değişebilir; tercih öncesi ÖSYM kılavuzu ve YÖK Atlas mutlaka kontrol edilmelidir.</p>
+        </article>
+        <article id="parentPanelCard" class="info-card report-tool parent-panel-card">
+          <span class="eyebrow">PREMIUM • VELİ TAKİP PANELİ</span>
+          <h3>Haftalık çalışma özeti</h3>
+          <p>Özet bu cihazdaki çalışma ve sınav kayıtlarından hazırlanır.</p>
+          <div class="obp-metrics"><div><span>Haftalık soru hedefi</span><strong id="parentWeeklyGoal">700</strong></div><div><span>Çözülen soru</span><strong id="parentAnswered">0</strong></div><div><span>Doğruluk</span><strong id="parentAccuracy">%0</strong></div></div>
+          <label class="field" for="parentNote"><span>Veli notu</span><textarea id="parentNote" rows="3" placeholder="Bu haftanın gözlemini yazın"></textarea></label>
+          <button id="saveParentNote" class="primary-btn wide-btn" type="button">VELİ NOTUNU KAYDET</button>
+          <p id="parentPanelStatus" class="source-note" aria-live="polite">Veli notu yalnızca bu cihazda saklanır.</p>
+        </article>
+        </div>
+      </section>
+      <section class="screen" data-screen="premium">
+        <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="YKS2027 Premium"><div class="hero-shadow"></div><div class="page-copy"><span class="eyebrow">YKS2027 PREMIUM</span><h2>Hedefini daha net gör</h2><p>OBP, bölüm karşılaştırması ve veli takibi tek üyelikte.</p></div></article>
+        <article class="info-card premium-offer-card">
+          <span class="premium-crown">♛</span>
+          <h3>Premium ile açılanlar</h3>
+          <div class="premium-feature-list"><div><b>01</b><span><strong>Tahmini OBP</strong><small>9–12. sınıf notlarından yerleştirme katkısı</small></span></div><div><b>02</b><span><strong>Üniversite ve bölüm karşılaştırması</strong><small>2025 resmî taban puanlarıyla koşullu sonuçlar</small></span></div><div><b>03</b><span><strong>Veli Takip Paneli</strong><small>Haftalık hedef, çözülen soru ve doğruluk özeti</small></span></div></div>
+          <button id="premiumStart" class="primary-btn wide-btn" type="button">ÜCRETLİ ÜYELİĞE GEÇ</button>
+          <p id="premiumCheckoutStatus" class="source-note" aria-live="polite">Üyelik planı ve güvenli ödeme bağlantısı bu ekranda açılacaktır.</p>
+        </article>
+        <button class="secondary-btn action-nav" data-target="home" type="button">ANA SAYFAYA DÖN</button>
+      </section>
     </main>
 
     <nav class="bottom-nav"><button class="nav-btn active" data-target="home"><span>⌂</span><label>Ana Sayfa</label></button><button class="nav-btn" data-target="program"><span>▤</span><label>Program</label></button><button class="nav-btn" data-target="notes"><span>☰</span><label>Notlar</label></button><button class="nav-btn center" data-target="arena"><span>⚡</span><label>Arena</label></button><button class="nav-btn" data-target="reports"><span>▥</span><label>Raporlar</label></button><button class="nav-btn" data-target="coach"><span>♛</span><label>Zeus</label></button></nav>
@@ -68,7 +139,8 @@
 
   <div id="settingsModal" class="settings-modal"><div class="settings-sheet"><div class="settings-head"><div><span>YKS2027 ARENA</span><h2>Ayarlar</h2></div><button id="settingsClose">×</button></div><div class="settings-card"><span>Cihaz</span><strong id="deviceInfo">Algılanıyor</strong><small id="supportInfo"></small></div><div class="settings-card"><h3>Günlük Çalışma Hedefi</h3><p>Önerilen başlangıç: 100 soru ve en az 3 net saat. Bu hedef üst sınır değildir.</p><div class="target-row"><input id="settingsQuestionTarget" type="number" min="1" step="5" inputmode="numeric" aria-label="Ayarlardaki günlük soru hedefi"><button id="settingsSaveTarget" class="primary-btn" type="button">Güncelle</button></div><small id="settingsTargetStatus" aria-live="polite"></small></div><div class="settings-card"><h3>Minimum Sistem Gereksinimleri</h3><p>Android 10 veya üzeri</p><p>Güncel Google Chrome önerilir</p><p>En az 2 GB RAM önerilir</p><p>İlk kurulum ve güncellemeler için internet bağlantısı gerekir</p></div></div></div>
   <div id="targetConfirmModal" class="settings-modal"><div class="settings-sheet confirm-sheet"><div class="settings-head"><div><span>HEDEF ONAYI</span><h2>Ortalamanın altında</h2></div></div><p id="targetConfirmText">Çalışma programınız seçtiğiniz şartlara göre oluşturuluyor. Emin misiniz?</p><div class="choice-row"><button id="confirmLowTarget" class="primary-btn" type="button">Bu Hedefle Oluştur</button><button id="editLowTarget" class="secondary-btn" type="button">Hedefi Düzenle</button></div></div></div>
-  <script src="./app.js?v=20260823-03"></script>
+  <div id="resultUpsellModal" class="settings-modal"><div class="settings-sheet premium-question-sheet"><span class="premium-crown">♛</span><div class="settings-head"><div><span>DENEME SONUCUN HAZIR</span><h2>Kazanabileceğin üniversite ve bölümleri de görmek ister misin?</h2></div></div><p>OBP katkını ve 2025 resmî taban puanlarına göre bölüm karşılaştırmanı görmek için Premium üyeliğe geçebilirsin.</p><div class="choice-row"><button id="resultPremiumYes" class="primary-btn" type="button">EVET, PREMIUM'U GÖR</button><button id="resultPremiumNo" class="secondary-btn" type="button">HAYIR, PUANIMI GÖSTER</button></div><small>Karşılaştırma tahminidir; kesin yerleşme garantisi vermez.</small></div></div>
+  <script src="./app.js?v=20260823-04"></script>
 </body>
 </html>
 
