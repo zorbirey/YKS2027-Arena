@@ -1,10 +1,10 @@
-const CACHE_NAME = 'yks2027-arena-visual-v1';
+const CACHE_NAME = 'yks2027-arena-20260823-01';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=visual-v1',
-  './app.js?v=visual-v1',
-  './manifest.webmanifest?v=visual-v1',
+  './styles.css?v=20260823-01',
+  './app.js?v=20260823-01',
+  './manifest.webmanifest?v=20260823-01',
   './assets/visual-v1/icon-192-v1.png',
   './assets/visual-v1/icon-512-v1.png',
   './assets/visual-v1/icon-maskable-512-v1.png',

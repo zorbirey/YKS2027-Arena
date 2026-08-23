@@ -3,7 +3,7 @@
   "name": "YKS2027 Arena",
   "short_name": "YKS2027",
   "description": "TYT ve AYT hazırlığı için Zeus Koçluğu, Akıllı Notlar ve Soru Arenası.",
-  "start_url": "./?source=pwa&build=visual-v1",
+  "start_url": "./?source=pwa&build=20260823-01",
   "scope": "./",
   "display": "standalone",
   "display_override": ["standalone"],
