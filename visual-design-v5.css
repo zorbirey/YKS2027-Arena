@@ -1,0 +1,47 @@
+/* YKS2027 Arena visual layer v5 — visible Zeus artwork */
+:root{--gold:#f2c246}
+
+/* Giriş ekranında Zeus görselini doğrudan görünür katmana al. */
+.entry-gate{isolation:isolate;background:#02070c!important}
+.entry-gate::before{content:"";position:absolute;inset:0;z-index:0;background:url('./assets/screen-home.webp?v=visual5') center 18%/cover no-repeat;filter:saturate(1.12) contrast(1.06) brightness(1.03)}
+.entry-bg{display:none!important}
+.entry-overlay{z-index:1!important;background:linear-gradient(180deg,rgba(2,7,11,.01) 0%,rgba(2,7,11,.05) 52%,rgba(2,7,11,.52) 78%,rgba(2,7,11,.92) 100%)!important}
+.entry-panel{z-index:2!important}
+.entry-icon{border:2px solid rgba(255,220,110,.68);box-shadow:0 0 0 5px rgba(4,11,17,.50),0 0 32px rgba(242,194,70,.32),0 18px 45px rgba(0,0,0,.58)!important}
+
+/* Uygulama genelinde gerçek Zeus filigranı. */
+.global-watermark{display:none!important}
+.app-shell::before{content:"";position:fixed;left:50%;top:53%;width:min(82vw,470px);height:min(72vh,720px);transform:translate(-50%,-50%);z-index:1;pointer-events:none;background:url('./assets/screen-coach.webp?v=visual5') center 20%/contain no-repeat;opacity:.105;filter:saturate(.78) contrast(1.08);mix-blend-mode:screen}
+.topbar,.main-content,.bottom-nav{position:relative;z-index:3!important}
+
+/* Ana sayfadaki Zeus, sadece background değil gerçek görünür foto katmanı. */
+.hero-card{background:#07111a!important;isolation:isolate;min-height:310px!important}
+.hero-card::before{content:"";position:absolute;inset:0;z-index:0;background:url('./assets/screen-home.webp?v=visual5') center 18%/cover no-repeat;filter:saturate(1.12) contrast(1.06)}
+.hero-card .hero-shadow{z-index:1;background:linear-gradient(90deg,rgba(3,8,13,.91) 0%,rgba(3,8,13,.66) 47%,rgba(3,8,13,.10) 80%),linear-gradient(180deg,transparent 38%,rgba(3,8,13,.58) 100%)!important}
+.hero-content{z-index:2!important;max-width:72%}
+
+/* Her bölüm başlığında Zeus resmi görünür. */
+.page-hero{background:#07111a!important;isolation:isolate;min-height:210px!important}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:0;background:url('./assets/screen-home.webp?v=visual5') center 22%/cover no-repeat;filter:saturate(1.08) contrast(1.05)}
+.screen[data-screen="coach"] .page-hero::before,.screen[data-screen="reports"] .page-hero::before{background-image:url('./assets/screen-coach.webp?v=visual5')}
+.page-hero .hero-shadow{z-index:1;background:linear-gradient(90deg,rgba(3,8,13,.82),rgba(3,8,13,.20) 70%),linear-gradient(180deg,transparent 35%,rgba(3,8,13,.70))!important}
+.page-hero-content{z-index:2!important}
+
+/* Kartlarda filigranın seçilebilmesi için panelleri biraz şeffaflaştır. */
+.feature-card,.info-card,.stat-card{background:linear-gradient(180deg,rgba(15,24,34,.90),rgba(9,16,24,.88))!important;backdrop-filter:blur(2px)}
+
+/* Zeus koçluğu sayfasında ek portre paneli. */
+.screen[data-screen="coach"] .content-stack::before{content:"";display:block;height:190px;border-radius:22px;border:1px solid rgba(242,194,70,.24);background:linear-gradient(180deg,rgba(2,7,11,.03),rgba(2,7,11,.62)),url('./assets/screen-coach.webp?v=visual5') center 18%/cover no-repeat;box-shadow:inset 0 0 42px rgba(0,0,0,.28)}
+
+@media(max-width:420px){
+  .entry-gate::before{background-position:center 15%}
+  .app-shell::before{width:94vw;height:67vh;top:54%;opacity:.12}
+  .hero-card{min-height:300px!important}
+  .hero-content{max-width:78%}
+  .page-hero{min-height:185px!important}
+}
+@media(min-width:600px){
+  .app-shell::before{width:min(58vw,560px);height:min(78vh,800px);opacity:.09}
+  .hero-card{min-height:390px!important}
+  .page-hero{min-height:250px!important}
+}
