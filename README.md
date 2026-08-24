@@ -3,8 +3,8 @@
 Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık PWA'sı.
 
 - Canlı PWA: https://zorbirey.github.io/YKS2027-Arena/
-- Güncel PWA ID: 20260824-01
-- Ücretsiz: çalışma programı, doğrulanmış soru havuzu, Dersler kataloğu, ham deneme sonucu ve temel ilerleme raporu
+- Güncel PWA ID: 20260824-02
+- Ücretsiz: en fazla 50 soruluk günlük çalışma hedefi, doğrulanmış soru havuzu, Dersler kataloğu, ham deneme sonucu ve temel ilerleme raporu
 - Premium: sınırsız/reklamsız kullanım, deneme ve yazılı senaryoları, tahmini OBP, 2025 taban puanlarıyla üniversite/bölüm karşılaştırması ve Veli Takip Paneli
 
 ## Ücretsiz kullanım kuralları

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-01';
+  const BUILD_ID='20260824-02';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
