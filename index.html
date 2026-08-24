@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#07121b">
   <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=20260824-03">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260824-04">
   <link rel="icon" href="./assets/visual-v1/icon-192-v1.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/visual-v1/icon-192-v1.png">
-  <link rel="stylesheet" href="./styles.css?v=20260824-03">
-  <link rel="stylesheet" href="./reports-v1.css?v=20260824-03">
-  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-03">
+  <link rel="stylesheet" href="./styles.css?v=20260824-04">
+  <link rel="stylesheet" href="./reports-v1.css?v=20260824-04">
+  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-04">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
@@ -21,7 +21,7 @@
       <img class="entry-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
       <div class="entry-brand">YKS2027 ARENA</div>
       <div class="entry-sub">ZEUS EDITION</div>
-      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-03</div>
+      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-04</div>
       <p>TYT ve AYT hazırlığını Zeus Koçluğu, Dersler ve Sınav Arenası ile yönet.</p>
       <div class="entry-actions">
         <button id="enterBtn" class="primary-btn entry-button" type="button">ARENA'YA GİR</button>
@@ -37,7 +37,7 @@
         <img class="brand-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
         <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
       </div>
-      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-03</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
+      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-04</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
     </header>
 
     <main class="main-content">
@@ -173,7 +173,7 @@
           <span class="premium-crown">♛</span>
           <h3>Premium ile açılanlar</h3>
           <div class="premium-feature-list"><div class="new-feature"><b>01</b><span><strong>Sınırsız soru ve Dersler</strong><small>Reklamsız, günlük kotasız kesintisiz kullanım</small></span></div><div class="new-feature"><b>02</b><span><strong>Deneme ve yazılı senaryoları</strong><small>TYT, AYT ve dört dönem yazılı senaryosu</small></span></div><div><b>03</b><span><strong>Tahmini OBP ve bölüm karşılaştırması</strong><small>Karne notları ve 2025 resmî taban puanları</small></span></div><div><b>04</b><span><strong>Veli Takip Paneli</strong><small>6 haneli kod, haftalık hedef ve ilerleme özeti</small></span></div></div>
-          <button id="premiumStart" class="primary-btn wide-btn" type="button">ÜCRETLİ ÜYELİĞE GEÇ</button>
+          <button id="premiumStart" class="primary-btn wide-btn" type="button">PREMIUM ÜYELİĞE GEÇ</button>
           <p id="premiumCheckoutStatus" class="source-note" aria-live="polite">Üyelik planı ve güvenli ödeme bağlantısı bu ekranda açılacaktır.</p>
         </article>
         <button class="secondary-btn action-nav" data-target="home" type="button">ANA SAYFAYA DÖN</button>
@@ -206,19 +206,19 @@
         <small class="integration-note">Hak yalnızca arkadaşın uygulamayı gerçekten kurup kullandığı üyelik sunucusunda doğrulandıktan sonra tanımlanır.</small>
       </div>
       <div class="settings-card"><h3>Günlük Çalışma Hedefi</h3><p>Ücretsiz üyelikte hedef en fazla 50 sorudur. Premium üyelikte üst sınır kaldırılır.</p><div class="target-row"><input id="settingsQuestionTarget" type="number" min="1" max="50" step="5" inputmode="numeric" aria-label="Ayarlardaki günlük soru hedefi"><button id="settingsSaveTarget" class="primary-btn" type="button">Güncelle</button></div><small id="settingsTargetStatus" aria-live="polite"></small></div>
-      <div class="settings-card"><h3>Ücretsiz Kullanım Kuralları</h3><p>50 soru veya 6 tamamlanmış ödüllü reklamdan sonra erişim ertesi gün Türkiye saatiyle 08.00’e kadar kilitlenir.</p><div class="quota-strip"><div class="quota-chip"><span>SORU</span><strong id="freeQuestionCount">0 / 50</strong></div><div class="quota-chip"><span>REKLAM</span><strong id="freeAdCount">0 / 6</strong></div></div></div>
+      <div class="settings-card"><h3>Ücretsiz Kullanım Kuralları</h3><p>50 soru veya 6 tamamlanmış ödüllü reklamdan sonra erişim ertesi gün Türkiye saatiyle 08.00’e kadar kilitlenir. Açılış zamanı sunucudan doğrulanır; cihaz saatini değiştirmek kilidi kaldırmaz.</p><div class="quota-strip"><div class="quota-chip"><span>SORU</span><strong id="freeQuestionCount">0 / 50</strong></div><div class="quota-chip"><span>REKLAM</span><strong id="freeAdCount">0 / 6</strong></div></div></div>
       <div class="settings-card"><h3>Minimum Sistem Gereksinimleri</h3><p>Android 10 veya üzeri</p><p>Güncel Google Chrome önerilir</p><p>En az 2 GB RAM önerilir</p><p>İlk kurulum ve güncellemeler için internet bağlantısı gerekir</p></div>
     </div>
   </div>
   <div id="targetConfirmModal" class="settings-modal"><div class="settings-sheet confirm-sheet"><div class="settings-head"><div><span>HEDEF ONAYI</span><h2>Ortalamanın altında</h2></div></div><p id="targetConfirmText">Çalışma programınız seçtiğiniz şartlara göre oluşturuluyor. Emin misiniz?</p><div class="choice-row"><button id="confirmLowTarget" class="primary-btn" type="button">Bu Hedefle Oluştur</button><button id="editLowTarget" class="secondary-btn" type="button">Hedefi Düzenle</button></div></div></div>
   <div id="resultUpsellModal" class="settings-modal"><div class="settings-sheet premium-question-sheet"><span class="premium-crown">♛</span><div class="settings-head"><div><span>DENEME SONUCUN HAZIR</span><h2>Kazanabileceğin üniversite ve bölümleri de görmek ister misin?</h2></div></div><p>OBP katkını ve 2025 resmî taban puanlarına göre bölüm karşılaştırmanı görmek için Premium üyeliğe geçebilirsin.</p><div class="choice-row"><button id="resultPremiumYes" class="primary-btn" type="button">EVET, PREMIUM'U GÖR</button><button id="resultPremiumNo" class="secondary-btn" type="button">HAYIR, PUANIMI GÖSTER</button></div><small>Karşılaştırma tahminidir; kesin yerleşme garantisi vermez.</small></div></div>
-  <div id="rewardModal" class="settings-modal"><div class="settings-sheet reward-sheet"><div class="reward-symbol">▶</div><span class="eyebrow">ÖDÜLLÜ REKLAM KAPISI</span><h2>Devam etmek için reklamı tamamla</h2><p id="rewardText"></p><p id="rewardQuota" class="quota-warning"></p><p id="rewardStatus" class="reward-status" aria-live="polite"></p><div class="reward-actions"><button id="rewardWatch" class="primary-btn" type="button">ÖDÜLLÜ REKLAMI İZLE</button><button id="rewardPremium" class="secondary-btn" type="button">PREMIUM'A GEÇ</button><button id="rewardCancel" class="ghost-btn" type="button">ŞİMDİ DEĞİL</button></div></div></div>
+  <div id="rewardModal" class="settings-modal"><div class="settings-sheet reward-sheet"><div class="reward-symbol">▶</div><span class="eyebrow">ÖDÜLLÜ REKLAM KAPISI</span><h2>Devam etmek için reklamı tamamla</h2><p id="rewardText"></p><p id="rewardQuota" class="quota-warning"></p><p id="rewardStatus" class="reward-status" aria-live="polite"></p><div id="rewardCountdown" class="reward-countdown" hidden><span>GEÇİCİ REKLAM</span><strong id="rewardCountdownNumber">8</strong><small>saniye</small><i><b id="rewardCountdownBar"></b></i><p>Sayaç yalnız uygulama ekranda açıkken ilerler.</p></div><div class="reward-actions"><button id="rewardWatch" class="primary-btn" type="button">ÖDÜLLÜ REKLAMI İZLE</button><button id="rewardPremium" class="secondary-btn" type="button">PREMIUM'A GEÇ</button><button id="rewardCancel" class="ghost-btn" type="button">ŞİMDİ DEĞİL</button></div></div></div>
   <div id="lessonChoiceModal" class="settings-modal"><div class="settings-sheet lesson-choice-sheet"><span class="premium-crown">♛</span><span class="eyebrow">SONRAKİ SAYFA</span><h2>Nasıl devam etmek istersin?</h2><p id="lessonChoiceText">Ödüllü reklamı tamamen izle veya Premium üyeliğe geç.</p><div class="reward-actions"><button id="lessonAdChoice" class="primary-btn" type="button">ÖDÜLLÜ REKLAM</button><button id="lessonPremiumChoice" class="secondary-btn" type="button">PREMIUM ÜYELİK</button><button id="lessonChoiceCancel" class="ghost-btn" type="button">VAZGEÇ</button></div></div></div>
-  <div id="dailyLockModal" class="settings-modal"><div class="settings-sheet lock-sheet"><div class="reward-symbol">🔒</div><span class="eyebrow">GÜNLÜK KOTA</span><h2>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</h2><p id="dailyLockText"></p><p id="dailyLockUntil" class="lock-until"></p><button id="dailyLockPremium" class="primary-btn wide-btn" data-lock-allowed type="button">ÜCRETLİ ÜYELİĞE GEÇ</button></div></div>
-  <script src="./app.js?v=20260824-03"></script>
-  <script src="./courses-v1.js?v=20260824-03"></script>
-  <script src="./course-details-v1.js?v=20260824-03"></script>
-  <script src="./engagement-v1.js?v=20260824-03"></script>
+  <div id="dailyLockModal" class="settings-modal"><div class="settings-sheet lock-sheet"><div class="reward-symbol">🔒</div><span class="eyebrow">GÜNLÜK KOTA</span><h2>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</h2><p id="dailyLockText"></p><p id="dailyLockUntil" class="lock-until"></p><p id="dailyLockClockStatus" class="clock-verification checking" aria-live="polite">Kilit süresi sunucu saatinden doğrulanıyor…</p><button id="dailyLockPremium" class="primary-btn wide-btn" data-lock-allowed type="button">PREMIUM ÜYELİĞE GEÇ</button></div></div>
+  <script src="./app.js?v=20260824-04"></script>
+  <script src="./courses-v1.js?v=20260824-04"></script>
+  <script src="./course-details-v1.js?v=20260824-04"></script>
+  <script src="./engagement-v1.js?v=20260824-04"></script>
 </body>
 </html>
 

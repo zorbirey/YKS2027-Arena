@@ -3,7 +3,7 @@
 Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık PWA'sı.
 
 - Canlı PWA: https://zorbirey.github.io/YKS2027-Arena/
-- Güncel PWA ID: 20260824-03
+- Güncel PWA ID: 20260824-04
 - Ücretsiz: en fazla 50 soruluk günlük çalışma hedefi, doğrulanmış soru havuzu, 44 üniteli ayrıntılı Dersler kataloğu, ham deneme sonucu ve temel ilerleme raporu
 - Premium: program kişiselleştirme ve boş gün dağıtımı, sınırsız/reklamsız kullanım, deneme ve yazılı senaryoları, tahmini OBP, 2025 taban puanlarıyla üniversite/bölüm karşılaştırması ve Veli Takip Paneli
 
@@ -17,10 +17,11 @@ Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık
 - Soru veya reklam kotası doluyken uygulamaya giriş Premium ekranına yönlenir.
 
 Kota verileri cihazda tutulur. Üretimde cihazlar arası ve kötüye kullanıma dayanıklı kota için kullanıcı hesabı/sunucu kaydı gerekir.
+Günlük kilit açılışı GitHub Pages yanıtındaki sunucu saatiyle doğrulanır ve çalışma oturumunda tekdüze sayaçla ilerletilir; cihaz saatini ileri veya geri almak kilidi açmaz. Sunucu zamanı doğrulanamazsa güvenlik nedeniyle kilit açık kalır. Yalnız istemci tarafındaki PWA'da uygulama verilerini tamamen silme veya farklı cihaz kullanma saldırısını kesin olarak engellemek mümkün değildir; bunun için kullanıcı hesabına bağlı sunucu tarafı kota kaydı gerekir.
 
 ## Doğrulama gerektiren entegrasyonlar
 
-Ödüllü reklam kapısı sahte bir sayaçla açılmaz. window.YKS2027_REWARDED_AD_PROVIDER.show çağrısının hem completed: true hem granted: true döndürmesi gerekir. Google Publisher Tag gibi bir sağlayıcıda bu değerler video-tamamlandı ve ödül-verildi olaylarından üretilmelidir. Reklam birimi ve yayıncı hesabı tanımlanana kadar ücretsiz geçiş butonu kapalı kalır.
+Ödüllü reklam sağlayıcısı bağlanana kadar geçici reklam akışı sekiz görünür saniyelik geri sayımla çalışır; uygulama arka plana alınırsa sayaç durur ve tamamlanmadan ödül verilmez. Gerçek sağlayıcı bağlandığında window.YKS2027_REWARDED_AD_PROVIDER.show çağrısının hem completed: true hem granted: true döndürmesi gerekir. Google Publisher Tag gibi bir sağlayıcıda bu değerler video-tamamlandı ve ödül-verildi olaylarından üretilmelidir.
 
 Arkadaş davet hakkı yalnız verifiedByServer: true olan üyelik sunucusu yanıtıyla etkinleşir. İlk, ikinci ve üçüncü doğrulanmış arkadaş sırasıyla +1, +2 ve +3 gün reklamsız ücretsiz kullanım kazandırır. 6 haneli veli kodu arayüzü hazırdır; güvenli cihazlar arası giriş için üyelik sunucusuna bağlanmalıdır.
 

@@ -10,7 +10,7 @@ vm.runInContext(fs.readFileSync('course-details-v1.js','utf8'),context,{filename
 const courses=context.window.YKS2027_COURSES.courses;
 const library=context.window.YKS2027_COURSE_DETAILS;
 const units=courses.flatMap((course)=>course.units.map((unit)=>({course:course.title,unit})));
-assert.equal(library.buildId,'20260824-03');
+assert.equal(library.buildId,'20260824-04');
 assert.equal(units.length,44,'Beklenen 44 ders ünitesi bulunmalı.');
 assert.equal(Object.keys(library.details).length,44,'Her ünite için tek bir ayrıntılı içerik bulunmalı.');
 

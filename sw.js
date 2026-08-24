@@ -1,16 +1,16 @@
-const CACHE_NAME = 'yks2027-arena-20260824-03';
+const CACHE_NAME = 'yks2027-arena-20260824-04';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=20260824-03',
-  './reports-v1.css?v=20260824-03',
-  './engagement-v1.css?v=20260824-03',
-  './app.js?v=20260824-03',
-  './courses-v1.js?v=20260824-03',
-  './course-details-v1.js?v=20260824-03',
-  './engagement-v1.js?v=20260824-03',
-  './manifest.webmanifest?v=20260824-03',
-  './data/verified/mixed_core_v15_50.json?v=20260824-03',
+  './styles.css?v=20260824-04',
+  './reports-v1.css?v=20260824-04',
+  './engagement-v1.css?v=20260824-04',
+  './app.js?v=20260824-04',
+  './courses-v1.js?v=20260824-04',
+  './course-details-v1.js?v=20260824-04',
+  './engagement-v1.js?v=20260824-04',
+  './manifest.webmanifest?v=20260824-04',
+  './data/verified/mixed_core_v15_50.json?v=20260824-04',
   './assets/visual-v1/icon-192-v1.png',
   './assets/visual-v1/icon-512-v1.png',
   './assets/visual-v1/icon-maskable-512-v1.png',
@@ -29,6 +29,11 @@ self.addEventListener('activate', function (event) {
 });
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.searchParams.has('clock-check')) {
+    event.respondWith(fetch(event.request, { cache: 'no-store' }));
+    return;
+  }
   if (event.request.mode === 'navigate') {
     event.respondWith(fetch(event.request).then(function (response) {
       const copy = response.clone();

@@ -1,11 +1,14 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-03';
+  const BUILD_ID='20260824-04';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
   const INCOMING_REF_KEY='yks2027-incoming-referral-v1';
+  const CLOCK_KEY='yks2027-trusted-clock-v1';
+  const DEMO_REWARD_SECONDS=8;
+  const CLOCK_REFRESH_MS=5*60*1000;
   const QUESTION_LIMIT=50;
   const QUESTION_GATE=10;
   const REWARDED_AD_LIMIT=6;
@@ -15,40 +18,74 @@
   let pendingReward=null;
   let readerState={courseIndex:-1,unitIndex:-1,page:0};
   let activeCourseFilter='ALL';
+  let trustedClockEpoch=0;
+  let trustedClockPerf=0;
+  let trustedClockVerified=false;
+  let clockSyncPromise=null;
+  let demoRewardSession=null;
 
   function parseStored(key,fallback){
     try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}
     catch(_){return fallback;}
   }
+  function monotonicNow(){return window.performance&&typeof window.performance.now==='function'?window.performance.now():Date.now();}
+  function storedTrustedNow(){const state=parseStored(CLOCK_KEY,{});return Math.max(0,Number(state.lastServerEpoch)||0);}
+  function trustedNow(){
+    if(trustedClockVerified&&trustedClockEpoch>0)return trustedClockEpoch+Math.max(0,monotonicNow()-trustedClockPerf);
+    return storedTrustedNow();
+  }
+  function accessNow(){return trustedNow()||Date.now();}
+  function syncTrustedClock(){
+    if(clockSyncPromise)return clockSyncPromise;
+    const url='./manifest.webmanifest?clock-check='+encodeURIComponent(BUILD_ID)+'&nonce='+Math.random().toString(36).slice(2);
+    clockSyncPromise=fetch(url,{cache:'no-store',credentials:'same-origin'}).then(function(response){
+      if(!response.ok)throw new Error('Saat doğrulama yanıtı alınamadı.');
+      const header=response.headers&&typeof response.headers.get==='function'?response.headers.get('Date'):'';
+      const serverEpoch=Date.parse(header||'');
+      if(!Number.isFinite(serverEpoch)||serverEpoch<=0)throw new Error('Sunucu zamanı okunamadı.');
+      const safeEpoch=serverEpoch;
+      trustedClockEpoch=safeEpoch;
+      trustedClockPerf=monotonicNow();
+      trustedClockVerified=true;
+      localStorage.setItem(CLOCK_KEY,JSON.stringify({lastServerEpoch:safeEpoch,verifiedAt:new Date(safeEpoch).toISOString(),buildId:BUILD_ID}));
+      return true;
+    }).catch(function(){return false;}).finally(function(){clockSyncPromise=null;});
+    return clockSyncPromise;
+  }
   function istanbulCycle(now){
-    return new Date((now||Date.now())-5*HOUR).toISOString().slice(0,10);
+    return new Date((Number(now)||accessNow())-5*HOUR).toISOString().slice(0,10);
   }
   function nextIstanbulReset(now){
-    const time=now||Date.now();
+    const time=Number(now)||accessNow();
     const local=new Date(time+3*HOUR);
     return Date.UTC(local.getUTCFullYear(),local.getUTCMonth(),local.getUTCDate()+1,5,0,0,0);
   }
-  function freshDaily(){
-    return {cycle:istanbulCycle(),questions:0,ads:0,notesSeen:[],questionGatePending:false,locked:false,lockReason:'',unlockAt:'',updatedAt:new Date().toISOString()};
+  function freshDaily(now){
+    const time=Number(now)||accessNow();
+    return {cycle:istanbulCycle(time),questions:0,ads:0,notesSeen:[],questionGatePending:false,locked:false,lockReason:'',unlockAt:'',clockVerificationRequired:false,updatedAt:new Date(time).toISOString()};
   }
   function dailyState(){
-    let state=parseStored(DAILY_KEY,freshDaily());
-    const now=Date.now();
-    const currentCycle=istanbulCycle(now);
-    const unlockTime=state.unlockAt?new Date(state.unlockAt).getTime():0;
-    const lockedUntilFuture=state.locked===true&&unlockTime>now;
-    if((state.locked===true&&unlockTime>0&&unlockTime<=now)||(state.cycle!==currentCycle&&!lockedUntilFuture)){
-      state=freshDaily();
-      localStorage.setItem(DAILY_KEY,JSON.stringify(state));
+    let state=parseStored(DAILY_KEY,null);
+    if(!state)state=freshDaily();
+    const now=trustedNow();
+    const canTrustTime=trustedClockVerified&&now>0;
+    if(!state.cycle)state.cycle=istanbulCycle(now||Date.now());
+    if(canTrustTime){
+      const currentCycle=istanbulCycle(now);
+      const unlockTime=state.unlockAt?new Date(state.unlockAt).getTime():0;
+      const lockExpired=state.locked===true&&unlockTime>0&&unlockTime<=now;
+      const cycleChanged=state.locked!==true&&state.cycle!==currentCycle;
+      if(lockExpired||cycleChanged){state=freshDaily(now);localStorage.setItem(DAILY_KEY,JSON.stringify(state));}
     }
     if(!Array.isArray(state.notesSeen))state.notesSeen=[];
     state.questions=Math.max(0,Number(state.questions)||0);
     state.ads=Math.max(0,Number(state.ads)||0);
     state.questionGatePending=Boolean(state.questionGatePending);
+    state.clockVerificationRequired=Boolean(state.locked);
     return state;
   }
   function saveDaily(state){
-    state.updatedAt=new Date().toISOString();
+    state.updatedAt=new Date(accessNow()).toISOString();
     localStorage.setItem(DAILY_KEY,JSON.stringify(state));
     renderUsage();
   }
@@ -60,7 +97,7 @@
   }
   function hasUnlimitedFreePass(){
     const status=verifiedReferralStatus();
-    return Boolean(status.passExpiresAt&&new Date(status.passExpiresAt).getTime()>Date.now());
+    return Boolean(status.passExpiresAt&&new Date(status.passExpiresAt).getTime()>accessNow());
   }
   function hasUnlimitedAccess(){
     return isPremium()||hasUnlimitedFreePass();
@@ -73,8 +110,9 @@
   function markLocked(state,reason){
     state.locked=true;
     state.lockReason=reason||state.lockReason||'quota';
+    state.clockVerificationRequired=true;
     const unlockTime=state.unlockAt?new Date(state.unlockAt).getTime():0;
-    if(!unlockTime||unlockTime<=Date.now())state.unlockAt=new Date(nextIstanbulReset()).toISOString();
+    if(!unlockTime)state.unlockAt=new Date(nextIstanbulReset(accessNow())).toISOString();
   }
   function isDailyLocked(){
     if(hasUnlimitedAccess())return false;
@@ -107,10 +145,29 @@
     hideModal('lessonChoiceModal');
     hideModal('dailyLockModal');
     hideEntry();
+    abortDemoRewardCountdown();
     pendingReward=null;
     activateScreen('premium');
     const status=document.getElementById('premiumCheckoutStatus');
     if(status&&source==='locked')status.innerHTML='<strong>Günlük ücretsiz kullanım kotan doldu.</strong> Kesintisiz devam etmek için güvenli üyelik bağlantısı bu alanda açılacaktır.';
+  }
+  function setClockStatus(message,state){
+    const element=document.getElementById('dailyLockClockStatus');
+    if(!element)return;
+    element.className='clock-verification '+(state||'checking');
+    element.textContent=message;
+  }
+  function verifyLockedClock(){
+    setClockStatus('Kilit süresi sunucu saatinden doğrulanıyor…','checking');
+    return syncTrustedClock().then(function(ok){
+      const state=dailyState();
+      if(!state.locked){hideModal('dailyLockModal');renderUsage();return true;}
+      if(ok)setClockStatus('Sunucu saati doğrulandı. Cihaz saatini değiştirmek kilidi kaldırmaz.','verified');
+      else setClockStatus('Sunucu zamanı doğrulanamadı. Güvenlik nedeniyle kilit açık kalır; internet bağlantını kontrol et.','failed');
+      const until=document.getElementById('dailyLockUntil');
+      if(until)until.textContent='Ücretsiz erişim '+resetLabel()+' tarihinde, sunucu zamanı doğrulandıktan sonra yeniden açılır.';
+      return ok;
+    });
   }
   function showDailyLock(reason){
     const state=dailyState();
@@ -118,14 +175,16 @@
     saveDaily(state);
     hideModal('rewardModal');
     hideModal('lessonChoiceModal');
+    abortDemoRewardCountdown();
     pendingReward=null;
     const text=document.getElementById('dailyLockText');
     const until=document.getElementById('dailyLockUntil');
     if(text)text.textContent=lockReasonText(state.lockReason);
-    if(until)until.textContent='Ücretsiz erişim '+resetLabel()+' tarihinde yeniden açılır.';
+    if(until)until.textContent='Ücretsiz erişim '+resetLabel()+' tarihinde, sunucu zamanı doğrulandıktan sonra yeniden açılır.';
     showModal('dailyLockModal');
     const banner=document.getElementById('dailyLockBanner');
-    if(banner){banner.hidden=false;banner.innerHTML='<strong>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</strong>'+lockReasonText(state.lockReason)+' Sabah 08.00’e kadar ücretsiz alanlar kilitli.';}
+    if(banner){banner.hidden=false;banner.innerHTML='<strong>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</strong>'+lockReasonText(state.lockReason)+' Sabah 08.00’e kadar ücretsiz alanlar kilitli. Açılış sunucu saatiyle doğrulanır.';}
+    verifyLockedClock();
   }
   function renderUsage(){
     const state=dailyState();
@@ -149,18 +208,83 @@
     if(context==='note-five')return 'Beş ücretsiz akıllı notu tamamladın. Yeni notu açmak için ödüllü reklamı tamamen izle.';
     return 'Ders özetinin sonraki sayfasını açmak için ödüllü reklamı tamamen izle veya Premium üyeliğe geç.';
   }
+  function resetDemoRewardUi(){
+    const panel=document.getElementById('rewardCountdown');
+    const count=document.getElementById('rewardCountdownNumber');
+    const bar=document.getElementById('rewardCountdownBar');
+    if(panel){panel.hidden=true;panel.classList.remove('complete');}
+    if(count)count.textContent=String(DEMO_REWARD_SECONDS);
+    if(bar)bar.style.width='0%';
+    const cancel=document.getElementById('rewardCancel');
+    const premium=document.getElementById('rewardPremium');
+    if(cancel)cancel.disabled=false;
+    if(premium)premium.disabled=false;
+  }
+  function abortDemoRewardCountdown(){
+    if(!demoRewardSession)return;
+    clearInterval(demoRewardSession.timer);
+    const resolve=demoRewardSession.resolve;
+    demoRewardSession=null;
+    resetDemoRewardUi();
+    resolve({completed:false,granted:false,cancelled:true});
+  }
+  function runDemoRewardCountdown(){
+    return new Promise(function(resolve){
+      if(demoRewardSession){resolve({completed:false,granted:false});return;}
+      const panel=document.getElementById('rewardCountdown');
+      const count=document.getElementById('rewardCountdownNumber');
+      const bar=document.getElementById('rewardCountdownBar');
+      const watch=document.getElementById('rewardWatch');
+      const status=document.getElementById('rewardStatus');
+      const cancel=document.getElementById('rewardCancel');
+      const premium=document.getElementById('rewardPremium');
+      const total=DEMO_REWARD_SECONDS*1000;
+      let remaining=total;
+      let last=monotonicNow();
+      if(panel)panel.hidden=false;
+      if(cancel)cancel.disabled=true;
+      if(premium)premium.disabled=true;
+      watch.disabled=true;
+      watch.textContent='REKLAM DEVAM EDİYOR';
+      function draw(){
+        const seconds=Math.max(0,Math.ceil(remaining/1000));
+        if(count)count.textContent=String(seconds);
+        if(bar)bar.style.width=Math.min(100,Math.round((total-remaining)/total*100))+'%';
+        status.textContent=seconds>0?seconds+' saniye sonra devam hakkın açılacak. Uygulamadan ayrılırsan sayaç durur.':'Reklam tamamlandı. Devam hakkın açılıyor…';
+      }
+      draw();
+      const timer=setInterval(function(){
+        const now=monotonicNow();
+        const elapsed=Math.max(0,Math.min(250,now-last));
+        last=now;
+        if(document.hidden){draw();return;}
+        remaining-=elapsed;
+        draw();
+        if(remaining<=0){
+          clearInterval(timer);
+          demoRewardSession=null;
+          if(panel)panel.classList.add('complete');
+          if(cancel)cancel.disabled=false;
+          if(premium)premium.disabled=false;
+          resolve({completed:true,granted:true,demo:true});
+        }
+      },100);
+      demoRewardSession={timer:timer,resolve:resolve};
+    });
+  }
   function showRewardGate(){
     if(!pendingReward)return;
     const state=dailyState();
     const watch=document.getElementById('rewardWatch');
     const status=document.getElementById('rewardStatus');
+    resetDemoRewardUi();
     document.getElementById('rewardText').textContent=rewardCopy(pendingReward.context);
     document.getElementById('rewardQuota').textContent='Bugünkü ödüllü reklam: '+state.ads+' / '+REWARDED_AD_LIMIT;
-    const available=Boolean(provider());
-    watch.disabled=!available;
-    watch.textContent=available?'ÖDÜLLÜ REKLAMI İZLE':'REKLAM HENÜZ HAZIR DEĞİL';
-    status.className='reward-status'+(available?'':' provider-missing');
-    status.textContent=available?'Reklam kapatılırsa veya ödül sinyali gelmezse sonraki aşama açılmaz.':'Canlı reklam sağlayıcısı ve reklam birimi tanımlanmadığı için ücretsiz geçiş açılamıyor.';
+    const liveProvider=Boolean(provider());
+    watch.disabled=false;
+    watch.textContent=liveProvider?'ÖDÜLLÜ REKLAMI İZLE':'8 SANİYELİK REKLAMI İZLE';
+    status.className='reward-status';
+    status.textContent=liveProvider?'Reklam kapatılırsa veya ödül sinyali gelmezse sonraki aşama açılmaz.':'Geçici demo reklam sekiz saniye boyunca ekranda kaldığında sonraki aşama açılır.';
     showModal('rewardModal');
   }
   function requestReward(context,onGranted){
@@ -170,22 +294,22 @@
     showRewardGate();
   }
   async function watchReward(){
-    if(!pendingReward)return;
+    if(!pendingReward||demoRewardSession)return;
     const activeProvider=provider();
-    if(!activeProvider){showRewardGate();return;}
     const watch=document.getElementById('rewardWatch');
     const status=document.getElementById('rewardStatus');
     watch.disabled=true;
     status.className='reward-status';
-    status.textContent='Reklam hazırlanıyor. Tamamlanmadan bu ekranı kapatmayın.';
+    status.textContent=activeProvider?'Reklam hazırlanıyor. Tamamlanmadan bu ekranı kapatmayın.':'Sekiz saniyelik geçici reklam başlatılıyor…';
     let result;
     try{
-      result=await activeProvider.show({placement:pendingReward.context,buildId:BUILD_ID});
+      result=activeProvider?await activeProvider.show({placement:pendingReward.context,buildId:BUILD_ID}):await runDemoRewardCountdown();
     }catch(error){
       result={completed:false,granted:false,error:error&&error.message};
     }
     if(!result||result.completed!==true||result.granted!==true){
       watch.disabled=false;
+      watch.textContent=activeProvider?'ÖDÜLLÜ REKLAMI TEKRAR DENE':'8 SANİYELİK REKLAMI TEKRARLA';
       status.className='reward-status provider-missing';
       status.textContent='Reklam tamamlanmadı veya doğrulanmış ödül alınamadı. Sonraki aşama kilitli kaldı.';
       return;
@@ -198,6 +322,7 @@
     state.ads+=1;
     saveDaily(state);
     hideModal('rewardModal');
+    resetDemoRewardUi();
     if(state.ads>=REWARDED_AD_LIMIT){showDailyLock('ads');return;}
     continuation();
   }
@@ -544,9 +669,19 @@
     if(incoming&&api&&typeof api.registerInstall==='function')api.registerInstall({code:incoming.code,buildId:BUILD_ID}).catch(function(){});
   });
 
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)syncTrustedClock().then(function(){renderUsage();});});
   registerIncomingReferral();
   renderCourses();
   renderProfile();
   renderUsage();
+  syncTrustedClock().then(function(ok){
+    renderUsage();
+    const state=dailyState();
+    if(state.locked){
+      if(ok)setClockStatus('Sunucu saati doğrulandı. Cihaz saatini değiştirmek kilidi kaldırmaz.','verified');
+      else setClockStatus('Sunucu zamanı doğrulanamadı. Güvenlik nedeniyle kilit açık kalır; internet bağlantını kontrol et.','failed');
+    }
+  });
   setInterval(renderUsage,60000);
+  setInterval(function(){syncTrustedClock().then(function(){renderUsage();});},CLOCK_REFRESH_MS);
 })();

@@ -33,7 +33,7 @@ function harness(options){
   const referralSteps=[makeElement('ref-1'),makeElement('ref-2'),makeElement('ref-3')];
   const main=makeElement('main');
   const document={
-    activeElement:null,
+    activeElement:null,hidden:false,
     getElementById:get,
     querySelector:function(selector){if(selector==='.main-content')return main;return makeElement(selector);},
     querySelectorAll:function(selector){
@@ -50,14 +50,36 @@ function harness(options){
     removeItem:function(key){store.delete(key);}
   };
   const events={};
+  let fakeNow=0;
+  let timerId=0;
+  const timers=new Map();
+  function testSetInterval(fn,delay){
+    if(!options.fakeTimer)return 1;
+    const id=++timerId;
+    timers.set(id,{fn:fn,delay:delay,next:fakeNow+delay});
+    return id;
+  }
+  function testClearInterval(id){if(options.fakeTimer)timers.delete(id);}
+  function advance(ms){
+    const end=fakeNow+ms;
+    while(true){
+      let selectedId=0;let selected=null;
+      timers.forEach(function(timer,id){if(timer.next<=end&&(!selected||timer.next<selected.next)){selected=timer;selectedId=id;}});
+      if(!selected)break;
+      fakeNow=selected.next;
+      selected.fn();
+      if(timers.has(selectedId))selected.next+=selected.delay;
+    }
+    fakeNow=end;
+  }
   const context={
-    console:console,document:document,localStorage:localStorage,crypto:webcrypto,URL:URL,URLSearchParams:URLSearchParams,Intl:Intl,Date:Date,Math:Math,JSON:JSON,
+    console:console,document:document,localStorage:localStorage,crypto:webcrypto,URL:URL,URLSearchParams:URLSearchParams,Intl:Intl,Date:Date,Math:Math,JSON:JSON,performance:{now:function(){return fakeNow;}},
     location:new URL('http://127.0.0.1:8765/'),
     navigator:{clipboard:{writeText:async function(){}},share:null},
-    setTimeout:function(fn){fn();return 1;},clearTimeout:function(){},setInterval:function(){return 1;},clearInterval:function(){},
+    setTimeout:function(fn){fn();return 1;},clearTimeout:function(){},setInterval:testSetInterval,clearInterval:testClearInterval,
     addEventListener:function(type,handler){(events[type]||(events[type]=[])).push(handler);},
     matchMedia:function(){return {matches:false};},
-    fetch:async function(){return {ok:false,json:async function(){return {};}};},
+    fetch:async function(url){if(options.serverDate&&String(url).indexOf('clock-check')>=0)return {ok:true,headers:{get:function(name){return name==='Date'?options.serverDate:null;}}};return {ok:false,json:async function(){return {};}};},
     isPremium:function(){return Boolean(options.premium);},
     entryGate:get('entryGate'),enterBtn:get('enterBtn'),settingsBtn:get('settingsBtn'),settingsModal:get('settingsModal'),
     activateScreen:function(name){context.lastScreen=name;},
@@ -71,7 +93,7 @@ function harness(options){
   vm.createContext(context);
   vm.runInContext(coursesCode,context,{filename:'courses-v1.js'});
   vm.runInContext(engagementCode,context,{filename:'engagement-v1.js'});
-  return {context:context,elements:elements,store:store,filters:filters};
+  return {context:context,elements:elements,store:store,filters:filters,advance:advance};
 }
 function stateFor(values){
   return JSON.stringify(Object.assign({cycle:cycle(),questions:0,ads:0,notesSeen:[],questionGatePending:false,locked:false,lockReason:'',unlockAt:'',updatedAt:new Date().toISOString()},values||{}));
@@ -86,8 +108,26 @@ function button(){const el=makeElement('choice');return el;}
   assert.equal(daily.questions,10);
   assert.equal(daily.questionGatePending,true);
   assert.equal(first.elements.get('rewardModal').classList.contains('show'),true);
-  assert.equal(first.elements.get('rewardWatch').disabled,true);
-  assert.match(first.elements.get('rewardStatus').textContent,/sağlayıcısı/);
+  assert.equal(first.elements.get('rewardWatch').disabled,false);
+  assert.match(first.elements.get('rewardStatus').textContent,/sekiz saniye/);
+
+  const demo=harness({fakeTimer:true,storage:{'yks2027-daily-access-v1':stateFor({notesSeen:['d1','d2','d3','d4','d5']})}});
+  demo.elements.get('courseCatalog').listeners.click[0]({target:clickTarget({courseIndex:'0'})});
+  demo.elements.get('unitList').listeners.click[0]({target:clickTarget({unitIndex:'0'})});
+  const demoPromise=demo.elements.get('rewardWatch').listeners.click[0]();
+  assert.equal(demo.elements.get('rewardCountdown').hidden,false);
+  demo.context.document.hidden=true;
+  demo.advance(1000);
+  assert.equal(demo.elements.get('rewardCountdownNumber').textContent,'8');
+  assert.equal(demo.elements.get('lessonReader').hidden,true);
+  demo.context.document.hidden=false;
+  demo.advance(7900);
+  assert.equal(demo.elements.get('lessonReader').hidden,true);
+  demo.advance(100);
+  await demoPromise;
+  daily=JSON.parse(demo.store.get('yks2027-daily-access-v1'));
+  assert.equal(daily.ads,1);
+  assert.equal(demo.elements.get('lessonReader').hidden,false);
 
   first.context.YKS2027_REWARDED_AD_PROVIDER={show:async function(){return {completed:false,granted:true};}};
   await first.elements.get('rewardWatch').listeners.click[0]();
@@ -133,6 +173,26 @@ function button(){const el=makeElement('choice');return el;}
   assert.equal(notes.elements.get('rewardModal').classList.contains('show'),true);
   assert.match(notes.elements.get('rewardText').textContent,/Beş ücretsiz/);
 
+  const clockBypass=harness({storage:{'yks2027-daily-access-v1':stateFor({questions:50,locked:true,lockReason:'questions',unlockAt:new Date(Date.now()-3600000).toISOString()})}});
+  clockBypass.context.activateScreen('notes');
+  daily=JSON.parse(clockBypass.store.get('yks2027-daily-access-v1'));
+  assert.equal(daily.locked,true);
+  assert.equal(clockBypass.context.lastScreen,'premium');
+
+  const serverGuard=harness({serverDate:'Thu, 01 Jan 2026 00:00:00 GMT',storage:{'yks2027-daily-access-v1':stateFor({cycle:'2025-12-31',questions:50,locked:true,lockReason:'questions',unlockAt:'2026-01-02T05:00:00.000Z'}),'yks2027-trusted-clock-v1':JSON.stringify({lastServerEpoch:Date.parse('Thu, 01 Jan 2037 00:00:00 GMT')})}});
+  await new Promise(function(resolve){setImmediate(resolve);});
+  serverGuard.context.activateScreen('notes');
+  daily=JSON.parse(serverGuard.store.get('yks2027-daily-access-v1'));
+  assert.equal(daily.locked,true);
+  assert.equal(serverGuard.context.lastScreen,'premium');
+  assert.equal(JSON.parse(serverGuard.store.get('yks2027-trusted-clock-v1')).lastServerEpoch,Date.parse('Thu, 01 Jan 2026 00:00:00 GMT'));
+
+  assert.match(engagementCode,/const DEMO_REWARD_SECONDS=8;/);
+  assert.match(engagementCode,/if\(document\.hidden\)/);
+  assert.match(engagementCode,/response\.headers.*get\('Date'\)/s);
+  assert.match(engagementCode,/clock-check/);
+  assert.match(fs.readFileSync('sw.js','utf8'),/searchParams\.has\('clock-check'\)/);
+
   const referral=harness({storage:{
     'yks2027-daily-access-v1':stateFor({questions:50,locked:true,lockReason:'questions'}),
     'yks2027-referral-status-v1':JSON.stringify({verifiedByServer:true,verifiedFriends:1,passExpiresAt:new Date(Date.now()+86400000).toISOString()})
@@ -140,5 +200,5 @@ function button(){const el=makeElement('choice');return el;}
   referral.context.activateScreen('notes');
   assert.equal(referral.context.lastScreen,'notes');
 
-  console.log('Engagement smoke tests OK: persistent 10-question gate, strict reward, 50-question lock, 6-ad lock, 5-note gate, verified referral pass.');
+  console.log('Engagement smoke tests OK: 8-second demo reward, persistent gates, server-clock lock, 50-question/6-ad quotas and verified referral pass.');
 })().catch(function(error){console.error(error);process.exitCode=1;});
