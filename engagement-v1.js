@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-08';
+  const BUILD_ID='20260824-09';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
@@ -12,7 +12,7 @@
   const QUESTION_LIMIT=50;
   const QUESTION_GATE=10;
   const REWARDED_AD_LIMIT=6;
-  const FREE_NOTE_LIMIT=5;
+  const FREE_NOTE_LIMIT=0;
   const HOUR=3600000;
   let questionBankPromise=null;
   let pendingReward=null;
@@ -102,7 +102,7 @@
     return Boolean(status.passExpiresAt&&new Date(status.passExpiresAt).getTime()>accessNow());
   }
   function hasUnlimitedAccess(){
-    return isPremium()||hasUnlimitedFreePass();
+    const reward=parseStored('yks2027-achievement-v1',{}),until=Date.parse(reward.adFreeUntil||'');return isPremium()||hasUnlimitedFreePass()||(trustedClockVerified&&Number.isFinite(until)&&until>accessNow());
   }
   function lockReasonText(reason){
     if(reason==='questions')return 'Bugünkü 50 soruluk ücretsiz kullanım hakkın tamamlandı.';
@@ -196,7 +196,7 @@
     ['freeQuestionCount','arenaQuestionUsage'].forEach(function(id){const el=document.getElementById(id);if(el)el.textContent=qText;});
     ['freeAdCount','arenaAdUsage'].forEach(function(id){const el=document.getElementById(id);if(el)el.textContent=adText;});
     const notes=document.getElementById('notesUsage');
-    if(notes)notes.textContent=unlimited?'Sınırsız not':'Bugün '+state.notesSeen.length+' akıllı not açıldı';
+    if(notes)notes.textContent=unlimited?'Sınırsız ders özeti':'Bugün '+state.notesSeen.length+' ders özeti açıldı';
     const banner=document.getElementById('dailyLockBanner');
     if(banner&&!isDailyLocked())banner.hidden=true;
     renderReferralStatus();
@@ -244,7 +244,7 @@
       let remaining=total;
       let last=monotonicNow();
       if(panel)panel.hidden=false;
-      if(cancel)cancel.disabled=true;
+      if(cancel)cancel.disabled=false;
       if(premium)premium.disabled=true;
       watch.disabled=true;
       watch.textContent='REKLAM DEVAM EDİYOR';
@@ -343,7 +343,7 @@
   function mapQuestionBank(payload){
     if(!payload||!Array.isArray(payload.questions))return QUESTIONS.slice();
     return payload.questions.map(function(item){
-      return {exam:item.exam,subject:item.subject,q:item.question,o:item.options,a:item.correctIndex,explanation:item.explanation||''};
+      return {id:item.id,exam:item.exam,subject:item.subject,topic:item.topic||'',difficulty:item.difficulty||'Orta',q:item.question,o:item.options,a:item.correctIndex,explanation:item.explanation||''};
     });
   }
   function loadQuestionBank(){
@@ -416,6 +416,7 @@
     const correct=quiz.answers.filter(function(item){return item.choice===item.q.a;}).length;
     pendingQuizResult={total:quiz.answers.length,correct:correct,wrong:quiz.answers.length-correct,rawPoints:correct*10};
     document.getElementById('quizBox').innerHTML='<div class="info-card"><h3>Deneme tamamlandı</h3><p>Sonucun hazır. Devam seçimini ekrandaki kutudan yap.</p></div>';
+    window.dispatchEvent(new CustomEvent('yksarena:quiz-finished',{detail:{answers:quiz.answers}}));
     if(isPremium())showSimpleQuizResult();
     else document.getElementById('resultUpsellModal').classList.add('show');
     renderUsage();
@@ -466,8 +467,7 @@
       renderReader();
       document.querySelector('.main-content').scrollTop=0;
     };
-    if(!hasUnlimitedAccess()&&isNew&&state.notesSeen.length>=FREE_NOTE_LIMIT)requestReward('note-five',open);
-    else open();
+    open();
   }
   function richLibrary(){return window.YKS2027_COURSE_DETAILS||{details:{},sources:{},checklists:{}};}
   function examLibrary(){return window.YKS2027_EXAM_GUIDE||{profiles:{},sources:[],difficultyOrder:[]};}
@@ -718,4 +718,5 @@
   });
   setInterval(renderUsage,60000);
   setInterval(function(){syncTrustedClock().then(function(){renderUsage();});},CLOCK_REFRESH_MS);
+  window.YKS2027_ENGAGEMENT=Object.freeze({trustedNow:accessNow,clockVerified:function(){return trustedClockVerified;},hasUnlimitedAccess:hasUnlimitedAccess,buildId:BUILD_ID});
 })();

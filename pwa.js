@@ -36,7 +36,7 @@
 
   if('serviceWorker' in navigator && location.protocol!=='file:'){
     window.addEventListener('load',()=>{
-      navigator.serviceWorker.register('./service-worker.js?v=14',{scope:'./'})
+      navigator.serviceWorker.register('./service-worker.js?v=20260824-09',{scope:'./',updateViaCache:'none'})
         .then(reg=>{
           reg.update().catch(()=>{});
           if(reg.waiting)reg.waiting.postMessage('SKIP_WAITING');

@@ -1,70 +1,13 @@
-const CACHE_NAME='yks-2027-arena-final-v15';
+const BUILD_ID='20260824-09';
+const CACHE_NAME='yks-2027-arena-core-v1-build-'+BUILD_ID;
 const APP_SHELL=[
-  './',
-  './index.html',
-  './styles.css?v=14',
-  './yks-v09-zeus.css?v=14',
-  './pwa-shell-v12.css?v=14',
-  './final-pwa-v14.css?v=14',
-  './zeus-assets-v14.js?v=14',
-  './data.js?v=14',
-  './app.js?v=14',
-  './privacy-fix.js?v=14',
-  './pwa.js?v=14',
-  './manifest.webmanifest?v=14',
-  './assets/icon.svg',
-  './assets/zeus-cover-inline.webp?v=14',
-  './assets/zeus-watermark-inline.webp?v=14',
-  './assets/zeus-real-v09.webp?v=14',
-  './assets/zeus-watermark-v09.webp?v=14'
+  './','./index.html','./manifest.webmanifest',
+  './styles.css','./reports-v1.css','./engagement-v1.css','./exam-guide-v1.css','./review-prompt-v1.css','./arena-ai-teacher-v1.css','./yks-learning-tools-v1.css',
+  './arena-core-v1.js','./arena-core.config.js','./arena-ai-teacher-standard-v1.js','./arena-plans-v1.js','./app.js','./courses-v1.js','./course-details-v1.js','./exam-guide-v1.js','./exam-questions-core-v1.js','./exam-questions-social-v1.js','./store-config-v1.js','./engagement-v1.js','./yks-learning-tools-v1.js','./review-prompt-v2.js','./pwa.js',
+  './data/verified/mixed_core_v15_50.json','./data/placements-2025.json',
+  './assets/visual-v1/entry-mobile-v1.webp','./assets/visual-v1/home-hero-v1.webp','./assets/visual-v1/section-hero-v1.webp','./assets/visual-v1/zeus-watermark-v1.webp','./assets/visual-v1/icon-192-v1.png','./assets/visual-v1/icon-512-v1.png','./assets/visual-v1/icon-maskable-512-v1.png'
 ];
-
-self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
-});
-
-self.addEventListener('activate',event=>{
-  event.waitUntil(
-    caches.keys()
-      .then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k))))
-      .then(()=>self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch',event=>{
-  const req=event.request;
-  if(req.method!=='GET')return;
-
-  if(req.mode==='navigate'){
-    event.respondWith(
-      fetch(req,{cache:'no-store'}).then(res=>{
-        const copy=res.clone();
-        caches.open(CACHE_NAME).then(cache=>cache.put('./index.html',copy));
-        return res;
-      }).catch(()=>caches.match('./index.html'))
-    );
-    return;
-  }
-
-  const url=new URL(req.url);
-  const isCore=/\.(?:js|css|webmanifest)$/i.test(url.pathname);
-  const isZeusPayload=/zeus-(?:cover|watermark)-inline\.webp$/i.test(url.pathname);
-  if(isCore||isZeusPayload){
-    event.respondWith(
-      fetch(req,{cache:'no-store'}).then(res=>{
-        if(res&&res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));}
-        return res;
-      }).catch(()=>caches.match(req))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(req).then(cached=>cached||fetch(req).then(res=>{
-      if(res&&res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));}
-      return res;
-    }))
-  );
-});
-
-self.addEventListener('message',event=>{if(event.data==='SKIP_WAITING')self.skipWaiting();});
+self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE_NAME);for(const url of APP_SHELL){const response=await fetch(new Request(url,{cache:'reload'}));if(!response||!response.ok)throw new Error('App shell load failed: '+url);await cache.put(url,response.clone())}await self.skipWaiting()})())});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(client=>client.postMessage({type:'ARENA_SW_READY',version:'ARENA-CORE-V1',buildId:BUILD_ID}))})())});
+self.addEventListener('fetch',event=>{const request=event.request;if(request.method!=='GET')return;const url=new URL(request.url);if(url.origin!==self.location.origin)return;event.respondWith((async()=>{try{const response=await fetch(request,{cache:'no-store'});if(response&&response.ok){const cache=await caches.open(CACHE_NAME);await cache.put(request,response.clone())}return response}catch{const cached=await caches.match(request,{ignoreSearch:true});if(cached)return cached;if(request.mode==='navigate')return(await caches.match('./index.html'))||(await caches.match('./'))||Response.error();return Response.error()}})())});
+self.addEventListener('message',event=>{if(event.data==='SKIP_WAITING'||event.data?.type==='SKIP_WAITING')self.skipWaiting()});
