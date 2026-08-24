@@ -10,7 +10,7 @@ vm.runInContext(fs.readFileSync('course-details-v1.js','utf8'),context,{filename
 const courses=context.window.YKS2027_COURSES.courses;
 const library=context.window.YKS2027_COURSE_DETAILS;
 const units=courses.flatMap((course)=>course.units.map((unit)=>({course:course.title,unit})));
-assert.equal(library.buildId,'20260824-05');
+assert.equal(library.buildId,'20260824-06');
 assert.equal(units.length,44,'Beklenen 44 ders ünitesi bulunmalı.');
 assert.equal(Object.keys(library.details).length,44,'Her ünite için tek bir ayrıntılı içerik bulunmalı.');
 
@@ -29,13 +29,16 @@ assert.ok(library.sources.Matematik.length>=2);
 assert.ok(library.sources.Fizik.length>=2);
 const engagement=fs.readFileSync('engagement-v1.js','utf8');
 assert.match(engagement,/function lessonPages\(/);
-assert.match(engagement,/4 sayfa • konu anlatımı • şema • çözümlü örnek/);
+assert.match(engagement,/sınav rehberi/);
+assert.match(engagement,/5 • SORU TİPLERİ VE ÇELDİRİCİLER/);
 assert.match(engagement,/readerState\.page\+=1/);
 const index=fs.readFileSync('index.html','utf8');
 assert.ok(index.indexOf('courses-v1.js')<index.indexOf('course-details-v1.js'));
-assert.ok(index.indexOf('course-details-v1.js')<index.indexOf('engagement-v1.js'));
+assert.ok(index.indexOf('course-details-v1.js')<index.indexOf('exam-guide-v1.js'));
+assert.ok(index.indexOf('exam-guide-v1.js')<index.indexOf('exam-questions-core-v1.js'));
+assert.ok(index.indexOf('exam-questions-social-v1.js')<index.indexOf('engagement-v1.js'));
 const app=fs.readFileSync('app.js','utf8');
 assert.match(app,/if\(!isPremium\(\)\|\|!programPrefs\.wantsRest/);
 assert.match(index,/id="programPersonalizeLock"[^>]+data-premium-route="program-customize"/);
 
-console.log('Course details smoke tests OK: 44 rich units, 4-page reader, verified sources and Premium program lock.');
+console.log('Course details smoke tests OK: 44 rich units, exam-guide reader, verified sources and Premium program lock.');

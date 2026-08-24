@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-05';
+  const BUILD_ID='20260824-06';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
@@ -446,7 +446,8 @@
     document.getElementById('courseDetailTitle').textContent=course.title;
     document.getElementById('courseDetailMeta').textContent=course.exam+' • 12. sınıf YKS çalışma özetleri';
     document.getElementById('unitList').innerHTML=course.units.map(function(item,index){
-      return '<button class="unit-card" data-unit-index="'+index+'" type="button"><strong>'+(index+1)+'. '+escapeHtml(item.title)+'</strong><small>4 sayfa • konu anlatımı • şema • çözümlü örnek</small></button>';
+      const questionCount=examQuestions(course,item).length;const pageCount=5+(questionCount?1:0);
+      return '<button class="unit-card" data-unit-index="'+index+'" type="button"><strong>'+(index+1)+'. '+escapeHtml(item.title)+'</strong><small>'+pageCount+' sayfa • sınav rehberi • '+(questionCount?'5 seviyeli soru paketi':'soru tipleri ve çeldiriciler')+'</small></button>';
     }).join('');
     document.querySelector('.main-content').scrollTop=0;
   }
@@ -469,6 +470,32 @@
     else open();
   }
   function richLibrary(){return window.YKS2027_COURSE_DETAILS||{details:{},sources:{},checklists:{}};}
+  function examLibrary(){return window.YKS2027_EXAM_GUIDE||{profiles:{},sources:[],difficultyOrder:[]};}
+  function examProfile(course,current){return examLibrary().profiles[course.title+'|'+current.title]||null;}
+  function examQuestions(course,current){
+    const sets=window.YKS2027_EXAM_QUESTION_SETS||examLibrary().questions||{};
+    return sets[course.title+'|'+current.title]||[];
+  }
+  function examList(items,className){
+    return '<ul class="'+className+'">'+(items||[]).map(function(item){return '<li>'+escapeHtml(item)+'</li>';}).join('')+'</ul>';
+  }
+  function renderExamGuide(profile){
+    if(!profile)return '<div class="verification-note">Bu ünitenin soru biçimi rehberi hazırlanıyor.</div>';
+    return '<div class="exam-guide-intro"><strong>Soru kökünü tanı, çeldiriciyi yakala</strong><p>Bu rehber resmî materyallerde tekrarlanan ölçme biçimlerinden hareketle hazırlanmıştır; bir çıkmış soru sıklık istatistiği değildir.</p></div>'+
+      '<div class="exam-guide-grid"><section><h4>Sık karşılaşılan soru biçimleri</h4>'+examList(profile.questionTypes,'exam-type-list')+'</section><section class="distractor-panel"><h4>Çeldiriciler</h4>'+examList(profile.distractors,'exam-distractor-list')+'</section></div>'+
+      '<section class="attention-panel"><h4>Nelere dikkat etmelisin?</h4>'+examList(profile.cautions,'exam-attention-list')+'</section>'+
+      '<section class="exam-use-panel"><span class="eyebrow">SINAV SORULARINDA NASIL KULLANILIR?</span><p>'+escapeHtml(profile.examUse)+'</p></section>';
+  }
+  function renderExamQuestion(question,index){
+    const letters=['A','B','C','D','E'];
+    const classes={'Kolay':'kolay','Orta':'orta','Orta Üst':'orta-ust','Zor':'zor','Efsane':'efsane'};
+    const optionRows=question.options.map(function(option,optionIndex){return '<li><b>'+letters[optionIndex]+'</b><span>'+escapeHtml(option)+'</span></li>';}).join('');
+    const distractors=(question.distractorNotes||[]).map(function(note){return '<li>'+escapeHtml(note)+'</li>';}).join('');
+    return '<details class="exam-question-card"><summary><span class="difficulty-badge '+(classes[question.difficulty]||'orta')+'">'+escapeHtml(question.difficulty)+'</span><strong>Soru '+(index+1)+'</strong><small>'+escapeHtml(question.id)+'</small></summary><div class="exam-question-body"><p class="exam-stem">'+escapeHtml(question.stem)+'</p><ol class="exam-options">'+optionRows+'</ol><details class="answer-reveal"><summary>Cevap ve çeldirici analizini göster</summary><div><p class="correct-answer"><b>Doğru cevap: '+letters[question.answer]+'</b> — '+escapeHtml(question.options[question.answer])+'</p><p>'+escapeHtml(question.explanation)+'</p><h5>Çeldirici analizi</h5><ul>'+distractors+'</ul><p class="attention-callout"><strong>Dikkat:</strong> '+escapeHtml(question.attention)+'</p><small>'+escapeHtml(question.sourceBasis)+'</small></div></details></div></details>';
+  }
+  function renderQuestionLab(questionSet){
+    return '<div class="question-lab-head"><strong>Beş basamaklı çalışma</strong><p>Kolaydan efsaneye ilerle; her soruda cevabı açmadan önce çeldiriciyi neden eleyeceğini söyle.</p></div><div class="question-lab">'+questionSet.map(renderExamQuestion).join('')+'</div>';
+  }
   function richDetail(course,current){
     const found=richLibrary().details[course.title+'|'+current.title];
     return found||{
@@ -514,12 +541,17 @@
     const detail=richDetail(course,current);
     const checklist=richLibrary().checklists[course.title]||['Ana kavramı belirledim.','Örneği adım adım çözdüm.','Sonucu temel ilkeyle kontrol ettim.'];
     const sources=richSources(course);
-    return [
+    const profile=examProfile(course,current);
+    const questionSet=examQuestions(course,current);
+    const pages=[
       '<section class="lesson-section"><span class="eyebrow">1 • KONU ANLATIMI</span><h4>Konunun çerçevesi</h4><p>'+escapeHtml(current.summary)+'</p><h4>Derinlemesine öğren</h4><p>'+escapeHtml(detail.explanation)+'</p><div class="verification-note">Bu anlatım MEB ünite kapsamı temel alınarak özgün yazıldı; aşağıdaki kaynaklarla kavramsal olarak doğrulandı.</div></section>',
       '<section class="lesson-section"><span class="eyebrow">2 • KAVRAMLAR VE ŞEMA</span>'+renderLessonVisual(detail.visual)+'<h4>Temel kavramlar</h4><div class="concept-grid">'+detail.concepts.map(conceptCard).join('')+'</div></section>',
       '<section class="lesson-section"><span class="eyebrow">3 • ÇÖZÜMLÜ ÖRNEK</span><div class="worked-example"><strong>Soru / Uygulama</strong><p>'+escapeHtml(detail.example)+'</p></div><h4>Adım adım çözüm</h4><ol class="solution-steps">'+detail.solution.map(function(step){return '<li>'+escapeHtml(step)+'</li>';}).join('')+'</ol></section>',
-      '<section class="lesson-section"><span class="eyebrow">4 • AKILLI NOT VE KAYNAK</span><div class="smart-note"><span class="eyebrow">AKILLI NOT</span><p>'+escapeHtml(current.note)+'</p></div><div class="mistake-box"><strong>Sık yapılan hata</strong><p>'+escapeHtml(detail.mistake)+'</p></div><h4>Ünite kontrol listesi</h4><ul class="lesson-checklist">'+checklist.map(function(item){return '<li>'+escapeHtml(item)+'</li>';}).join('')+'</ul><h4>Doğrulama kaynakları</h4><ul class="lesson-source-list">'+sources.map(function(source){return '<li><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(source.label)+'</a><small>'+escapeHtml(source.note)+'</small></li>';}).join('')+'</ul><small class="source-method-note">Kaynaklar doğrulama amacıyla kullanılmıştır; metinler ve uygulama içi şemalar YKS2027 Arena için özgün hazırlanmıştır.</small></section>'
+      '<section class="lesson-section"><span class="eyebrow">4 • AKILLI NOT VE KAYNAK</span><div class="smart-note"><span class="eyebrow">AKILLI NOT</span><p>'+escapeHtml(current.note)+'</p></div><div class="mistake-box"><strong>Sık yapılan hata</strong><p>'+escapeHtml(detail.mistake)+'</p></div><h4>Ünite kontrol listesi</h4><ul class="lesson-checklist">'+checklist.map(function(item){return '<li>'+escapeHtml(item)+'</li>';}).join('')+'</ul><h4>Doğrulama kaynakları</h4><ul class="lesson-source-list">'+sources.map(function(source){return '<li><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(source.label)+'</a><small>'+escapeHtml(source.note)+'</small></li>';}).join('')+'</ul><small class="source-method-note">Kaynaklar doğrulama amacıyla kullanılmıştır; metinler ve uygulama içi şemalar YKS2027 Arena için özgün hazırlanmıştır.</small></section>',
+      '<section class="lesson-section exam-guide-page"><span class="eyebrow">5 • SORU TİPLERİ VE ÇELDİRİCİLER</span>'+renderExamGuide(profile)+'</section>'
     ];
+    if(questionSet.length)pages.push('<section class="lesson-section exam-lab-page"><span class="eyebrow">6 • SEVİYELİ SORU LABORATUVARI</span>'+renderQuestionLab(questionSet)+'</section>');
+    return pages;
   }
   function renderReader(){
     const course=courseData().courses[readerState.courseIndex];
