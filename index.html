@@ -6,13 +6,14 @@
   <meta name="theme-color" content="#07121b">
   <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=20260824-06">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260824-07">
   <link rel="icon" href="./assets/visual-v1/icon-192-v1.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/visual-v1/icon-192-v1.png">
-  <link rel="stylesheet" href="./styles.css?v=20260824-06">
-  <link rel="stylesheet" href="./reports-v1.css?v=20260824-06">
-  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-06">
-  <link rel="stylesheet" href="./exam-guide-v1.css?v=20260824-06">
+  <link rel="stylesheet" href="./styles.css?v=20260824-07">
+  <link rel="stylesheet" href="./reports-v1.css?v=20260824-07">
+  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-07">
+  <link rel="stylesheet" href="./exam-guide-v1.css?v=20260824-07">
+  <link rel="stylesheet" href="./review-prompt-v1.css?v=20260824-07">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
@@ -22,7 +23,7 @@
       <img class="entry-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
       <div class="entry-brand">YKS2027 ARENA</div>
       <div class="entry-sub">ZEUS EDITION</div>
-      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-06</div>
+      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-07</div>
       <p>TYT ve AYT hazırlığını Zeus Koçluğu, Dersler ve Sınav Arenası ile yönet.</p>
       <div class="entry-actions">
         <button id="enterBtn" class="primary-btn entry-button" type="button">ARENA'YA GİR</button>
@@ -38,7 +39,7 @@
         <img class="brand-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
         <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
       </div>
-      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-06</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
+      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-07</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
     </header>
 
     <main class="main-content">
@@ -215,14 +216,17 @@
   <div id="resultUpsellModal" class="settings-modal"><div class="settings-sheet premium-question-sheet"><span class="premium-crown">♛</span><div class="settings-head"><div><span>DENEME SONUCUN HAZIR</span><h2>Kazanabileceğin üniversite ve bölümleri de görmek ister misin?</h2></div></div><p>OBP katkını ve 2025 resmî taban puanlarına göre bölüm karşılaştırmanı görmek için Premium üyeliğe geçebilirsin.</p><div class="choice-row"><button id="resultPremiumYes" class="primary-btn" type="button">EVET, PREMIUM'U GÖR</button><button id="resultPremiumNo" class="secondary-btn" type="button">HAYIR, PUANIMI GÖSTER</button></div><small>Karşılaştırma tahminidir; kesin yerleşme garantisi vermez.</small></div></div>
   <div id="rewardModal" class="settings-modal"><div class="settings-sheet reward-sheet"><div class="reward-symbol">▶</div><span class="eyebrow">ÖDÜLLÜ REKLAM KAPISI</span><h2>Devam etmek için reklamı tamamla</h2><p id="rewardText"></p><p id="rewardQuota" class="quota-warning"></p><p id="rewardStatus" class="reward-status" aria-live="polite"></p><div id="rewardCountdown" class="reward-countdown" hidden><span>GEÇİCİ REKLAM</span><strong id="rewardCountdownNumber">8</strong><small>saniye</small><i><b id="rewardCountdownBar"></b></i><p>Sayaç yalnız uygulama ekranda açıkken ilerler.</p></div><div class="reward-actions"><button id="rewardWatch" class="primary-btn" type="button">ÖDÜLLÜ REKLAMI İZLE</button><button id="rewardPremium" class="secondary-btn" type="button">PREMIUM'A GEÇ</button><button id="rewardCancel" class="ghost-btn" type="button">ŞİMDİ DEĞİL</button></div></div></div>
   <div id="lessonChoiceModal" class="settings-modal"><div class="settings-sheet lesson-choice-sheet"><span class="premium-crown">♛</span><span class="eyebrow">SONRAKİ SAYFA</span><h2>Nasıl devam etmek istersin?</h2><p id="lessonChoiceText">Ödüllü reklamı tamamen izle veya Premium üyeliğe geç.</p><div class="reward-actions"><button id="lessonAdChoice" class="primary-btn" type="button">ÖDÜLLÜ REKLAM</button><button id="lessonPremiumChoice" class="secondary-btn" type="button">PREMIUM ÜYELİK</button><button id="lessonChoiceCancel" class="ghost-btn" type="button">VAZGEÇ</button></div></div></div>
+  <div id="reviewPromptModal" class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="reviewPromptTitle"><div class="settings-sheet review-prompt-sheet"><div class="review-prompt-mark" aria-hidden="true">✦</div><span class="eyebrow">GÖRÜŞÜNÜZ BİZİM İÇİN DEĞERLİ</span><h2 id="reviewPromptTitle">YKS2027 Arena deneyiminizi Google Play’de değerlendirebilirsiniz.</h2><p>Paylaşacağınız dürüst görüş, uygulamayı öğrenciler için daha yararlı ve güvenilir hâle getirmemize yardımcı olur.</p><div class="review-prompt-actions"><button id="reviewOpenPlay" class="primary-btn" type="button">GOOGLE PLAY’DE DEĞERLENDİR</button><button id="reviewAskLater" class="secondary-btn" type="button">DAHA SONRA</button><button id="reviewNeverAsk" class="ghost-btn" type="button">BİR DAHA GÖSTERME</button></div><small class="review-policy-note">Değerlendirme tamamen isteğe bağlıdır; uygulamadaki erişim haklarınızı ve kullanım koşullarınızı değiştirmez.</small></div></div>
   <div id="dailyLockModal" class="settings-modal"><div class="settings-sheet lock-sheet"><div class="reward-symbol">🔒</div><span class="eyebrow">GÜNLÜK KOTA</span><h2>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</h2><p id="dailyLockText"></p><p id="dailyLockUntil" class="lock-until"></p><p id="dailyLockClockStatus" class="clock-verification checking" aria-live="polite">Kilit süresi sunucu saatinden doğrulanıyor…</p><button id="dailyLockPremium" class="primary-btn wide-btn" data-lock-allowed type="button">PREMIUM ÜYELİĞE GEÇ</button></div></div>
-  <script src="./app.js?v=20260824-06"></script>
-  <script src="./courses-v1.js?v=20260824-06"></script>
-  <script src="./course-details-v1.js?v=20260824-06"></script>
-  <script src="./exam-guide-v1.js?v=20260824-06"></script>
-  <script src="./exam-questions-core-v1.js?v=20260824-06"></script>
-  <script src="./exam-questions-social-v1.js?v=20260824-06"></script>
-  <script src="./engagement-v1.js?v=20260824-06"></script>
+  <script src="./app.js?v=20260824-07"></script>
+  <script src="./courses-v1.js?v=20260824-07"></script>
+  <script src="./course-details-v1.js?v=20260824-07"></script>
+  <script src="./exam-guide-v1.js?v=20260824-07"></script>
+  <script src="./exam-questions-core-v1.js?v=20260824-07"></script>
+  <script src="./exam-questions-social-v1.js?v=20260824-07"></script>
+  <script src="./store-config-v1.js?v=20260824-07"></script>
+  <script src="./engagement-v1.js?v=20260824-07"></script>
+  <script src="./review-prompt-v1.js?v=20260824-07"></script>
 </body>
 </html>
 

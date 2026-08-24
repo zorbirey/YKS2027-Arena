@@ -12,7 +12,7 @@ const courses=context.window.YKS2027_COURSES.courses;
 const guide=context.window.YKS2027_EXAM_GUIDE;
 const sets=context.window.YKS2027_EXAM_QUESTION_SETS;
 const units=courses.flatMap((course)=>course.units.map((unit)=>course.title+'|'+unit.title));
-assert.equal(guide.buildId,'20260824-06');
+assert.equal(guide.buildId,'20260824-07');
 assert.equal(units.length,44);
 assert.equal(Object.keys(guide.profiles).length,44,'Her ünite için sınav rehberi bulunmalı.');
 for(const key of units){

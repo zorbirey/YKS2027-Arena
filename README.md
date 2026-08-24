@@ -3,7 +3,7 @@
 Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık PWA'sı.
 
 - Canlı PWA: https://zorbirey.github.io/YKS2027-Arena/
-- Güncel PWA ID: 20260824-06
+- Güncel PWA ID: 20260824-07
 - Ücretsiz: en fazla 50 soruluk günlük çalışma hedefi, doğrulanmış soru havuzu, 44 üniteli ayrıntılı Dersler kataloğu, ham deneme sonucu ve temel ilerleme raporu
 - Premium: program kişiselleştirme ve boş gün dağıtımı, sınırsız/reklamsız kullanım, deneme ve yazılı senaryoları, tahmini OBP, 2025 taban puanlarıyla üniversite/bölüm karşılaştırması ve Veli Takip Paneli
 
@@ -18,6 +18,14 @@ Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık
 
 Kota verileri cihazda tutulur. Üretimde cihazlar arası ve kötüye kullanıma dayanıklı kota için kullanıcı hesabı/sunucu kaydı gerekir.
 Günlük kilit açılışı GitHub Pages yanıtındaki sunucu saatiyle doğrulanır ve çalışma oturumunda tekdüze sayaçla ilerletilir; cihaz saatini ileri veya geri almak kilidi açmaz. Sunucu zamanı doğrulanamazsa güvenlik nedeniyle kilit açık kalır. Yalnız istemci tarafındaki PWA'da uygulama verilerini tamamen silme veya farklı cihaz kullanma saldırısını kesin olarak engellemek mümkün değildir; bunun için kullanıcı hesabına bağlı sunucu tarafı kota kaydı gerekir.
+
+## Google Play değerlendirme akışı
+
+- İstek, kullanıcı uygulamaya girdikten sonra toplam 15 görünür dakika ve en az 3 anlamlı çalışma işlemi tamamlandığında değerlendirilir.
+- Metin tarafsızdır; belirli bir yıldız sayısı istenmez, değerlendirme karşılığında reklam veya erişim avantajı verilmez.
+- “Daha sonra” seçimi 60 gün, mağaza sayfasını açma 365 gün yeniden gösterimi erteler; kullanıcı isterse kalıcı olarak kapatabilir.
+- Akış yalnız `store-config-v1.js` içindeki doğrulanmış Google Play ürün adresi tanımlandığında görünür. Depoda veya herkese açık Google Play aramasında YKS2027 Arena paket kimliği bulunmadığı için sahte adres kullanılmamıştır.
+- Politika kaynakları: https://support.google.com/googleplay/android-developer/answer/9898684 ve https://developer.android.com/guide/playcore/in-app-review
 
 ## Doğrulama gerektiren entegrasyonlar
 

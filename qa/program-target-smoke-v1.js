@@ -21,5 +21,5 @@ assert.equal(context.normalizeQuestionTarget('',true),100);
 const html=fs.readFileSync('index.html','utf8');
 assert.match(html,/id="questionTarget"[^>]+max="50"/);
 assert.match(html,/id="settingsQuestionTarget"[^>]+max="50"/);
-assert.match(html,/PWA ID: 20260824-06/);
+assert.match(html,/PWA ID: 20260824-07/);
 console.log('Program target smoke tests OK: free max 50, premium unlimited, old/invalid free target defaults to 50.');
