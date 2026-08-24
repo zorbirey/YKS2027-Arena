@@ -3,7 +3,8 @@
 Zeus Edition görsel çekirdeğine sahip, Android 10–16 hedefli YKS hazırlık PWA'sı.
 
 - Canlı PWA: https://zorbirey.github.io/YKS2027-Arena/
-- Güncel PWA ID: 20260824-07
+- Güncel PWA ID: 20260824-08
+- Ortak AI öğretmen karar işareti: `ARENA-AI-TEACHER-V1`
 - Ücretsiz: en fazla 50 soruluk günlük çalışma hedefi, doğrulanmış soru havuzu, 44 üniteli ayrıntılı Dersler kataloğu, ham deneme sonucu ve temel ilerleme raporu
 - Premium: program kişiselleştirme ve boş gün dağıtımı, sınırsız/reklamsız kullanım, deneme ve yazılı senaryoları, tahmini OBP, 2025 taban puanlarıyla üniversite/bölüm karşılaştırması ve Veli Takip Paneli
 
@@ -43,3 +44,9 @@ Arkadaş davet hakkı yalnız verifiedByServer: true olan üyelik sunucusu yanı
 OBP hesaplaması 2026 ÖSYM kuralını referans alır; 2027 kılavuzu yayımlandığında yeniden doğrulanmalıdır. Yerleştirme karşılaştırması ÖSYM'nin 2025 genel kontenjan en küçük puan tablolarından üretilmiştir ve yerleşme garantisi değildir.
 
 Premium arayüz ve erişim sınırı hazırdır. Gerçek üyelik doğrulaması ve ödeme için güvenli bir kimlik/ödeme sağlayıcısı bağlanmalıdır; yalnız istemci tarafındaki bir PWA ödeme güvenliği sağlamaz.
+
+## Arena AI Öğretmen ortak standardı
+
+`ARENA-AI-TEACHER-V1`, tüm Arena projelerinde kullanılacak ürün ve entegrasyon sözleşmesidir. Görsel soru çözümü harici Photomath akışı olarak ayrı tutulur; Arena AI Öğretmen yalnızca doğrulanmış ders içeriklerine dayalı metin öğretmenidir. Ücretsiz pakette toplam 3, Premium'da ayda 5 tanıtım sorusu; Pro'da başlangıçta günde 10 ve ayda 200 soru planlanır. API anahtarı istemciye konmaz, üyelik ve kota sunucuda doğrulanır, doğrudan kişisel bilgiler modele gönderilmez. Gerçek sunucu ve sağlayıcı bağlı olmadığı sürece arayüz özelliği canlıymış gibi göstermez.
+
+Paylaşılan Codex standardı: `standards/arena-ai-teacher-standard/SKILL.md`. Diğer Arena projelerinde `$arena-ai-teacher-standard` veya `ARENA-AI-TEACHER-V1 ile uygula` denebilir.

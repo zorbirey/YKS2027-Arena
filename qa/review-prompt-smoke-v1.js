@@ -48,7 +48,7 @@ assert.match(html,/YKS2027 Arena deneyiminizi Google Play’de değerlendirebili
 assert.match(html,/dürüst görüş/);
 assert.doesNotMatch(html,/5 yıldız[^<]{0,80}reklamsız/i);
 
-assert.match(code,/const BUILD_ID='20260824-07'/);
+assert.match(code,/const BUILD_ID='20260824-08'/);
 assert.match(code,/if\(!sessionEntered\|\|document\.hidden\)return/);
 assert.match(code,/anotherModalOpen/);
 const sw=fs.readFileSync('sw.js','utf8');

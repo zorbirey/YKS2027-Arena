@@ -1,0 +1,73 @@
+.ai-teacher-entry {
+  position: relative;
+  border-color: rgba(87, 177, 255, .52);
+  background: linear-gradient(145deg, rgba(9, 28, 44, .96), rgba(6, 14, 24, .98));
+}
+.ai-teacher-entry::after {
+  content: "PRO";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 9px;
+  border: 1px solid rgba(103, 189, 255, .6);
+  border-radius: 999px;
+  color: #9fd7ff;
+  font-size: .66rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.ai-teacher-preview,
+.pro-offer-card {
+  border-color: rgba(92, 181, 255, .44);
+  background: linear-gradient(155deg, rgba(8, 30, 49, .97), rgba(5, 15, 27, .98));
+}
+.ai-standard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ai-standard-marker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid rgba(94, 187, 255, .55);
+  border-radius: 999px;
+  color: #a7dcff;
+  background: rgba(7, 25, 41, .8);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+.ai-teacher-preview h3,
+.pro-offer-card h3 { margin-top: 6px; }
+.ai-teacher-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+.ai-teacher-points div {
+  padding: 12px 9px;
+  border: 1px solid rgba(128, 190, 231, .24);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .035);
+}
+.ai-teacher-points strong,
+.ai-teacher-points small { display: block; }
+.ai-teacher-points strong { color: #fff; font-size: .9rem; }
+.ai-teacher-points small { margin-top: 5px; color: #adc0cf; font-size: .72rem; line-height: 1.35; }
+.ai-not-live {
+  display: block;
+  margin-top: 12px;
+  color: #9fb2c2;
+  line-height: 1.45;
+}
+@media (max-width: 620px) {
+  .ai-standard-head { align-items: flex-start; flex-direction: column; }
+  .ai-teacher-points { grid-template-columns: 1fr; }
+  .ai-standard-marker { white-space: normal; }
+}

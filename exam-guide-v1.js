@@ -257,6 +257,6 @@
   /* QUESTION_PACKS */
 
   window.YKS2027_EXAM_GUIDE={
-    buildId:'20260824-07',difficultyOrder:difficultyOrder,sources:sources,profiles:profiles,questions:questions
+    buildId:'20260824-08',difficultyOrder:difficultyOrder,sources:sources,profiles:profiles,questions:questions
   };
 })();

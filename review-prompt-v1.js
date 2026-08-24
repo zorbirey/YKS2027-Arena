@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD_ID='20260824-07';
+  const BUILD_ID='20260824-08';
   const STATE_KEY='yks2027-review-prompt-v1';
   const ACTIVE_TIME_REQUIRED_MS=15*60*1000;
   const MEANINGFUL_ACTIONS_REQUIRED=3;
