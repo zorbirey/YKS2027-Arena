@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07121b">
+  <meta name="pwa-build-id" content="20260824-09">
   <meta name="mobile-web-app-capable" content="yes">
   <title>YKS2027 Arena</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=20260824-08">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260824-09">
   <link rel="icon" href="./assets/visual-v1/icon-192-v1.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/visual-v1/icon-192-v1.png">
-  <link rel="stylesheet" href="./styles.css?v=20260824-08">
-  <link rel="stylesheet" href="./reports-v1.css?v=20260824-08">
-  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-08">
-  <link rel="stylesheet" href="./exam-guide-v1.css?v=20260824-08">
-  <link rel="stylesheet" href="./review-prompt-v1.css?v=20260824-08">
-  <link rel="stylesheet" href="./arena-ai-teacher-v1.css?v=20260824-08">
+  <link rel="stylesheet" href="./styles.css?v=20260824-09">
+  <link rel="stylesheet" href="./reports-v1.css?v=20260824-09">
+  <link rel="stylesheet" href="./engagement-v1.css?v=20260824-09">
+  <link rel="stylesheet" href="./exam-guide-v1.css?v=20260824-09">
+  <link rel="stylesheet" href="./review-prompt-v1.css?v=20260824-09">
+  <link rel="stylesheet" href="./arena-ai-teacher-v1.css?v=20260824-09">
+  <link rel="stylesheet" href="./yks-learning-tools-v1.css?v=20260824-09">
 </head>
 <body>
   <div id="entryGate" class="entry-gate">
@@ -24,7 +26,7 @@
       <img class="entry-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
       <div class="entry-brand">YKS2027 ARENA</div>
       <div class="entry-sub">ZEUS EDITION</div>
-      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-08</div>
+      <div class="build-id" aria-label="PWA sürüm kimliği">PWA ID: 20260824-09</div>
       <p>TYT ve AYT hazırlığını Zeus Koçluğu, Dersler ve Sınav Arenası ile yönet.</p>
       <div class="entry-actions">
         <button id="enterBtn" class="primary-btn entry-button" type="button">ARENA'YA GİR</button>
@@ -40,7 +42,7 @@
         <img class="brand-icon" src="./assets/visual-v1/icon-192-v1.png" alt="YKS2027 Arena ikonu" width="192" height="192">
         <div><div class="brand-title">YKS2027 ARENA</div><div class="brand-sub">ZEUS EDITION</div></div>
       </div>
-      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-08</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
+      <div class="top-actions"><span class="build-id build-id-top">ID 20260824-09</span><button id="premiumBtn" class="premium-mini" type="button">PREMIUM</button><button id="installBtn" class="ghost-btn" hidden>YÜKLE</button><button id="settingsBtn" class="settings-btn" aria-label="Ayarlar">⚙</button></div>
     </header>
 
     <main class="main-content">
@@ -64,7 +66,7 @@
 
       <section class="screen" data-screen="coach">
         <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="Zeus Koçluğu"><div class="hero-shadow"></div><div class="page-copy"><h2>Zeus Koçluğu</h2><p>Günlük hedeflerin ve çalışma önerilerin.</p></div></article>
-        <div class="info-card"><h3>Bugünkü Koçluk Mesajı</h3><p>Türkçe paragraf ve temel matematikte seri tekrar yap. AYT tarafında fonksiyon ve problem çözüm hızına odaklan.</p></div>
+        <div class="info-card"><h3>Dikkat Etmen Gerekenler</h3><p id="zeusRuleCoach">Yeterli performans verisi oluştuğunda kişisel çalışma önceliklerin burada sunulacaktır.</p></div>
         <article id="aiTeacherPreview" class="info-card ai-teacher-preview">
           <div class="ai-standard-head"><span class="eyebrow">ARENA PRO • AI ÖĞRETMEN</span><span class="ai-standard-marker">ARENA-AI-TEACHER-V1</span></div>
           <h3>Ders içeriğine bağlı kişisel öğretmen</h3>
@@ -78,7 +80,7 @@
       <section class="screen" data-screen="notes">
         <article class="page-hero"><img class="page-art" src="./assets/visual-v1/section-hero-v1.webp" alt="YKS Dersleri"><div class="hero-shadow"></div><div class="page-copy"><span class="eyebrow">YKS DERS KÜTÜPHANESİ</span><h2>Dersler</h2><p>YKS ders kapsamı, 12. sınıf ünite özetleri ve akıllı notlar.</p></div></article>
         <article class="info-card course-scope">
-          <div class="premium-zone-head"><div><span class="eyebrow">YKS KAPSAMI</span><h3>Sorumlu olduğun dersler</h3></div><span id="notesUsage" class="premium-badge">Bugün 0 akıllı not açıldı</span></div>
+          <div class="premium-zone-head"><div><span class="eyebrow">YKS KAPSAMI</span><h3>Sorumlu olduğun dersler</h3></div><span id="notesUsage" class="premium-badge">Bugün 0 ders özeti açıldı</span></div>
           <div class="scope-row"><b>TYT</b><span>Türkçe • Temel Matematik • Geometri • Tarih • Coğrafya • Felsefe • Din Kültürü • Fizik • Kimya • Biyoloji</span></div>
           <div class="scope-row"><b>AYT</b><span>Matematik • Geometri • Türk Dili ve Edebiyatı • Tarih • Coğrafya • Felsefe Grubu • Din Kültürü • Fizik • Kimya • Biyoloji</span></div>
           <div class="scope-row"><b>YDT</b><span>İngilizce • Almanca • Fransızca • Arapça • Rusça</span></div>
@@ -187,7 +189,7 @@
         <article class="info-card premium-offer-card">
           <span class="premium-crown">♛</span>
           <h3>Premium ile açılanlar</h3>
-          <div class="premium-feature-list"><div class="new-feature"><b>01</b><span><strong>Sınırsız soru ve Dersler</strong><small>Reklamsız, günlük kotasız kesintisiz kullanım</small></span></div><div class="new-feature"><b>02</b><span><strong>Deneme ve yazılı senaryoları</strong><small>TYT, AYT ve dört dönem yazılı senaryosu</small></span></div><div><b>03</b><span><strong>Tahmini OBP ve bölüm karşılaştırması</strong><small>Karne notları ve 2025 resmî taban puanları</small></span></div><div><b>04</b><span><strong>Veli Takip Paneli</strong><small>6 haneli kod, haftalık hedef ve ilerleme özeti</small></span></div></div>
+          <div class="premium-feature-list"><div class="new-feature"><b>01</b><span><strong>Sınırsız soru, Dersler ve Akıllı Notlar</strong><small>Reklamsız, günlük kotasız kesintisiz kullanım</small></span></div><div class="new-feature"><b>02</b><span><strong>Deneme, yazılı senaryoları ve Yanlışlar Defteri</strong><small>TYT, AYT, dört dönem yazılı senaryosu ve hatalara göre tekrar</small></span></div><div><b>03</b><span><strong>Tahmini OBP ve bölüm karşılaştırması</strong><small>Karne notları ve 2025 resmî taban puanları</small></span></div><div><b>04</b><span><strong>Veli Takip ve güvenli cihaz aktarımı</strong><small>6 haneli kod, haftalık özet ve üyelik taşımayan elle yedekleme</small></span></div></div>
           <button id="premiumStart" class="primary-btn wide-btn" type="button">PREMIUM ÜYELİĞE GEÇ</button>
           <p id="premiumCheckoutStatus" class="source-note" aria-live="polite">Üyelik planı ve güvenli ödeme bağlantısı bu ekranda açılacaktır.</p>
         </article>
@@ -195,9 +197,10 @@
           <div class="ai-standard-head"><span class="eyebrow">ARENA PRO • PLANLANAN</span><span class="ai-standard-marker">ARENA-AI-TEACHER-V1</span></div>
           <h3>AI Öğretmen ile analiz et, sor ve öğren</h3>
           <p>Premium'daki tüm haklara ek olarak doğrulanmış Arena içeriğine bağlı AI öğretmen, kişiye özel açıklama ve program uyarlaması.</p>
-          <div class="premium-feature-list"><div><b>01</b><span><strong>Metin tabanlı AI öğretmen</strong><small>Ders ve konu bağlamında kısa, kontrollü açıklamalar</small></span></div><div><b>02</b><span><strong>Günlük 10 • aylık 200 soru</strong><small>Maliyet ve kötüye kullanım sunucu kotasıyla korunur</small></span></div><div><b>03</b><span><strong>Yanlış ve çeldirici analizi</strong><small>Yanlışın nedenini ve bir sonraki çalışmayı önerir</small></span></div><div><b>04</b><span><strong>Güvenli sağlayıcı katmanı</strong><small>API anahtarı PWA'ya konulmaz; kişisel veri modele gönderilmez</small></span></div></div>
+          <div class="premium-feature-list"><div><b>01</b><span><strong>Metin ve fotoğraf tabanlı AI öğretmen</strong><small>Ders bağlamında kontrollü açıklama ve gönderilen soru görselini çözümleme</small></span></div><div><b>02</b><span><strong>Günlük 10 • aylık 200 soru</strong><small>Maliyet ve kötüye kullanım sunucu kotasıyla korunur</small></span></div><div><b>03</b><span><strong>Yanlış ve çeldirici analizi</strong><small>Yanlışın nedenini ve bir sonraki çalışmayı önerir</small></span></div><div><b>04</b><span><strong>Güvenli çoklu cihaz senkronizasyonu</strong><small>Sunucu altyapısı hazır olduğunda ilerleme verileri cihazlar arasında doğrulanarak taşınır</small></span></div></div>
           <p class="source-note">Pro satışa açılmadan önce gerçek üyelik sunucusu, AI sağlayıcısı, güvenlik filtreleri ve kalite testleri tamamlanacaktır.</p>
         </article>
+        <article class="info-card pro-offer-card"><div class="ai-standard-head"><span class="eyebrow">ARENA PRO+ • GELECEK AŞAMA</span></div><h3>Yüksek kota ve insan desteği</h3><p>Arena Pro haklarına ek olarak maliyetler ölçüldükten sonra daha yüksek AI kotası ve planlanan uzman desteği sunulur. Hazır olmadan sınırsız olarak tanıtılmaz.</p></article>
         <button class="secondary-btn action-nav" data-target="home" type="button">ANA SAYFAYA DÖN</button>
       </section>
     </main>
@@ -238,16 +241,21 @@
   <div id="lessonChoiceModal" class="settings-modal"><div class="settings-sheet lesson-choice-sheet"><span class="premium-crown">♛</span><span class="eyebrow">SONRAKİ SAYFA</span><h2>Nasıl devam etmek istersin?</h2><p id="lessonChoiceText">Ödüllü reklamı tamamen izle veya Premium üyeliğe geç.</p><div class="reward-actions"><button id="lessonAdChoice" class="primary-btn" type="button">ÖDÜLLÜ REKLAM</button><button id="lessonPremiumChoice" class="secondary-btn" type="button">PREMIUM ÜYELİK</button><button id="lessonChoiceCancel" class="ghost-btn" type="button">VAZGEÇ</button></div></div></div>
   <div id="reviewPromptModal" class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="reviewPromptTitle"><div class="settings-sheet review-prompt-sheet"><div class="review-prompt-mark" aria-hidden="true">✦</div><span class="eyebrow">GÖRÜŞÜNÜZ BİZİM İÇİN DEĞERLİ</span><h2 id="reviewPromptTitle">YKS2027 Arena deneyiminizi Google Play’de değerlendirebilirsiniz.</h2><p>Paylaşacağınız dürüst görüş, uygulamayı öğrenciler için daha yararlı ve güvenilir hâle getirmemize yardımcı olur.</p><div class="review-prompt-actions"><button id="reviewOpenPlay" class="primary-btn" type="button">GOOGLE PLAY’DE DEĞERLENDİR</button><button id="reviewAskLater" class="secondary-btn" type="button">DAHA SONRA</button><button id="reviewNeverAsk" class="ghost-btn" type="button">BİR DAHA GÖSTERME</button></div><small class="review-policy-note">Değerlendirme tamamen isteğe bağlıdır; uygulamadaki erişim haklarınızı ve kullanım koşullarınızı değiştirmez.</small></div></div>
   <div id="dailyLockModal" class="settings-modal"><div class="settings-sheet lock-sheet"><div class="reward-symbol">🔒</div><span class="eyebrow">GÜNLÜK KOTA</span><h2>GÜNLÜK ÜCRETSİZ KULLANIM KOTANIZ DOLDU</h2><p id="dailyLockText"></p><p id="dailyLockUntil" class="lock-until"></p><p id="dailyLockClockStatus" class="clock-verification checking" aria-live="polite">Kilit süresi sunucu saatinden doğrulanıyor…</p><button id="dailyLockPremium" class="primary-btn wide-btn" data-lock-allowed type="button">PREMIUM ÜYELİĞE GEÇ</button></div></div>
-  <script src="./arena-ai-teacher-standard-v1.js?v=20260824-08"></script>
-  <script src="./app.js?v=20260824-08"></script>
-  <script src="./courses-v1.js?v=20260824-08"></script>
-  <script src="./course-details-v1.js?v=20260824-08"></script>
-  <script src="./exam-guide-v1.js?v=20260824-08"></script>
-  <script src="./exam-questions-core-v1.js?v=20260824-08"></script>
-  <script src="./exam-questions-social-v1.js?v=20260824-08"></script>
-  <script src="./store-config-v1.js?v=20260824-08"></script>
-  <script src="./engagement-v1.js?v=20260824-08"></script>
-  <script src="./review-prompt-v1.js?v=20260824-08"></script>
+  <script src="./arena-core-v1.js?v=20260824-09"></script>
+  <script src="./arena-core.config.js?v=20260824-09"></script>
+  <script src="./arena-ai-teacher-standard-v1.js?v=20260824-09"></script>
+  <script src="./arena-plans-v1.js?v=20260824-09"></script>
+  <script src="./app.js?v=20260824-09"></script>
+  <script src="./courses-v1.js?v=20260824-09"></script>
+  <script src="./course-details-v1.js?v=20260824-09"></script>
+  <script src="./exam-guide-v1.js?v=20260824-09"></script>
+  <script src="./exam-questions-core-v1.js?v=20260824-09"></script>
+  <script src="./exam-questions-social-v1.js?v=20260824-09"></script>
+  <script src="./store-config-v1.js?v=20260824-09"></script>
+  <script src="./engagement-v1.js?v=20260824-09"></script>
+  <script src="./yks-learning-tools-v1.js?v=20260824-09"></script>
+  <script src="./review-prompt-v2.js?v=20260824-09"></script>
+  <script src="./pwa.js?v=20260824-09"></script>
 </body>
 </html>
 

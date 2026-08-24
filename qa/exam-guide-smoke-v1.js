@@ -12,7 +12,7 @@ const courses=context.window.YKS2027_COURSES.courses;
 const guide=context.window.YKS2027_EXAM_GUIDE;
 const sets=context.window.YKS2027_EXAM_QUESTION_SETS;
 const units=courses.flatMap((course)=>course.units.map((unit)=>course.title+'|'+unit.title));
-assert.equal(guide.buildId,'20260824-08');
+assert.equal(guide.buildId,'20260824-09');
 assert.equal(units.length,44);
 assert.equal(Object.keys(guide.profiles).length,44,'Her ünite için sınav rehberi bulunmalı.');
 for(const key of units){
@@ -61,7 +61,7 @@ assert.match(engagement,/Cevap ve çeldirici analizini göster/);
 const index=fs.readFileSync('index.html','utf8');
 for(const asset of ['exam-guide-v1.css','exam-guide-v1.js','exam-questions-core-v1.js','exam-questions-social-v1.js'])assert.match(index,new RegExp(asset.replaceAll('.','\\.')));
 assert.ok(index.indexOf('exam-questions-social-v1.js')<index.indexOf('engagement-v1.js'));
-const sw=fs.readFileSync('sw.js','utf8');
+const sw=fs.readFileSync('service-worker.js','utf8');
 for(const asset of ['exam-guide-v1.css','exam-guide-v1.js','exam-questions-core-v1.js','exam-questions-social-v1.js'])assert.match(sw,new RegExp(asset.replaceAll('.','\\.')));
 
 console.log('Exam guide smoke tests OK: 44 guides, 8 courses, 40 original questions, five difficulty levels.');
