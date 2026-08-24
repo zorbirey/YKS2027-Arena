@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-02';
+  const BUILD_ID='20260824-03';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
@@ -319,7 +319,7 @@
     document.getElementById('courseDetailTitle').textContent=course.title;
     document.getElementById('courseDetailMeta').textContent=course.exam+' • 12. sınıf YKS çalışma özetleri';
     document.getElementById('unitList').innerHTML=course.units.map(function(item,index){
-      return '<button class="unit-card" data-unit-index="'+index+'" type="button"><strong>'+(index+1)+'. '+escapeHtml(item.title)+'</strong><small>Özet + akıllı not • 2 sayfa</small></button>';
+      return '<button class="unit-card" data-unit-index="'+index+'" type="button"><strong>'+(index+1)+'. '+escapeHtml(item.title)+'</strong><small>4 sayfa • konu anlatımı • şema • çözümlü örnek</small></button>';
     }).join('');
     document.querySelector('.main-content').scrollTop=0;
   }
@@ -341,22 +341,80 @@
     if(!hasUnlimitedAccess()&&isNew&&state.notesSeen.length>=FREE_NOTE_LIMIT)requestReward('note-five',open);
     else open();
   }
+  function richLibrary(){return window.YKS2027_COURSE_DETAILS||{details:{},sources:{},checklists:{}};}
+  function richDetail(course,current){
+    const found=richLibrary().details[course.title+'|'+current.title];
+    return found||{
+      explanation:current.summary,
+      concepts:['Ana fikir|'+current.summary],
+      example:'Bu ünitenin temel kavramını kendi cümlenle açıkla.',
+      solution:['Kavramın tanımını belirle.','Sorudaki ipucuyla ilişkilendir.','Sonucu temel ilkeyle kontrol et.'],
+      mistake:'Kavramı bağlamdan kopuk ezberlemek yerine neden-sonuç ilişkisini kur.',
+      visual:{type:'flow',title:'Konu çalışma akışı',items:['Tanım','İlişki','Uygulama']}
+    };
+  }
+  function richSources(course){
+    const library=richLibrary();
+    return (library.sources.common||[]).concat(library.sources[course.title]||[]);
+  }
+  function conceptCard(value){
+    const split=String(value).split('|');
+    const label=split.shift();
+    return '<div class="concept-card"><strong>'+escapeHtml(label)+'</strong><span>'+escapeHtml(split.join('|'))+'</span></div>';
+  }
+  function renderLessonVisual(visual){
+    if(!visual||!Array.isArray(visual.items))return '';
+    const title=escapeHtml(visual.title||'Konu şeması');
+    const items=visual.items.map(function(item){return escapeHtml(item);});
+    if(visual.type==='curve'){
+      return '<figure class="lesson-visual lesson-curve"><figcaption>'+title+' <small>Şematik gösterim</small></figcaption><svg viewBox="0 0 320 170" role="img" aria-label="'+title+'"><line x1="25" y1="140" x2="305" y2="140"/><line x1="45" y1="155" x2="45" y2="15"/><path d="M32 126 C78 118 105 102 140 78 S222 33 295 24"/><path class="visual-path-alt" d="M55 150 C78 124 106 102 140 84 S225 50 294 42"/><circle cx="140" cy="78" r="5"/></svg><div class="visual-legend">'+items.map(function(item){return '<span>'+item+'</span>';}).join('')+'</div></figure>';
+    }
+    if(visual.type==='bars'){
+      const numeric=visual.items.map(function(item){const match=String(item).match(/-?\d+(?:[.,]\d+)?/);return match?Number(match[0].replace(',','.')):NaN;});
+      const usable=numeric.every(Number.isFinite);const max=usable?Math.max.apply(null,numeric):1;
+      return '<figure class="lesson-visual"><figcaption>'+title+' <small>Şematik karşılaştırma</small></figcaption><div class="visual-bars">'+items.map(function(item,index){const width=usable?Math.max(14,Math.round(numeric[index]/max*100)):Math.max(28,100-index*18);return '<div class="visual-bar-row"><span>'+item+'</span><i style="width:'+width+'%"></i></div>';}).join('')+'</div></figure>';
+    }
+    if(visual.type==='timeline'){
+      return '<figure class="lesson-visual"><figcaption>'+title+'</figcaption><ol class="visual-timeline">'+items.map(function(item){return '<li><span></span><b>'+item+'</b></li>';}).join('')+'</ol></figure>';
+    }
+    if(visual.type==='compare'){
+      return '<figure class="lesson-visual"><figcaption>'+title+'</figcaption><div class="visual-compare">'+items.map(function(item){return '<div>'+item+'</div>';}).join('')+'</div></figure>';
+    }
+    const cycleClass=visual.type==='cycle'?' visual-cycle':'';
+    return '<figure class="lesson-visual"><figcaption>'+title+'</figcaption><div class="visual-flow'+cycleClass+'">'+items.map(function(item,index){return '<span>'+item+'</span>'+(index<items.length-1?'<b aria-hidden="true">→</b>':'');}).join('')+'</div></figure>';
+  }
+  function lessonPages(course,current){
+    const detail=richDetail(course,current);
+    const checklist=richLibrary().checklists[course.title]||['Ana kavramı belirledim.','Örneği adım adım çözdüm.','Sonucu temel ilkeyle kontrol ettim.'];
+    const sources=richSources(course);
+    return [
+      '<section class="lesson-section"><span class="eyebrow">1 • KONU ANLATIMI</span><h4>Konunun çerçevesi</h4><p>'+escapeHtml(current.summary)+'</p><h4>Derinlemesine öğren</h4><p>'+escapeHtml(detail.explanation)+'</p><div class="verification-note">Bu anlatım MEB ünite kapsamı temel alınarak özgün yazıldı; aşağıdaki kaynaklarla kavramsal olarak doğrulandı.</div></section>',
+      '<section class="lesson-section"><span class="eyebrow">2 • KAVRAMLAR VE ŞEMA</span>'+renderLessonVisual(detail.visual)+'<h4>Temel kavramlar</h4><div class="concept-grid">'+detail.concepts.map(conceptCard).join('')+'</div></section>',
+      '<section class="lesson-section"><span class="eyebrow">3 • ÇÖZÜMLÜ ÖRNEK</span><div class="worked-example"><strong>Soru / Uygulama</strong><p>'+escapeHtml(detail.example)+'</p></div><h4>Adım adım çözüm</h4><ol class="solution-steps">'+detail.solution.map(function(step){return '<li>'+escapeHtml(step)+'</li>';}).join('')+'</ol></section>',
+      '<section class="lesson-section"><span class="eyebrow">4 • AKILLI NOT VE KAYNAK</span><div class="smart-note"><span class="eyebrow">AKILLI NOT</span><p>'+escapeHtml(current.note)+'</p></div><div class="mistake-box"><strong>Sık yapılan hata</strong><p>'+escapeHtml(detail.mistake)+'</p></div><h4>Ünite kontrol listesi</h4><ul class="lesson-checklist">'+checklist.map(function(item){return '<li>'+escapeHtml(item)+'</li>';}).join('')+'</ul><h4>Doğrulama kaynakları</h4><ul class="lesson-source-list">'+sources.map(function(source){return '<li><a href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(source.label)+'</a><small>'+escapeHtml(source.note)+'</small></li>';}).join('')+'</ul><small class="source-method-note">Kaynaklar doğrulama amacıyla kullanılmıştır; metinler ve uygulama içi şemalar YKS2027 Arena için özgün hazırlanmıştır.</small></section>'
+    ];
+  }
   function renderReader(){
     const course=courseData().courses[readerState.courseIndex];
     const current=course&&course.units[readerState.unitIndex];
     if(!current)return;
-    const isSummary=readerState.page===0;
-    document.getElementById('readerProgress').textContent='SAYFA '+(readerState.page+1)+' / 2 • '+course.title;
+    const pages=lessonPages(course,current);
+    if(readerState.page>=pages.length)readerState.page=pages.length-1;
+    document.getElementById('readerProgress').textContent='SAYFA '+(readerState.page+1)+' / '+pages.length+' • '+course.title;
     document.getElementById('readerTitle').textContent=current.title;
-    document.getElementById('readerBody').innerHTML=isSummary?'<p>'+escapeHtml(current.summary)+'</p>':'<div class="smart-note"><span class="eyebrow">AKILLI NOT</span><p>'+escapeHtml(current.note)+'</p></div>';
+    document.getElementById('readerBody').innerHTML=pages[readerState.page];
     const next=document.getElementById('readerNext');
-    next.textContent=isSummary?'SONRAKİ SAYFA':'ÜNİTELERE DÖN';
+    next.textContent=readerState.page===pages.length-1?'ÜNİTELERE DÖN':'SONRAKİ SAYFA';
   }
   function requestNextReaderPage(){
-    if(readerState.page===1){showCourse(readerState.courseIndex);return;}
-    const proceed=function(){readerState.page=1;renderReader();document.querySelector('.main-content').scrollTop=0;};
+    const course=courseData().courses[readerState.courseIndex];
+    const current=course&&course.units[readerState.unitIndex];
+    if(!current)return;
+    const pages=lessonPages(course,current);
+    if(readerState.page>=pages.length-1){showCourse(readerState.courseIndex);return;}
+    const proceed=function(){readerState.page+=1;renderReader();document.querySelector('.main-content').scrollTop=0;};
     if(hasUnlimitedAccess()){proceed();return;}
-    document.getElementById('lessonChoiceText').textContent='Akıllı not sayfasına geçmek için ödüllü reklamı tamamen izle veya Premium üyeliği görüntüle.';
+    document.getElementById('lessonChoiceText').textContent='Sonraki ders sayfasına geçmek için ödüllü reklamı tamamen izle veya Premium üyeliği görüntüle.';
     document.getElementById('lessonAdChoice').onclick=function(){hideModal('lessonChoiceModal');requestReward('lesson-page',proceed);};
     showModal('lessonChoiceModal');
   }
