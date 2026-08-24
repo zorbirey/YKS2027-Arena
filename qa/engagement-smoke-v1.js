@@ -79,7 +79,7 @@ function harness(options){
     setTimeout:function(fn){fn();return 1;},clearTimeout:function(){},setInterval:testSetInterval,clearInterval:testClearInterval,
     addEventListener:function(type,handler){(events[type]||(events[type]=[])).push(handler);},
     matchMedia:function(){return {matches:false};},
-    fetch:async function(url){if(options.serverDate&&String(url).indexOf('clock-check')>=0)return {ok:true,headers:{get:function(name){return name==='Date'?options.serverDate:null;}}};return {ok:false,json:async function(){return {};}};},
+    fetch:async function(url){if(options.serverDate&&String(url).indexOf('clock-check')>=0)return {ok:true,headers:{get:function(name){return name==='Date'?options.serverDate:(name==='Age'?(options.serverAge||'0'):null);}}};return {ok:false,json:async function(){return {};}};},
     isPremium:function(){return Boolean(options.premium);},
     entryGate:get('entryGate'),enterBtn:get('enterBtn'),settingsBtn:get('settingsBtn'),settingsModal:get('settingsModal'),
     activateScreen:function(name){context.lastScreen=name;},
@@ -179,13 +179,13 @@ function button(){const el=makeElement('choice');return el;}
   assert.equal(daily.locked,true);
   assert.equal(clockBypass.context.lastScreen,'premium');
 
-  const serverGuard=harness({serverDate:'Thu, 01 Jan 2026 00:00:00 GMT',storage:{'yks2027-daily-access-v1':stateFor({cycle:'2025-12-31',questions:50,locked:true,lockReason:'questions',unlockAt:'2026-01-02T05:00:00.000Z'}),'yks2027-trusted-clock-v1':JSON.stringify({lastServerEpoch:Date.parse('Thu, 01 Jan 2037 00:00:00 GMT')})}});
+  const serverGuard=harness({serverDate:'Thu, 01 Jan 2026 00:00:00 GMT',serverAge:'120',storage:{'yks2027-daily-access-v1':stateFor({cycle:'2025-12-31',questions:50,locked:true,lockReason:'questions',unlockAt:'2026-01-02T05:00:00.000Z'}),'yks2027-trusted-clock-v1':JSON.stringify({lastServerEpoch:Date.parse('Thu, 01 Jan 2037 00:00:00 GMT')})}});
   await new Promise(function(resolve){setImmediate(resolve);});
   serverGuard.context.activateScreen('notes');
   daily=JSON.parse(serverGuard.store.get('yks2027-daily-access-v1'));
   assert.equal(daily.locked,true);
   assert.equal(serverGuard.context.lastScreen,'premium');
-  assert.equal(JSON.parse(serverGuard.store.get('yks2027-trusted-clock-v1')).lastServerEpoch,Date.parse('Thu, 01 Jan 2026 00:00:00 GMT'));
+  assert.equal(JSON.parse(serverGuard.store.get('yks2027-trusted-clock-v1')).lastServerEpoch,Date.parse('Thu, 01 Jan 2026 00:00:00 GMT')+120000);
 
   assert.match(engagementCode,/const DEMO_REWARD_SECONDS=8;/);
   assert.match(engagementCode,/if\(document\.hidden\)/);

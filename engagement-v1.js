@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_ID='20260824-04';
+  const BUILD_ID='20260824-05';
   const DAILY_KEY='yks2027-daily-access-v1';
   const PROFILE_KEY='yks2027-student-profile-v1';
   const REFERRAL_STATUS_KEY='yks2027-referral-status-v1';
@@ -41,7 +41,9 @@
     clockSyncPromise=fetch(url,{cache:'no-store',credentials:'same-origin'}).then(function(response){
       if(!response.ok)throw new Error('Saat doğrulama yanıtı alınamadı.');
       const header=response.headers&&typeof response.headers.get==='function'?response.headers.get('Date'):'';
-      const serverEpoch=Date.parse(header||'');
+      const ageHeader=response.headers&&typeof response.headers.get==='function'?response.headers.get('Age'):'';
+      const ageSeconds=Math.max(0,Number(ageHeader)||0);
+      const serverEpoch=Date.parse(header||'')+ageSeconds*1000;
       if(!Number.isFinite(serverEpoch)||serverEpoch<=0)throw new Error('Sunucu zamanı okunamadı.');
       const safeEpoch=serverEpoch;
       trustedClockEpoch=safeEpoch;
